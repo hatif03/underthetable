@@ -1,0 +1,84 @@
+import { getLang, t, type Key } from "./i18n"
+
+const WORDS: Record<string, string> = {
+  station_house_officer: "Station house officer",
+  traffic_constable: "Traffic constable",
+  motor_vehicle_inspector: "Motor vehicle inspector",
+  verification_officer: "Verification officer",
+  junior_engineer: "Junior engineer",
+  assessing_officer: "Assessing officer",
+  driving_licence: "Driving licence",
+  vehicle_registration: "Vehicle registration",
+  fitness_certificate: "Fitness certificate",
+  caste_certificate: "Caste certificate",
+  income_certificate: "Income certificate",
+  fresh_passport: "Fresh passport",
+  police_verification: "Police verification",
+  birth_certificate: "Birth certificate",
+  trade_licence: "Trade licence",
+  building_plan: "Building plan",
+  new_connection: "New connection",
+  name_transfer: "Name transfer",
+  fir_registration: "FIR registration",
+  traffic_stop: "Traffic stop",
+  gautam_buddh_nagar: "Gautam Buddh Nagar",
+  bengaluru_urban: "Bengaluru Urban",
+  new_delhi: "New Delhi",
+  revenue_inspector: "Revenue inspector",
+  land_conversion: "Land conversion",
+}
+
+export function labelize(slug: string): string {
+  return WORDS[slug] ?? slug.replaceAll("_", " ").replace(/^\w/, (c) => c.toUpperCase())
+}
+
+const DEPARTMENT_LABELS: Record<string, string> = {
+  police: "Police",
+  rto: "RTO",
+  revenue: "Revenue",
+  passport: "Passport",
+  municipal: "Municipal",
+  gst: "GST",
+  electricity: "Electricity",
+  income_tax: "Income tax",
+  fda: "FDA",
+  ration: "Ration",
+  health: "Health",
+  school: "School",
+  demand: "Demand",
+  failure: "Failure",
+  absence: "Absence",
+  diversion: "Diversion",
+  public: "Public",
+  restriction: "Restriction",
+  assembly_permission_denied: "Permission to assemble denied",
+  gathering_ban_order: "Ban on gatherings",
+  barricades_or_closures: "Barricades or closures",
+  force_at_gathering: "Force used at a gathering",
+  detention_without_notice: "Detention without notice",
+  fir_not_registered: "FIR not registered",
+  pothole: "Pothole",
+  streetlight: "Streetlight",
+  open_drain: "Open drain",
+  garbage_pile: "Garbage pile",
+  broken_road: "Broken road",
+  water_supply: "Water supply",
+  power_cut: "Power cut",
+  counter_closed: "Counter closed",
+  doctor_absent: "Doctor absent",
+  medicine_missing: "Medicine missing",
+  teacher_absent: "Teacher absent",
+  meal_missing: "Meal missing",
+  shop_closed: "Shop closed",
+  grain_short: "Grain short",
+  fuel_short: "Fuel short",
+  meal_short: "Meal short",
+  material_missing: "Material missing",
+  medicine_short: "Medicine short",
+}
+
+export function departmentLabel(slug: string): string {
+  const key = `dept.${slug}` as Key
+  if (getLang() === "hi" && key in { "dept.police": 1, "dept.rto": 1, "dept.revenue": 1, "dept.passport": 1, "dept.municipal": 1, "dept.gst": 1, "dept.electricity": 1, "dept.income_tax": 1, "dept.fda": 1, "dept.ration": 1, "dept.health": 1, "dept.school": 1 }) return t(key)
+  return DEPARTMENT_LABELS[slug] ?? labelize(slug)
+}
