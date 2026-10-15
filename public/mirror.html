@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Under the Table, mirror</title>
+<style>
+  :root { color-scheme: light dark; font-family: system-ui, sans-serif; }
+  body { max-width: 980px; margin: 0 auto; padding: 24px 16px 64px; line-height: 1.5; }
+  h1 { font-size: 26px; margin: 0 0 4px; }
+  p, li { color: #555; }
+  @media (prefers-color-scheme: dark) { p, li { color: #aaa; } }
+  code { background: rgba(127,127,127,.18); padding: 1px 6px; border-radius: 6px; font-size: 0.9em; overflow-wrap: anywhere; }
+  .bar { display: flex; gap: 8px; flex-wrap: wrap; margin: 16px 0; }
+  input, button { font: inherit; padding: 8px 12px; border-radius: 10px; border: 1px solid rgba(127,127,127,.5); background: transparent; color: inherit; }
+  button { cursor: pointer; font-weight: 600; }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  th, td { text-align: left; padding: 8px 6px; border-bottom: 1px solid rgba(127,127,127,.25); vertical-align: top; }
+  .tag { font-size: 11px; padding: 1px 7px; border-radius: 99px; background: rgba(127,127,127,.2); }
+  .err { color: #c0392b; }
+</style>
+</head>
+<body>
+<h1>Under the Table, mirror</h1>
+<p>One file. It has no server of ours and no build step. It asks Arkiv's Tiramisu network directly for every underthetable entity, keeps only the ones that are valid and sealed, and lists them. Save this page and open it from your disk if the site is ever blocked.</p>
+<div class="bar">
+  <input id="filter" placeholder="Filter: district, service, kind" size="28">
+  <button id="read">Read from Arkiv</button>
+  <span id="status"></span>
+</div>
+<table id="table"><thead><tr><th>Kind</th><th>District</th><th>Desk</th><th>Week</th><th>Figure</th><th>Outcome</th><th>Source</th><th>Creator</th></tr></thead><tbody></tbody></table>
+<p id="foot"></p>
+<p>Query sent: <code>project = str('underthetable')</code>. The same thing on the command line is on the site's "How it is sealed" page. A report counts here only if its owner is <code>0x…dEaD</code>, its payload is exactly <code>{"v":1}</code>, and its attributes are the schema's, with slugs only. The full closed-list check is in the app and in <code>npm run audit</code>. Reports marked <b>press</b> are believed only from the curator wallet in this file. Reports marked <b>demo</b> were written by the team&rsquo;s own test wallets and are synthetic.</p>
+<script>
+const RPC = "https://rpc.tiramisu.db-chain.testnet.arkiv.network"
+const DEAD = "0x000000000000000000000000000000000000dead"
+const CURATORS = ["0xc26debe828cd500c6d31f184baecce2782847ea3"]
+const DEMO = ["0x13398a1803eca909d909193f1547fffc1e05ef4f","0x8b34c95cda664550c4eb9c4ba14bb7172d6ada25","0xa81eef553318368e1c98f851c29521ab247532ad","0xee368405802ca49d38572f88de24b9ba044f2804","0xc3a64559e2bee5e542ef3180934646a89c3db67b","0x7ca1817218d26f2c6fac7e63fe2d97307c1fb92f","0x80aa599b39308191f323e4bf1c212f4f241d7365"]
+const ALLOWED = ["project","type","state","district","department","role","service","outcome","kind","week","day","amount_inr","source"]
+const $ = (id) => document.getElementById(id)
+let rows = []
+
+async function rpc(method, params) {
+  const res = await fetch(RPC, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ jsonrpc: "2.0", id: 1, method, params }) })
+  const text = await res.text()
+  let body
+  try { body = JSON.parse(text) } catch { throw new Error("The public node refused the read (" + res.status + "). Wait a while and try again.") }
+  if (body.error) throw new Error(body.error.message || "RPC error")
+  return body.result
+}
+const attr = (entity) => Object.fromEntries((entity.attributes || []).map((a) => [a.name, a]))
+const str = (a, name) => (a[name] && a[name].type === "str" ? a[name].value : null)
+const text = (hex) => { try { return new TextDecoder().decode(Uint8Array.from(hex.slice(2).match(/../g) || [], (b) => parseInt(b, 16))) } catch { return null } }
+
+function valid(entity) {
+  const a = attr(entity)
+  if (Object.keys(a).some((n) => !ALLOWED.includes(n))) return false
+  if (str(a, "project") !== "underthetable" || str(a, "type") !== "report") return false
+  if (String(entity.owner || "").toLowerCase() !== DEAD) return false
+  if (text(entity.payload || "0x") !== '{"v":1}') return false
+  for (const n of ["state","district","department","role","service","outcome"]) if (!/^[a-z0-9_]{1,40}$/.test(str(a, n) || "")) return false
+  if (!/^\d{4}-W\d{2}$/.test(str(a, "week") || "")) return false
+  const amount = a.amount_inr && a.amount_inr.type === "u64" ? Number(BigInt(a.amount_inr.value)) : 0
+  const kind = str(a, "kind") || "demand"
+  if (!["demand","failure","absence","diversion","restriction"].includes(kind)) return false
+  return kind === "demand" ? amount >= 1 && amount <= 10000000 : amount >= 1 && amount <= 5
+}
+
+async function read() {
+  $("status").textContent = "Reading…"
+  $("status").className = ""
+  try {
+    const head = await rpc("eth_blockNumber", [])
+    let cursor, all = []
+    for (let i = 0; i < 6; i++) {
+      const opts = { atBlock: head, limit: "0xc8", select: { key: true, owner: true, creator: true, createdAt: true, expiresAt: true, attributes: true, payload: true } }
+      if (cursor) opts.cursor = cursor
+      const page = await rpc("arkiv_query", ["project = str('underthetable')", opts])
+      all = all.concat(page.data || [])
+      cursor = page.cursor
+      if (!cursor) break
+    }
+    const now = BigInt(head)
+    rows = all.filter(valid).filter((e) => BigInt(e.expiresAt) > now)
+    $("status").textContent = rows.length + " valid of " + all.length + " read, block " + Number(now).toLocaleString("en-IN")
+    draw()
+  } catch (e) {
+    $("status").textContent = e.message
+    $("status").className = "err"
+  }
+}
+
+function draw() {
+  const q = $("filter").value.trim().toLowerCase()
+  const body = document.querySelector("#table tbody")
+  body.textContent = ""
+  for (const e of rows) {
+    const a = attr(e)
+    const kind = str(a, "kind") || "demand"
+    const press = str(a, "source") === "press" && CURATORS.includes(String(e.creator).toLowerCase())
+    const amount = Number(BigInt(a.amount_inr.value))
+    const cells = [kind, str(a, "district"), str(a, "department") + " · " + str(a, "service"), str(a, "week"), kind === "demand" ? "₹" + amount.toLocaleString("en-IN") : "severity " + amount, str(a, "outcome"), press ? "press" : DEMO.includes(String(e.creator).toLowerCase()) ? "demo" : "citizen", String(e.creator).slice(0, 8) + "…" + String(e.creator).slice(-4)]
+    if (q && !cells.join(" ").toLowerCase().includes(q)) continue
+    const tr = document.createElement("tr")
+    cells.forEach((c, i) => {
+      const td = document.createElement("td")
+      if (i === 7) { const link = document.createElement("a"); link.href = "https://tiramisu.explorer.arkiv.network/entity/" + e.key; link.textContent = c; link.target = "_blank"; link.rel = "noreferrer"; td.append(link) }
+      else if (i === 6) { const s = document.createElement("span"); s.className = "tag"; s.textContent = c; td.append(s) }
+      else td.textContent = c
+      tr.append(td)
+    })
+    body.append(tr)
+  }
+}
+$("read").addEventListener("click", read)
+$("filter").addEventListener("input", draw)
+read()
+</script>
+</body>
+</html>
