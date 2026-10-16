@@ -1,0 +1,248 @@
+{
+  "departments": [
+    {
+      "slug": "police",
+      "label": "Police"
+    },
+    {
+      "slug": "rto",
+      "label": "RTO / transport"
+    },
+    {
+      "slug": "revenue",
+      "label": "Revenue and land records"
+    },
+    {
+      "slug": "passport",
+      "label": "Passport"
+    },
+    {
+      "slug": "municipal",
+      "label": "Municipal corporation"
+    },
+    {
+      "slug": "gst",
+      "label": "GST"
+    },
+    {
+      "slug": "electricity",
+      "label": "Electricity board"
+    },
+    {
+      "slug": "income_tax",
+      "label": "Income tax"
+    },
+    {
+      "slug": "fda",
+      "label": "Food and drug administration"
+    },
+    {
+      "slug": "ration",
+      "label": "Ration shop"
+    },
+    {
+      "slug": "health",
+      "label": "Health"
+    },
+    {
+      "slug": "school",
+      "label": "School"
+    }
+  ],
+  "kinds": [
+    {
+      "slug": "demand",
+      "label": "A demand for money"
+    },
+    {
+      "slug": "failure",
+      "label": "A public thing is broken"
+    },
+    {
+      "slug": "absence",
+      "label": "Something that should be there is missing"
+    },
+    {
+      "slug": "diversion",
+      "label": "Something meant for the public did not arrive"
+    },
+    {
+      "slug": "restriction",
+      "label": "A public freedom was restricted"
+    }
+  ],
+  "roles": {
+    "police": [
+      "station_house_officer",
+      "constable",
+      "traffic_constable"
+    ],
+    "rto": [
+      "motor_vehicle_inspector",
+      "clerk"
+    ],
+    "revenue": [
+      "tehsildar",
+      "patwari",
+      "clerk",
+      "revenue_inspector"
+    ],
+    "passport": [
+      "verification_officer",
+      "clerk"
+    ],
+    "municipal": [
+      "junior_engineer",
+      "clerk"
+    ],
+    "gst": [
+      "inspector",
+      "clerk"
+    ],
+    "electricity": [
+      "lineman",
+      "clerk"
+    ],
+    "income_tax": [
+      "assessing_officer",
+      "clerk"
+    ],
+    "fda": [
+      "inspector",
+      "clerk"
+    ],
+    "ration": [
+      "public"
+    ],
+    "health": [
+      "public"
+    ],
+    "school": [
+      "public"
+    ]
+  },
+  "services": {
+    "police": [
+      "fir_registration",
+      "noc",
+      "traffic_stop"
+    ],
+    "rto": [
+      "driving_licence",
+      "vehicle_registration",
+      "fitness_certificate"
+    ],
+    "revenue": [
+      "mutation",
+      "caste_certificate",
+      "income_certificate",
+      "land_conversion"
+    ],
+    "passport": [
+      "fresh_passport",
+      "police_verification"
+    ],
+    "municipal": [
+      "birth_certificate",
+      "trade_licence",
+      "building_plan"
+    ],
+    "gst": [
+      "registration",
+      "refund"
+    ],
+    "electricity": [
+      "new_connection",
+      "name_transfer"
+    ],
+    "income_tax": [
+      "refund",
+      "pan"
+    ],
+    "fda": [
+      "licence"
+    ]
+  },
+  "conditions": {
+    "failure": {
+      "municipal": [
+        "pothole",
+        "streetlight",
+        "open_drain",
+        "garbage_pile",
+        "broken_road",
+        "water_supply"
+      ],
+      "electricity": [
+        "power_cut"
+      ]
+    },
+    "absence": {
+      "municipal": [
+        "counter_closed"
+      ],
+      "health": [
+        "doctor_absent",
+        "medicine_missing"
+      ],
+      "school": [
+        "teacher_absent",
+        "meal_missing"
+      ],
+      "ration": [
+        "shop_closed"
+      ]
+    },
+    "diversion": {
+      "ration": [
+        "grain_short",
+        "fuel_short"
+      ],
+      "school": [
+        "meal_short"
+      ],
+      "municipal": [
+        "material_missing"
+      ],
+      "health": [
+        "medicine_short"
+      ]
+    },
+    "restriction": {
+      "police": [
+        "assembly_permission_denied",
+        "gathering_ban_order",
+        "barricades_or_closures",
+        "force_at_gathering",
+        "detention_without_notice",
+        "fir_not_registered"
+      ]
+    }
+  },
+  "outcomes": [
+    {
+      "slug": "asked",
+      "label": "Asked, not paid"
+    },
+    {
+      "slug": "paid",
+      "label": "Paid"
+    },
+    {
+      "slug": "refused",
+      "label": "Refused"
+    },
+    {
+      "slug": "noted",
+      "label": "Noted"
+    },
+    {
+      "slug": "worsened",
+      "label": "Worsened"
+    },
+    {
+      "slug": "cleared",
+      "label": "Cleared"
+    }
+  ]
+}

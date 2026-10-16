@@ -1,0 +1,547 @@
+{
+  "states": [
+    {
+      "slug": "an",
+      "label": "Andaman and Nicobar Islands",
+      "districts": [
+        "nicobar",
+        "north_and_middle_andaman",
+        "south_andaman"
+      ]
+    },
+    {
+      "slug": "ap",
+      "label": "Andhra Pradesh",
+      "districts": [
+        "anantapur",
+        "chittoor",
+        "east_godavari",
+        "guntur",
+        "krishna",
+        "kurnool",
+        "nellore",
+        "prakasam",
+        "srikakulam",
+        "visakhapatnam",
+        "vizianagaram",
+        "west_godavari",
+        "ysr_kadapa"
+      ]
+    },
+    {
+      "slug": "ar",
+      "label": "Arunachal Pradesh",
+      "districts": [
+        "changlang",
+        "east_siang",
+        "lohit",
+        "papum_pare",
+        "tawang",
+        "west_kameng"
+      ]
+    },
+    {
+      "slug": "as",
+      "label": "Assam",
+      "districts": [
+        "barpeta",
+        "cachar",
+        "dibrugarh",
+        "goalpara",
+        "golaghat",
+        "jorhat",
+        "kamrup",
+        "karbi_anglong",
+        "nagaon",
+        "sivasagar",
+        "sonitpur",
+        "tinsukia"
+      ]
+    },
+    {
+      "slug": "br",
+      "label": "Bihar",
+      "districts": [
+        "bhagalpur",
+        "darbhanga",
+        "gaya",
+        "muzaffarpur",
+        "nalanda",
+        "patna",
+        "purnia",
+        "saharsa",
+        "samastipur",
+        "saran",
+        "vaishali"
+      ]
+    },
+    {
+      "slug": "ch",
+      "label": "Chandigarh",
+      "districts": [
+        "chandigarh"
+      ]
+    },
+    {
+      "slug": "ct",
+      "label": "Chhattisgarh",
+      "districts": [
+        "bastar",
+        "bilaspur",
+        "durg",
+        "korba",
+        "raigarh",
+        "raipur",
+        "rajnandgaon",
+        "surajpur"
+      ]
+    },
+    {
+      "slug": "dn",
+      "label": "Dadra and Nagar Haveli and Daman and Diu",
+      "districts": [
+        "dadra_and_nagar_haveli",
+        "daman",
+        "diu"
+      ]
+    },
+    {
+      "slug": "dl",
+      "label": "Delhi",
+      "districts": [
+        "central_delhi",
+        "east_delhi",
+        "new_delhi",
+        "north_delhi",
+        "north_east_delhi",
+        "north_west_delhi",
+        "shahdara",
+        "south_delhi",
+        "south_east_delhi",
+        "south_west_delhi",
+        "west_delhi"
+      ]
+    },
+    {
+      "slug": "ga",
+      "label": "Goa",
+      "districts": [
+        "north_goa",
+        "south_goa"
+      ]
+    },
+    {
+      "slug": "gj",
+      "label": "Gujarat",
+      "districts": [
+        "ahmedabad",
+        "amreli",
+        "anand",
+        "banaskantha",
+        "bharuch",
+        "bhavnagar",
+        "gandhinagar",
+        "jamnagar",
+        "junagadh",
+        "kheda",
+        "kutch",
+        "mehsana",
+        "rajkot",
+        "surat",
+        "vadodara"
+      ]
+    },
+    {
+      "slug": "hr",
+      "label": "Haryana",
+      "districts": [
+        "ambala",
+        "bhiwani",
+        "faridabad",
+        "gurugram",
+        "hisar",
+        "karnal",
+        "kurukshetra",
+        "nuh",
+        "panipat",
+        "rohtak",
+        "sirsa",
+        "sonipat"
+      ]
+    },
+    {
+      "slug": "hp",
+      "label": "Himachal Pradesh",
+      "districts": [
+        "bilaspur",
+        "chamba",
+        "hamirpur",
+        "kangra",
+        "kinnaur",
+        "kullu",
+        "mandi",
+        "shimla",
+        "sirmaur",
+        "solan",
+        "una"
+      ]
+    },
+    {
+      "slug": "jk",
+      "label": "Jammu and Kashmir",
+      "districts": [
+        "anantnag",
+        "baramulla",
+        "budgam",
+        "jammu",
+        "kathua",
+        "pulwama",
+        "rajouri",
+        "samba",
+        "srinagar",
+        "udhampur"
+      ]
+    },
+    {
+      "slug": "jh",
+      "label": "Jharkhand",
+      "districts": [
+        "bokaro",
+        "dhanbad",
+        "east_singhbhum",
+        "giridih",
+        "hazaribagh",
+        "palamu",
+        "ranchi",
+        "west_singhbhum"
+      ]
+    },
+    {
+      "slug": "ka",
+      "label": "Karnataka",
+      "districts": [
+        "ballari",
+        "belagavi",
+        "bengaluru_urban",
+        "bidar",
+        "chikkamagaluru",
+        "dakshina_kannada",
+        "dharwad",
+        "kalaburagi",
+        "mysuru",
+        "raichur",
+        "shivamogga",
+        "tumakuru",
+        "udupi",
+        "vijayapura"
+      ]
+    },
+    {
+      "slug": "kl",
+      "label": "Kerala",
+      "districts": [
+        "alappuzha",
+        "ernakulam",
+        "idukki",
+        "kannur",
+        "kollam",
+        "kottayam",
+        "kozhikode",
+        "malappuram",
+        "palakkad",
+        "thiruvananthapuram",
+        "thrissur",
+        "wayanad"
+      ]
+    },
+    {
+      "slug": "la",
+      "label": "Ladakh",
+      "districts": [
+        "kargil",
+        "leh"
+      ]
+    },
+    {
+      "slug": "ld",
+      "label": "Lakshadweep",
+      "districts": [
+        "lakshadweep"
+      ]
+    },
+    {
+      "slug": "mp",
+      "label": "Madhya Pradesh",
+      "districts": [
+        "bhopal",
+        "gwalior",
+        "indore",
+        "jabalpur",
+        "ratlam",
+        "rewa",
+        "sagar",
+        "satna",
+        "ujjain"
+      ]
+    },
+    {
+      "slug": "mh",
+      "label": "Maharashtra",
+      "districts": [
+        "ahmednagar",
+        "akola",
+        "amravati",
+        "aurangabad",
+        "beed",
+        "bhandara",
+        "buldhana",
+        "chandrapur",
+        "dhule",
+        "gadchiroli",
+        "gondia",
+        "hingoli",
+        "jalgaon",
+        "jalna",
+        "kolhapur",
+        "latur",
+        "mumbai",
+        "mumbai_suburban",
+        "nagpur",
+        "nanded",
+        "nandurbar",
+        "nashik",
+        "osmanabad",
+        "palghar",
+        "parbhani",
+        "pune",
+        "raigad",
+        "ratnagiri",
+        "sangli",
+        "satara",
+        "sindhudurg",
+        "solapur",
+        "thane",
+        "wardha",
+        "washim",
+        "yavatmal"
+      ]
+    },
+    {
+      "slug": "mn",
+      "label": "Manipur",
+      "districts": [
+        "bishnupur",
+        "churachandpur",
+        "imphal_east",
+        "imphal_west",
+        "jiribam",
+        "kakching",
+        "thoubal",
+        "ukhrul"
+      ]
+    },
+    {
+      "slug": "ml",
+      "label": "Meghalaya",
+      "districts": [
+        "east_khasi_hills",
+        "west_garo_hills",
+        "west_jaintia_hills",
+        "west_khasi_hills"
+      ]
+    },
+    {
+      "slug": "mz",
+      "label": "Mizoram",
+      "districts": [
+        "aizawl",
+        "lunglei",
+        "mamit",
+        "saiha"
+      ]
+    },
+    {
+      "slug": "nl",
+      "label": "Nagaland",
+      "districts": [
+        "dimapur",
+        "kohima",
+        "mokokchung",
+        "mon",
+        "tuensang",
+        "wokha"
+      ]
+    },
+    {
+      "slug": "or",
+      "label": "Odisha",
+      "districts": [
+        "balangir",
+        "balasore",
+        "cuttack",
+        "ganjam",
+        "khordha",
+        "koraput",
+        "puri",
+        "sambalpur",
+        "sundargarh"
+      ]
+    },
+    {
+      "slug": "py",
+      "label": "Puducherry",
+      "districts": [
+        "karaikal",
+        "mahe",
+        "puducherry",
+        "yanam"
+      ]
+    },
+    {
+      "slug": "pb",
+      "label": "Punjab",
+      "districts": [
+        "amritsar",
+        "barnala",
+        "bathinda",
+        "jalandhar",
+        "ludhiana",
+        "patiala",
+        "sas_nagar"
+      ]
+    },
+    {
+      "slug": "rj",
+      "label": "Rajasthan",
+      "districts": [
+        "ajmer",
+        "alwar",
+        "bikaner",
+        "jaipur",
+        "jodhpur",
+        "kota",
+        "udaipur"
+      ]
+    },
+    {
+      "slug": "sk",
+      "label": "Sikkim",
+      "districts": [
+        "east_sikkim",
+        "north_sikkim",
+        "south_sikkim",
+        "west_sikkim"
+      ]
+    },
+    {
+      "slug": "tn",
+      "label": "Tamil Nadu",
+      "districts": [
+        "chennai",
+        "coimbatore",
+        "cuddalore",
+        "dharmapuri",
+        "erode",
+        "kanchipuram",
+        "madurai",
+        "salem",
+        "thanjavur",
+        "thoothukudi",
+        "tiruchirappalli",
+        "tirunelveli",
+        "vellore"
+      ]
+    },
+    {
+      "slug": "tg",
+      "label": "Telangana",
+      "districts": [
+        "adilabad",
+        "hyderabad",
+        "karimnagar",
+        "khammam",
+        "mahbbubnagar",
+        "medchal_malkajgiri",
+        "nalgonda",
+        "nizamabad",
+        "rangareddy",
+        "warangal"
+      ]
+    },
+    {
+      "slug": "tr",
+      "label": "Tripura",
+      "districts": [
+        "dhalai",
+        "gomati",
+        "khowai",
+        "north_tripura",
+        "sepahijala",
+        "south_tripura",
+        "unakoti",
+        "west_tripura"
+      ]
+    },
+    {
+      "slug": "up",
+      "label": "Uttar Pradesh",
+      "districts": [
+        "agra",
+        "aligarh",
+        "allahabad",
+        "balrampur",
+        "bareilly",
+        "bijnor",
+        "fatehpur",
+        "gautam_buddh_nagar",
+        "ghaziabad",
+        "gorakhpur",
+        "hardoi",
+        "jhansi",
+        "kannauj",
+        "kanpur_nagar",
+        "lucknow",
+        "meerut",
+        "moradabad",
+        "rampur",
+        "sitapur",
+        "varanasi"
+      ]
+    },
+    {
+      "slug": "uk",
+      "label": "Uttarakhand",
+      "districts": [
+        "almora",
+        "dehradun",
+        "haridwar",
+        "nainital",
+        "pauri_garhwal",
+        "tehri_garhwal",
+        "udham_singh_nagar"
+      ]
+    },
+    {
+      "slug": "wb",
+      "label": "West Bengal",
+      "districts": [
+        "bankura",
+        "birbhum",
+        "darjeeling",
+        "hooghly",
+        "howrah",
+        "jalpaiguri",
+        "kolkata",
+        "malda",
+        "murshidabad",
+        "nadia",
+        "north_24_parganas",
+        "paschim_bardhaman",
+        "paschim_medinipur",
+        "purba_bardhaman",
+        "purba_medinipur",
+        "south_24_parganas"
+      ]
+    }
+  ]
+}
