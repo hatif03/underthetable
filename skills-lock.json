@@ -1,0 +1,107 @@
+{
+  "version": 1,
+  "skills": {
+    "arkiv": {
+      "source": "Arkiv-Network/skills",
+      "sourceType": "github",
+      "skillPath": "skills/arkiv/SKILL.md",
+      "computedHash": "31b9bb1898970f059e5ef9c09d07a4c34d428de157f79b2b1aa96290a20f679b"
+    },
+    "arkiv-app-integration": {
+      "source": "Arkiv-Network/skills",
+      "sourceType": "github",
+      "skillPath": "skills/arkiv-app-integration/SKILL.md",
+      "computedHash": "193cdf5c4c4d1361c80ee005fc4a25724da62b8ecacc946a09acc20a245e3796"
+    },
+    "arkiv-best-practices": {
+      "source": "Arkiv-Network/skills",
+      "sourceType": "github",
+      "skillPath": "skills/arkiv-best-practices/SKILL.md",
+      "computedHash": "9fada7c54c78106bcfb31183e125e003ff2baab9dc7d65ba654c8a0eed9d105b"
+    },
+    "arkiv-data-modeling": {
+      "source": "Arkiv-Network/skills",
+      "sourceType": "github",
+      "skillPath": "skills/arkiv-data-modeling/SKILL.md",
+      "computedHash": "56c2e79d9e776c21ce17bfb30a5768b5899395dbaf2dee46dffd5ec303c3e940"
+    },
+    "arkiv-encryption": {
+      "source": "Arkiv-Network/skills",
+      "sourceType": "github",
+      "skillPath": "skills/arkiv-encryption/SKILL.md",
+      "computedHash": "eb95e039291ab7e0d19df9fa5a2faa013628734e2b51e277f7c0bfa95fcf3b50"
+    },
+    "arkiv-entity-expiration": {
+      "source": "Arkiv-Network/skills",
+      "sourceType": "github",
+      "skillPath": "skills/arkiv-entity-expiration/SKILL.md",
+      "computedHash": "9ea788c1cbfe170b70a46fd13032381e7477e6c7ea4ea7015c6b80a20bdda416"
+    },
+    "arkiv-entity-lifecycle": {
+      "source": "Arkiv-Network/skills",
+      "sourceType": "github",
+      "skillPath": "skills/arkiv-entity-lifecycle/SKILL.md",
+      "computedHash": "6d2d61787cf0b2ba79d0308d1f1c9fe244dc3939c2c19199d7df210ab071fffe"
+    },
+    "arkiv-feedback": {
+      "source": "Arkiv-Network/skills",
+      "sourceType": "github",
+      "skillPath": "skills/arkiv-feedback/SKILL.md",
+      "computedHash": "ad1676d1548468be4b55f88e44b70081801f31542e2ae15355eb646b5b07adc7"
+    },
+    "arkiv-first-write": {
+      "source": "Arkiv-Network/skills",
+      "sourceType": "github",
+      "skillPath": "skills/arkiv-first-write/SKILL.md",
+      "computedHash": "4c7ece1e475c967749c9ee7674a8d932848a2365087ec1273a20a2dcbf1446f6"
+    },
+    "arkiv-indexing": {
+      "source": "Arkiv-Network/skills",
+      "sourceType": "github",
+      "skillPath": "skills/arkiv-indexing/SKILL.md",
+      "computedHash": "9d013b56b31e2f1e438af837df59305e7b6aea04aa7402364accf483587bb051"
+    },
+    "arkiv-large-files": {
+      "source": "Arkiv-Network/skills",
+      "sourceType": "github",
+      "skillPath": "skills/arkiv-large-files/SKILL.md",
+      "computedHash": "50ddb136392b2c1e2b8fc9cb964719fc920c47dcbc4592560076692234fbe761"
+    },
+    "arkiv-mcp": {
+      "source": "Arkiv-Network/skills",
+      "sourceType": "github",
+      "skillPath": "skills/arkiv-mcp/SKILL.md",
+      "computedHash": "037aac0e31882d56448086987d031190bb17e96fb3d9058c5f1e00a9b04808e1"
+    },
+    "arkiv-query": {
+      "source": "Arkiv-Network/skills",
+      "sourceType": "github",
+      "skillPath": "skills/arkiv-query/SKILL.md",
+      "computedHash": "960b8008a06727242b738f4f87d34c9b047f92c51925b9150a88dbfd7e8dea3d"
+    },
+    "arkiv-security-trust": {
+      "source": "Arkiv-Network/skills",
+      "sourceType": "github",
+      "skillPath": "skills/arkiv-security-trust/SKILL.md",
+      "computedHash": "fdbb012fe9fdcc50e72b33e785f4ddb99117aa3c5f9e41aecbad278cb838d58e"
+    },
+    "arkiv-social-graph": {
+      "source": "Arkiv-Network/skills",
+      "sourceType": "github",
+      "skillPath": "skills/arkiv-social-graph/SKILL.md",
+      "computedHash": "12f6a420cf3d8ecd5893ff6f6428d01e2c96e81393e4427a0d42e0278924d06b"
+    },
+    "arkiv-troubleshooting": {
+      "source": "Arkiv-Network/skills",
+      "sourceType": "github",
+      "skillPath": "skills/arkiv-troubleshooting/SKILL.md",
+      "computedHash": "0a05bd12a07a0caf156ee904bfe3fd3308a2aeb235a9186a7133001fbbbf903e"
+    },
+    "arkiv-write-safety": {
+      "source": "Arkiv-Network/skills",
+      "sourceType": "github",
+      "skillPath": "skills/arkiv-write-safety/SKILL.md",
+      "computedHash": "51b2b6a58021eeca2d0a5a7be919a3a7645681ffa93ce278badb2c596a438f37"
+    }
+  }
+}
