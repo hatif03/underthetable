@@ -1,5 +1,5 @@
 import districts from "../../data/districts.json"
-import { DOTS, DOT_GEO } from "./indiaDots"
+import { CENTROIDS, DOTS, DOT_GEO } from "./indiaDots"
 
 export type Coarse = { lat: number; lon: number }
 
@@ -37,6 +37,17 @@ export function stateAt({ lat, lon }: Coarse): string | null {
   return hit ? hit[2] : null
 }
 
+/** Is a point in, or one dot (about 50 km) from, the state? Used to refuse a pin that is nowhere near its state. */
+export function nearState(point: Coarse, state: string): boolean {
+  for (const dLat of [-DOT_GEO.dy, 0, DOT_GEO.dy]) {
+    for (const dLon of [-DOT_GEO.dx, 0, DOT_GEO.dx]) {
+      const here = stateAt({ lat: point.lat + dLat, lon: point.lon + dLon })
+      if (here && sameArea(here, state)) return true
+    }
+  }
+  return false
+}
+
 /** Ladakh is drawn apart from Jammu and Kashmir, but the location check treats them as one area. */
 export function sameArea(a: string, b: string): boolean {
   const pair = new Set(["jk", "la"])
@@ -45,4 +56,10 @@ export function sameArea(a: string, b: string): boolean {
 
 export function stateName(slug: string): string {
   return districts.states.find((item) => item.slug === slug)?.label ?? slug
+}
+
+/** The middle of a state on the map, to open a pin map somewhere sensible. About 50 km accurate. */
+export function stateCenter(state: string): Coarse {
+  const dot = CENTROIDS[state] ?? CENTROIDS.mh
+  return { lon: DOT_GEO.x0 + (dot[0] + 0.5) * DOT_GEO.dx, lat: DOT_GEO.y1 - (dot[1] + 0.5) * DOT_GEO.dy }
 }

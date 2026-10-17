@@ -3,6 +3,7 @@ import { tiramisu } from "@arkiv-network/sdk/chains"
 import { isAddress, parseEther } from "viem"
 import { privateKeyToAccount } from "viem/accounts"
 import { keyedHttp, makePublicClient } from "../src/lib/client.ts"
+import { checkHuman, type Proof } from "./human.ts"
 
 /**
  * Sends a few cents of test GLM to a throwaway browser address so a person with no wallet can file.
@@ -16,11 +17,12 @@ const PER_DAY = 300
 const hits = new Map<string, number[]>()
 let day = { date: "", count: 0 }
 
-export async function drip(address: unknown, client: string, env: { key?: string; rpc?: string }) {
+export async function drip(address: unknown, client: string, env: { key?: string; rpc?: string; human?: { secret?: string; turnstileSecret?: string; turnstileSite?: string } }, proof?: Proof) {
   if (!env.key || !/^0x[0-9a-fA-F]{64}$/.test(env.key)) {
     throw new Error("The faucet is not configured on this host. Connect a wallet that holds test GLM.")
   }
   if (typeof address !== "string" || !isAddress(address)) throw new Error("That is not an address.")
+  await checkHuman(proof, env.human ?? {}, client)
 
   const now = Date.now()
   const recent = (hits.get(client) ?? []).filter((time) => now - time < 3_600_000)

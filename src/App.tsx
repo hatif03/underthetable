@@ -1,7 +1,7 @@
 import * as Tabs from "@radix-ui/react-tabs"
 import * as Tooltip from "@radix-ui/react-tooltip"
 import { Plus, RefreshCw } from "lucide-react"
-import { useEffect, useState } from "react"
+import { lazy, Suspense, useEffect, useState } from "react"
 import { ago } from "./lib/derive"
 import { setLang, t, useLang } from "./lib/i18n"
 import { reload, setDirect, start } from "./state/store"
@@ -14,8 +14,11 @@ import { Pulse, type Prefill } from "./views/Pulse"
 import { Record } from "./views/Record"
 import { Sealed } from "./views/Sealed"
 
+// Leaflet is only downloaded when the map tab is opened.
+const MapView = lazy(() => import("./views/MapView").then((m) => ({ default: m.MapView })))
+
 const closed = new URLSearchParams(window.location.search).get("mode") === "closed"
-const VIEWS = ["pulse", "office", "record", "sealed"] as const
+const VIEWS = ["pulse", "map", "office", "record", "sealed"] as const
 type View = (typeof VIEWS)[number]
 
 function viewFromHash(): View {
@@ -74,6 +77,7 @@ export function App() {
           </a>
           <Tabs.List className="nav" aria-label="Views">
             <Tabs.Trigger value="pulse">{t("nav.pulse")}</Tabs.Trigger>
+            <Tabs.Trigger value="map">{t("nav.map")}</Tabs.Trigger>
             <Tabs.Trigger value="office">{t("nav.office")}</Tabs.Trigger>
             <Tabs.Trigger value="record">{t("nav.record")}</Tabs.Trigger>
             <Tabs.Trigger value="sealed">{t("nav.sealed")}</Tabs.Trigger>
@@ -111,6 +115,13 @@ export function App() {
         <main>
           <Tabs.Content value="pulse" tabIndex={-1}>
             <Pulse live={live} closed={closed} onSearch={() => setPalette(true)} onDistrict={setDistrict} onReport={report} />
+          </Tabs.Content>
+          <Tabs.Content value="map" tabIndex={-1}>
+            {view === "map" ? (
+              <Suspense fallback={<p className="muted">Loading the map…</p>}>
+                <MapView live={live} closed={closed} onReport={report} />
+              </Suspense>
+            ) : null}
           </Tabs.Content>
           <Tabs.Content value="office" tabIndex={-1}>
             {view === "office" ? <Office live={live} onDistrict={setDistrict} /> : null}

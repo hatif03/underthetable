@@ -18,6 +18,12 @@ type Rule = { re: RegExp; kind: ReportKind; department: string; service: string 
 
 // Most specific first. The first rule that matches decides kind, department and service.
 const RULES: Rule[] = [
+  { re: /internet.*(shut|suspend|snapp?ed|cut|down|ban)|(shut|suspend|cut).*(internet|mobile data|broadband)|no (mobile )?(internet|data)/, kind: "restriction", department: "administration", service: "internet_shutdown" },
+  { re: /(website|site|account|app|channel|handle)s?.*(blocked|withheld|banned|taken down)|(blocked|banned).*(website|account|channel)/, kind: "restriction", department: "administration", service: "content_blocked" },
+  { re: /demolish|demolition|bulldoz/, kind: "restriction", department: "administration", service: "demolition_without_notice" },
+  { re: /evict/, kind: "restriction", department: "administration", service: "forced_eviction" },
+  { re: /custody|custodial|lock-?up.*(beat|tortur|hit)|(beat|tortur).*(lock-?up|police station)/, kind: "restriction", department: "police", service: "custodial_violence" },
+  { re: /journalist|reporter|press (card|person)/, kind: "restriction", department: "police", service: "journalist_detained_or_attacked" },
   { re: /permission.*(denied|refused|rejected|not (given|granted))|(denied|refused|rejected).*permission/, kind: "restriction", department: "police", service: "assembly_permission_denied" },
   { re: /section 144|section 163|ban on (gatherings|assembly)|more than (five|5) people|gatherings? (banned|prohibited)/, kind: "restriction", department: "police", service: "gathering_ban_order" },
   { re: /barricad|metro (stations? )?(was |were )?closed|roads? (was |were )?(blocked|closed)/, kind: "restriction", department: "police", service: "barricades_or_closures" },

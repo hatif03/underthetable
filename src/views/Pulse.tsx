@@ -15,7 +15,8 @@ import * as Switch from "@radix-ui/react-switch"
 import { Badge, Checked, Counter, Pips, Tip } from "../ui/kit"
 import { PressBadge, pressEntry } from "../ui/Press"
 import { setShowDemo } from "../state/store"
-import { kindMeta, OUTCOME_LABEL } from "../ui/meta"
+import { ILLUSTRATION } from "../ui/illustrations"
+import { kindMeta, KIND_META, OUTCOME_LABEL } from "../ui/meta"
 
 export type Prefill = { kind?: string; state?: string; district?: string; department?: string; service?: string }
 
@@ -26,6 +27,11 @@ type Props = {
   onDistrict: (district: string) => void
   onReport: (prefill?: Prefill) => void
 }
+
+const CATEGORIES: { art: string; label: () => string; blurb: () => string; prefill: Prefill }[] = [
+  ...(["demand", "failure", "absence", "diversion", "restriction"] as const).map((kind) => ({ art: kind, label: () => KIND_META[kind].label, blurb: () => KIND_META[kind].blurb, prefill: { kind } })),
+  { art: "shutdown", label: () => t("cat.shutdown"), blurb: () => t("cat.shutdownSub"), prefill: { kind: "restriction", department: "administration", service: "internet_shutdown" } },
+]
 
 export function Pulse({ live, closed, onSearch, onDistrict, onReport }: Props) {
   const { d, store } = live
@@ -127,6 +133,24 @@ export function Pulse({ live, closed, onSearch, onDistrict, onReport }: Props) {
               <span className="muted">{store.showDemo ? t("demo.showing") : `${t("demo.hiding")} (${d.demoHidden})`}</span>
             </label>
           ) : null}
+        </div>
+      </section>
+
+      <section className="stack tight">
+        <header className="section-head">
+          <h2>{t("cat.title")}</h2>
+        </header>
+        <div className="cats">
+          {CATEGORIES.map((cat) => {
+            const Art = ILLUSTRATION[cat.art]
+            return (
+              <button key={cat.art} type="button" className="cat" disabled={closed} onClick={() => onReport(cat.prefill)}>
+                <Art />
+                <strong>{cat.label()}</strong>
+                <span className="muted">{cat.blurb()}</span>
+              </button>
+            )
+          })}
         </div>
       </section>
 

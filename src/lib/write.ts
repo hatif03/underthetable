@@ -1,5 +1,5 @@
 import { ExpirationTime, jsonToPayload } from "@arkiv-network/sdk"
-import { str, u64 } from "@arkiv-network/sdk/attr"
+import { i32, str, u64 } from "@arkiv-network/sdk/attr"
 import type { Hex } from "viem"
 import { DEAD, makePublicClient, sharedPublicClient } from "./client"
 import { assertPayload, PAYLOAD_BYTES, type SealedReport } from "./guard"
@@ -47,6 +47,8 @@ export async function submitReport(
     week: str(report.week),
     amount_inr: u64(report.amount_inr),
     ...(report.source ? { source: str(report.source) } : {}),
+    // i32 on purpose: a signed whole number can be range-queried, so "issues inside this map view" is one Arkiv query.
+    ...(report.lat_e5 !== undefined && report.lon_e5 !== undefined ? { lat_e5: i32(report.lat_e5), lon_e5: i32(report.lon_e5) } : {}),
   }
   const expires = hours ? ExpirationTime.fromHours(1) : ExpirationTime.fromDays(180)
   const flags = { readonly: true as const, permissionlessExtension: false as const }

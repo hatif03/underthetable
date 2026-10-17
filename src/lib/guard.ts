@@ -1,5 +1,6 @@
 import vocab from "../../data/vocab.json"
 import districts from "../../data/districts.json"
+import { nearState } from "./geo"
 import { incidentWindow, isoWeek, kolkataDay } from "./week"
 
 export const PAYLOAD_TEXT = '{"v":1}'
@@ -22,6 +23,8 @@ export type ReportInput = {
   kind?: ReportKind
   /** Only the press curator writes this. A report from a news article, not from a citizen. */
   source?: "press"
+  /** The exact place of a public-infrastructure problem. Never of a person, and never for a bribe or a rights report. */
+  geo?: { lat: number; lon: number }
 }
 
 export type SealedReport = ReportInput & {
@@ -30,6 +33,9 @@ export type SealedReport = ReportInput & {
   kind: ReportKind
   week: string
   amount_inr: bigint
+  /** Degrees times 100,000, as whole numbers (about 1 m). Only when geo was given. */
+  lat_e5?: number
+  lon_e5?: number
 }
 
 const roles = vocab.roles as Record<string, string[]>
@@ -160,6 +166,19 @@ export function sealReport(input: ReportInput): SealedReport {
   if (dateError) throw new Error(dateError)
 
   if (input.source !== undefined && input.source !== "press") throw new Error("The source must be press, or left out.")
+  let lat_e5: number | undefined
+  let lon_e5: number | undefined
+  if (input.geo) {
+    const allowed = (vocab as { geoServices?: Record<string, string[]> }).geoServices ?? {}
+    if (kind !== "failure" || !allowed[input.department]?.includes(input.service)) {
+      throw new Error("A pin is only for a broken road, light, drain or pile of garbage. Bribes and rights reports stay at district level.")
+    }
+    const { lat, lon } = input.geo
+    if (!Number.isFinite(lat) || !Number.isFinite(lon) || lat < 6 || lat > 38 || lon < 68 || lon > 98) throw new Error("That pin is not in India.")
+    if (!nearState({ lat, lon }, input.state)) throw new Error("That pin is not in the state you chose. Move it, or change the district.")
+    lat_e5 = Math.round(lat * 100_000)
+    lon_e5 = Math.round(lon * 100_000)
+  }
   assertPayload(PAYLOAD_BYTES)
 
   return {
@@ -169,5 +188,6 @@ export function sealReport(input: ReportInput): SealedReport {
     kind,
     week: isoWeek(input.day),
     amount_inr: BigInt(input.amountInr),
+    ...(lat_e5 !== undefined && lon_e5 !== undefined ? { lat_e5, lon_e5 } : {}),
   }
 }

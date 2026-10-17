@@ -63,10 +63,10 @@ test("every press record passes the guard, is dated in the window, and cites a s
   assert.ok(pressRecords.length > 0)
   for (const record of pressRecords) {
     assert.ok(record.sources.length > 0, record.id)
-    assert.ok(record.eventDate >= "2026-10-09" && record.eventDate <= "2026-10-16", `${record.id} is outside 9 to 16 October`)
+    assert.ok(record.eventDate >= "2026-10-02" && record.eventDate <= "2026-10-17", `${record.id} is outside 2 to 17 October`)
     const sealed = sealReport({
       state: record.state, district: record.district, department: record.department, role: record.role, service: record.service,
-      outcome: record.outcome, amountInr: record.amountInr, day: record.eventDate, today: "2026-10-16", kind: record.kind as never, source: "press",
+      outcome: record.outcome, amountInr: record.amountInr, day: record.eventDate, today: "2026-10-17", kind: record.kind as never, source: "press",
     })
     assert.equal(sealed.source, "press")
     // No name or number that identifies a person in what is published about the record.

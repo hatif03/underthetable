@@ -80,3 +80,18 @@ test("the scan sees through Hindi digits, UPI handles, spelled emails and separa
   assert.equal(noted("asked 700 in Nashik last week").length, 0)
   assert.throws(() => sealReport({ state: "mh", district: "nashik", department: "rto", role: "clerk", service: "driving_licence", outcome: "९८७६५४३२१०", amountInr: 500, day: "2026-10-16", today: "2026-10-16" }))
 })
+
+test("rights violations and shutdowns are read from words", () => {
+  const cases: [string, string, string][] = [
+    ["Mobile internet was shut down in Nashik for three days", "administration", "internet_shutdown"],
+    ["They bulldozed our shop in Pune without any notice", "administration", "demolition_without_notice"],
+    ["A journalist was detained in Nashik while covering the march", "police", "journalist_detained_or_attacked"],
+    ["He was beaten in custody at the Nashik police station", "police", "custodial_violence"],
+  ]
+  for (const [text, department, service] of cases) {
+    const g = guess(text)
+    assert.equal(g.kind, "restriction", text)
+    assert.equal(g.department, department, text)
+    assert.equal(g.service, service, text)
+  }
+})

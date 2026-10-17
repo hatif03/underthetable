@@ -47,6 +47,10 @@
     {
       "slug": "school",
       "label": "School"
+    },
+    {
+      "slug": "administration",
+      "label": "District or state administration"
     }
   ],
   "kinds": [
@@ -68,7 +72,7 @@
     },
     {
       "slug": "restriction",
-      "label": "A public freedom was restricted"
+      "label": "A right was restricted or violated"
     }
   ],
   "roles": {
@@ -118,6 +122,9 @@
       "public"
     ],
     "school": [
+      "public"
+    ],
+    "administration": [
       "public"
     ]
   },
@@ -215,7 +222,15 @@
         "barricades_or_closures",
         "force_at_gathering",
         "detention_without_notice",
-        "fir_not_registered"
+        "fir_not_registered",
+        "custodial_violence",
+        "journalist_detained_or_attacked"
+      ],
+      "administration": [
+        "internet_shutdown",
+        "content_blocked",
+        "demolition_without_notice",
+        "forced_eviction"
       ]
     }
   },
@@ -244,5 +259,14 @@
       "slug": "cleared",
       "label": "Cleared"
     }
-  ]
+  ],
+  "geoServices": {
+    "municipal": [
+      "pothole",
+      "streetlight",
+      "open_drain",
+      "garbage_pile",
+      "broken_road"
+    ]
+  }
 }

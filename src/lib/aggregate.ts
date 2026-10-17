@@ -19,6 +19,9 @@ export type ReportRow = {
   verified?: string
   /** "press" when a trusted curator wrote it from a published article. It is not a citizen voice. */
   source?: string
+  /** The exact place, in degrees, for a pinned public-infrastructure problem. */
+  lat?: number
+  lon?: number
 }
 
 export type QuotedBucket = {

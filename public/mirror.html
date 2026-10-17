@@ -36,7 +36,7 @@ const RPC = "https://rpc.tiramisu.db-chain.testnet.arkiv.network"
 const DEAD = "0x000000000000000000000000000000000000dead"
 const CURATORS = ["0xc26debe828cd500c6d31f184baecce2782847ea3"]
 const DEMO = ["0x13398a1803eca909d909193f1547fffc1e05ef4f","0x8b34c95cda664550c4eb9c4ba14bb7172d6ada25","0xa81eef553318368e1c98f851c29521ab247532ad","0xee368405802ca49d38572f88de24b9ba044f2804","0xc3a64559e2bee5e542ef3180934646a89c3db67b","0x7ca1817218d26f2c6fac7e63fe2d97307c1fb92f","0x80aa599b39308191f323e4bf1c212f4f241d7365"]
-const ALLOWED = ["project","type","state","district","department","role","service","outcome","kind","week","day","amount_inr","source"]
+const ALLOWED = ["project","type","state","district","department","role","service","outcome","kind","week","day","amount_inr","source","lat_e5","lon_e5"]
 const $ = (id) => document.getElementById(id)
 let rows = []
 
@@ -63,6 +63,14 @@ function valid(entity) {
   const amount = a.amount_inr && a.amount_inr.type === "u64" ? Number(BigInt(a.amount_inr.value)) : 0
   const kind = str(a, "kind") || "demand"
   if (!["demand","failure","absence","diversion","restriction"].includes(kind)) return false
+  const hasLat = "lat_e5" in a, hasLon = "lon_e5" in a
+  if (hasLat !== hasLon) return false
+  if (hasLat) {
+    // a pin is two i32 values, only on a failure, inside India's bounds (the app also checks the state)
+    const lat = a.lat_e5.type === "i32" ? Number(a.lat_e5.value) / 1e5 : NaN
+    const lon = a.lon_e5.type === "i32" ? Number(a.lon_e5.value) / 1e5 : NaN
+    if (kind !== "failure" || !(lat >= 6 && lat <= 38 && lon >= 68 && lon <= 98)) return false
+  }
   return kind === "demand" ? amount >= 1 && amount <= 10000000 : amount >= 1 && amount <= 5
 }
 
@@ -99,7 +107,7 @@ function draw() {
     const kind = str(a, "kind") || "demand"
     const press = str(a, "source") === "press" && CURATORS.includes(String(e.creator).toLowerCase())
     const amount = Number(BigInt(a.amount_inr.value))
-    const cells = [kind, str(a, "district"), str(a, "department") + " · " + str(a, "service"), str(a, "week"), kind === "demand" ? "₹" + amount.toLocaleString("en-IN") : "severity " + amount, str(a, "outcome"), press ? "press" : DEMO.includes(String(e.creator).toLowerCase()) ? "demo" : "citizen", String(e.creator).slice(0, 8) + "…" + String(e.creator).slice(-4)]
+    const cells = [kind, str(a, "district"), str(a, "department") + " · " + str(a, "service"), str(a, "week"), kind === "demand" ? "₹" + amount.toLocaleString("en-IN") : "severity " + amount + ("lat_e5" in a ? " · pinned " + (Number(a.lat_e5.value) / 1e5).toFixed(5) + ", " + (Number(a.lon_e5.value) / 1e5).toFixed(5) : ""), str(a, "outcome"), press ? "press" : DEMO.includes(String(e.creator).toLowerCase()) ? "demo" : "citizen", String(e.creator).slice(0, 8) + "…" + String(e.creator).slice(-4)]
     if (q && !cells.join(" ").toLowerCase().includes(q)) continue
     const tr = document.createElement("tr")
     cells.forEach((c, i) => {

@@ -2,6 +2,7 @@ import districts from "../../data/districts.json"
 import vocab from "../../data/vocab.json"
 import type { Attributes } from "@arkiv-network/sdk"
 import { DEAD } from "./client"
+import { nearState } from "./geo"
 import { KINDS } from "./guard"
 import { addDays, kolkataDay, weekStart } from "./week"
 
@@ -11,7 +12,7 @@ import { addDays, kolkataDay, weekStart } from "./week"
  * can delete it. So every reader (the page, the CLI, the audit) applies this before it counts or shows
  * a row. A row that fails is ignored, never displayed, never counted.
  */
-export const REPORT_ATTRIBUTES = new Set(["project", "type", "state", "district", "department", "role", "service", "outcome", "kind", "week", "day", "amount_inr", "source"])
+export const REPORT_ATTRIBUTES = new Set(["project", "type", "state", "district", "department", "role", "service", "outcome", "kind", "week", "day", "amount_inr", "source", "lat_e5", "lon_e5"])
 export const ATTESTATION_ATTRIBUTES = new Set(["project", "type", "report", "method", "scope", "state"])
 
 const roles = vocab.roles as Record<string, string[]>
@@ -86,6 +87,16 @@ export function reportProblem(entity: RawEntity, today = kolkataDay()): string |
   if (!week || !weekPlausible(week, today)) return "a week that is malformed, in the future, or more than a year old"
   const day = attributes.day
   if (day !== undefined && (day.type !== "str" || !/^\d{4}-\d{2}-\d{2}$/.test(day.value as string))) return "a malformed legacy day"
+  const lat = attributes.lat_e5
+  const lon = attributes.lon_e5
+  if (lat !== undefined || lon !== undefined) {
+    if (!lat || !lon || lat.type !== "i32" || lon.type !== "i32") return "a pin that is not two i32 numbers"
+    const geoServices = (vocab as { geoServices?: Record<string, string[]> }).geoServices ?? {}
+    if (kind !== "failure" || !geoServices[department]?.includes(service)) return "a pin on something that is not public infrastructure"
+    const [la, lo] = [Number(lat.value) / 100_000, Number(lon.value) / 100_000]
+    if (la < 6 || la > 38 || lo < 68 || lo > 98) return "a pin outside India"
+    if (!nearState({ lat: la, lon: lo }, state.slug)) return "a pin that is not in its state"
+  }
   const source = attributes.source
   if (source !== undefined && !(source.type === "str" && source.value === "press")) return "a source other than press"
   return null

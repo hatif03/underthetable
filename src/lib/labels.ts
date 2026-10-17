@@ -44,6 +44,7 @@ const DEPARTMENT_LABELS: Record<string, string> = {
   fda: "FDA",
   ration: "Ration",
   health: "Health",
+  administration: "Administration",
   school: "School",
   demand: "Demand",
   failure: "Failure",
@@ -57,6 +58,12 @@ const DEPARTMENT_LABELS: Record<string, string> = {
   force_at_gathering: "Force used at a gathering",
   detention_without_notice: "Detention without notice",
   fir_not_registered: "FIR not registered",
+  custodial_violence: "Violence in custody",
+  journalist_detained_or_attacked: "Journalist detained or attacked",
+  internet_shutdown: "Internet shutdown",
+  content_blocked: "Websites or accounts blocked",
+  demolition_without_notice: "Demolition without notice",
+  forced_eviction: "Forced eviction",
   pothole: "Pothole",
   streetlight: "Streetlight",
   open_drain: "Open drain",
@@ -79,6 +86,6 @@ const DEPARTMENT_LABELS: Record<string, string> = {
 
 export function departmentLabel(slug: string): string {
   const key = `dept.${slug}` as Key
-  if (getLang() === "hi" && key in { "dept.police": 1, "dept.rto": 1, "dept.revenue": 1, "dept.passport": 1, "dept.municipal": 1, "dept.gst": 1, "dept.electricity": 1, "dept.income_tax": 1, "dept.fda": 1, "dept.ration": 1, "dept.health": 1, "dept.school": 1 }) return t(key)
+  if (getLang() === "hi" && key in { "dept.police": 1, "dept.rto": 1, "dept.revenue": 1, "dept.passport": 1, "dept.municipal": 1, "dept.gst": 1, "dept.electricity": 1, "dept.income_tax": 1, "dept.fda": 1, "dept.ration": 1, "dept.health": 1, "dept.school": 1, "dept.administration": 1 }) return t(key)
   return DEPARTMENT_LABELS[slug] ?? labelize(slug)
 }

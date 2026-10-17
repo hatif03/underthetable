@@ -11,6 +11,8 @@ export type Derived = {
   live: ReportRow[]
   /** Written from published news by a curator wallet. Never counted as a citizen voice. */
   press: ReportRow[]
+  /** Reports with an exact place on the map. */
+  pinned: ReportRow[]
   /** Desks that have one or two citizen wallets and are waiting for a third. */
   open: Bucket[]
   /** Synthetic rows from the team's own wallets that are currently hidden. */
@@ -107,6 +109,7 @@ export function derive(rows: ReportRow[], head: bigint, now: number, attestation
   return {
     live,
     press,
+    pinned: live.filter((row) => row.lat !== undefined && row.lon !== undefined),
     open: desks.filter((desk) => !desk.quoted),
     demoHidden,
     verifiedCount: live.filter((row) => row.verified).length,

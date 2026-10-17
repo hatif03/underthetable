@@ -15,7 +15,11 @@
     "wallet": "tsx scripts/wallet.ts",
     "repro": "tsx scripts/repro.ts",
     "test": "tsx --test test/*.test.ts",
-    "build:api": "node scripts/build-api.mjs"
+    "build:api": "node scripts/build-api.mjs",
+    "seed:pin": "tsx scripts/seed-pin.ts",
+    "catalog": "tsx scripts/catalog.ts",
+    "ai:check": "tsx scripts/ai-check.ts",
+    "screenshots": "tsx scripts/screenshots.ts"
   },
   "dependencies": {
     "@arkiv-network/sdk": "^0.8.1",
@@ -30,6 +34,7 @@
     "@radix-ui/react-toggle-group": "^1.2.1",
     "@radix-ui/react-tooltip": "^1.4.1",
     "cmdk": "^1.1.1",
+    "leaflet": "^1.9.4",
     "lucide-react": "^1.58.0",
     "motion": "^14.3.0",
     "phaser": "^3.90.0",
@@ -38,6 +43,7 @@
     "viem": "^2.37.0"
   },
   "devDependencies": {
+    "@types/leaflet": "^1.9.22",
     "@types/node": "^24.19.2",
     "@types/react": "^19.1.0",
     "@types/react-dom": "^19.1.0",

@@ -1,8 +1,11 @@
 import { AnimatePresence, motion } from "motion/react"
 import * as Switch from "@radix-ui/react-switch"
 import { ExternalLink, Lock, MapPin, RotateCcw, ShieldCheck, Trash2, UserRound, Wallet } from "lucide-react"
-import { useEffect, useMemo, useState } from "react"
+import { lazy, Suspense, useEffect, useMemo, useRef, useState } from "react"
 import districts from "../../data/districts.json"
+import vocab from "../../data/vocab.json"
+import { proveHuman } from "../lib/human"
+import type { Pin } from "../ui/PinPicker"
 import type { ReportRow } from "../lib/aggregate"
 import { DEAD, entityUrl, txUrl } from "../lib/client"
 import { findPrivate, KINDS, redactText, sealReport, type ReportKind } from "../lib/guard"
@@ -35,8 +38,12 @@ function lastDistrict(): { state: string; district: string } {
   return { state: "mh", district: "nashik" }
 }
 
-type Phase = "idle" | "locating" | "gas" | "sealing" | "checking"
+type Phase = "idle" | "locating" | "human" | "gas" | "sealing" | "checking"
 type Check = { ok: boolean; text: string; attestationKey?: string }
+
+// The map is only downloaded when someone is reporting a pinnable problem.
+const PinPicker = lazy(() => import("../ui/PinPicker"))
+const GEO = (vocab as { geoServices?: Record<string, string[]> }).geoServices ?? {}
 
 export function FileSheet({ open, onOpenChange, prefill }: { open: boolean; onOpenChange: (open: boolean) => void; prefill?: Prefill }) {
   const today = kolkataDay()
@@ -64,6 +71,9 @@ export function FileSheet({ open, onOpenChange, prefill }: { open: boolean; onOp
   const [mode, setMode] = useState<"identity" | "wallet">("identity")
   const [connection, setConnection] = useState<Connection | null>(null)
   const [address, setAddress] = useState(currentAddress())
+  const [pin, setPin] = useState<Pin | null>(null)
+  const [human, setHuman] = useState<string | null>(null)
+  const humanSlot = useRef<HTMLDivElement>(null)
 
   function chooseKind(next: ReportKind, keepDesk?: { department: string; service: string }) {
     setKind(next)
@@ -137,6 +147,8 @@ export function FileSheet({ open, onOpenChange, prefill }: { open: boolean; onOp
   const demand = kind === "demand"
   const amount = demand ? Number(amountText.replaceAll(",", "")) : Number(severity)
   const roles = rolesFor(kind, department)
+  const pinnable = kind === "failure" && Boolean(GEO[department]?.includes(service))
+  const geo = pinnable ? (pin ?? undefined) : undefined
 
   const deskOptions = departmentsFor(kind).flatMap((item) =>
     servicesFor(kind, item.slug).map((slug) => ({ value: `${item.slug}:${slug}`, label: labelize(slug), group: departmentLabel(item.slug) })),
@@ -144,9 +156,10 @@ export function FileSheet({ open, onOpenChange, prefill }: { open: boolean; onOp
 
   async function onFile() {
     setError(null)
+    setHuman(null)
     let sealed
     try {
-      sealed = sealReport({ state: stateSlug, district, department, role, service, outcome, amountInr: amount, day: weeks[weekIndex].day, today, kind })
+      sealed = sealReport({ state: stateSlug, district, department, role, service, outcome, amountInr: amount, day: weeks[weekIndex].day, today, kind, geo })
     } catch (problem) {
       return setError(problem instanceof Error ? problem.message : String(problem))
     }
@@ -178,8 +191,12 @@ export function FileSheet({ open, onOpenChange, prefill }: { open: boolean; onOp
       if (mode === "identity") {
         const identity = getIdentity()
         setAddress(identity.address)
+        // Only the faucet needs a person; a wallet that already holds test GLM skips this.
+        setPhase("human")
+        const proof = await proveHuman(humanSlot.current)
+        setHuman(proof.label)
         setPhase("gas")
-        await fundIdentity(identity.address)
+        await fundIdentity(identity.address, proof)
         setPhase("sealing")
         filed = await fileAsIdentity(identity.client as Connection["client"], sealed)
         signer = identity.client as unknown as typeof signer
@@ -212,6 +229,8 @@ export function FileSheet({ open, onOpenChange, prefill }: { open: boolean; onOp
         week: sealed.week,
         amountInr: sealed.amountInr,
         kind: sealed.kind,
+        lat: sealed.lat_e5 === undefined ? undefined : sealed.lat_e5 / 100_000,
+        lon: sealed.lon_e5 === undefined ? undefined : sealed.lon_e5 / 100_000,
       }
       if (position) {
         setPhase("checking")
@@ -225,6 +244,7 @@ export function FileSheet({ open, onOpenChange, prefill }: { open: boolean; onOp
         check = { ok: false, text: "Skipped. This report counts as a wallet, and is not marked location-checked." }
       }
       setReceipt({ ...filed, delete: remove, check })
+      setPin(null)
       setSealText(null)
       setWords("")
       setFilled([])
@@ -238,7 +258,7 @@ export function FileSheet({ open, onOpenChange, prefill }: { open: boolean; onOp
   }
 
   const busy = phase !== "idle"
-  const label = { idle: t("form.file"), locating: t("form.locating"), gas: t("form.gas"), sealing: t("form.sealing"), checking: t("form.checking") }[phase]
+  const label = { idle: t("form.file"), locating: t("form.locating"), human: t("human.title"), gas: t("form.gas"), sealing: t("form.sealing"), checking: t("form.checking") }[phase]
 
   return (
     <Sheet
@@ -258,6 +278,7 @@ export function FileSheet({ open, onOpenChange, prefill }: { open: boolean; onOp
             check={receipt.check}
             sealText={sealText}
             onDelete={async () => setSealText(await receipt.delete())}
+            human={human}
             onAnother={() => {
               setReceipt(null)
               setSealText(null)
@@ -361,6 +382,18 @@ export function FileSheet({ open, onOpenChange, prefill }: { open: boolean; onOp
               ) : null}
             </div>
 
+            {pinnable ? (
+              <div className="field">
+                <span className="field-label">{t("pin.title")} <span className="muted small">(optional)</span></span>
+                <Suspense fallback={<div className="pinmap" />}>
+                  <PinPicker key={`${stateSlug}:${district}`} value={pin} onChange={setPin} state={stateSlug} />
+                </Suspense>
+                <span className="muted small field-note">
+                  <MapPin size={12} /> {t("pin.hint")}
+                </span>
+              </div>
+            ) : null}
+
             <aside className="public-box">
               <header>
                 <ShieldCheck size={16} /> {t("form.public")}
@@ -368,6 +401,7 @@ export function FileSheet({ open, onOpenChange, prefill }: { open: boolean; onOp
               <p>
                 {KIND_META[kind].label} · {labelize(district)}, {state.label} · {departmentLabel(department)}
                 {demand ? ` · ${labelize(role)}` : ""} · {labelize(service)} · {OUTCOME_LABEL[outcome]} · {demand ? (Number.isFinite(amount) ? rupees(amount) : "—") : `severity ${amount}`} · {weeks[weekIndex]?.week}
+                {geo ? ` · pin ${geo.lat.toFixed(5)}, ${geo.lon.toFixed(5)}` : ""}
               </p>
               <p className="muted small">{t("form.notStored")}</p>
             </aside>
@@ -416,6 +450,7 @@ export function FileSheet({ open, onOpenChange, prefill }: { open: boolean; onOp
               </span>
             </div>
 
+            <div id="human-slot" ref={humanSlot} hidden />
             {error ? <p className="error" role="alert">{error}</p> : null}
             <button type="button" className="btn primary wide big-btn" disabled={busy} onClick={() => void onFile()}>
               {busy ? <span className="spinner" aria-hidden /> : null}
@@ -429,7 +464,7 @@ export function FileSheet({ open, onOpenChange, prefill }: { open: boolean; onOp
   )
 }
 
-function Receipt({ receipt, check, sealText, onDelete, onAnother, onClose }: { receipt: SealReceipt; check: Check | null; sealText: string | null; onDelete: () => Promise<void>; onAnother: () => void; onClose: () => void }) {
+function Receipt({ receipt, check, human, sealText, onDelete, onAnother, onClose }: { receipt: SealReceipt; check: Check | null; human: string | null; sealText: string | null; onDelete: () => Promise<void>; onAnother: () => void; onClose: () => void }) {
   const [trying, setTrying] = useState(false)
   return (
     <motion.div key="receipt" className="receipt" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
@@ -484,6 +519,10 @@ function Receipt({ receipt, check, sealText, onDelete, onAnother, onClose }: { r
               <span className="muted">Not requested.</span>
             )}
           </dd>
+        </div>
+        <div>
+          <dt>Human check</dt>
+          <dd>{human ? <span className="hit">✓ {human}</span> : <span className="muted">Not needed: the wallet already held test GLM.</span>}</dd>
         </div>
         <div>
           <dt>Leaves queries at block</dt>

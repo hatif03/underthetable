@@ -1,9 +1,9 @@
 import type { Attributes } from "@arkiv-network/sdk"
-import { addr, str, u64 } from "@arkiv-network/sdk/attr"
+import { addr, i32, str, u64 } from "@arkiv-network/sdk/attr"
 import attesters from "../../data/attesters.json"
 import curators from "../../data/curators.json"
 import { attestationProblem, reportProblem, type RawEntity } from "./validate"
-import { QueryError, and, eq, gte, render } from "@arkiv-network/sdk/query"
+import { QueryError, and, eq, gte, lte, render } from "@arkiv-network/sdk/query"
 import type { Address, Hex } from "viem"
 import type { ReportRow } from "./aggregate"
 import { MAX_PAGES, PAGE_LIMIT, makePublicClient, sharedPublicClient } from "./client"
@@ -180,6 +180,9 @@ export function toReportRow(entity: RawEntity & { key?: Hex; creator?: Hex; owne
     amountInr: Number(amount.value),
     kind: readStr(attributes, "kind") ?? "demand",
     // Anyone can write source = press. Only a listed curator wallet is believed.
+    ...(attributes.lat_e5 && attributes.lon_e5 && attributes.lat_e5.type === "i32" && attributes.lon_e5.type === "i32"
+      ? { lat: Number(attributes.lat_e5.value) / 100_000, lon: Number(attributes.lon_e5.value) / 100_000 }
+      : {}),
     source: readStr(attributes, "source") === "press" && CURATORS.has(entity.creator.toLowerCase()) ? "press" : undefined,
   }
 }
@@ -319,4 +322,36 @@ export function readError(error: unknown, district?: string, minInr?: number): s
 
 export function isShortLived(row: ReportRow): boolean {
   return row.expiresAt > row.createdAt && row.expiresAt - row.createdAt <= 2_000n
+}
+
+export type Box = { south: number; west: number; north: number; east: number }
+
+/**
+ * Pinned problems inside a map view, answered by Arkiv itself: four range predicates on the i32 attributes
+ * lat_e5 and lon_e5. A flat file or a content hash cannot answer "what is inside this rectangle" without
+ * a server that downloads everything first.
+ */
+export async function fetchInBox(box: Box, rpc?: string): Promise<{ rows: ReportRow[]; blockNumber: bigint; query: string }> {
+  const client = rpc ? makePublicClient(rpc) : sharedPublicClient()
+  const snapshot = await client.getBlockNumber({ cacheTime: 0 })
+  const parts = [
+    eq("project", str("underthetable")),
+    eq("type", str("report")),
+    gte("lat_e5", i32(Math.floor(box.south * 100_000))),
+    lte("lat_e5", i32(Math.ceil(box.north * 100_000))),
+    gte("lon_e5", i32(Math.floor(box.west * 100_000))),
+    lte("lon_e5", i32(Math.ceil(box.east * 100_000))),
+  ]
+  const page = await client
+    .select({ key: true, creator: true, owner: true, createdAt: true, expiresAt: true, attributes: true, payload: true })
+    .where(...parts)
+    .atBlock(snapshot)
+    .limit(PAGE_LIMIT)
+    .fetch()
+  const rows: ReportRow[] = []
+  for (const entity of page.entities) {
+    const row = toReportRow(entity)
+    if (row && row.expiresAt > snapshot) rows.push(row)
+  }
+  return { rows, blockNumber: snapshot, query: render(and(...parts)) }
 }

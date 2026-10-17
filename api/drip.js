@@ -2224,18 +2224,18 @@ var init_lru = __esm({
         });
         this.maxSize = size5;
       }
-      get(key2) {
-        const value = super.get(key2);
-        if (super.has(key2)) {
-          super.delete(key2);
-          super.set(key2, value);
+      get(key3) {
+        const value = super.get(key3);
+        if (super.has(key3)) {
+          super.delete(key3);
+          super.set(key3, value);
         }
         return value;
       }
-      set(key2, value) {
-        if (super.has(key2))
-          super.delete(key2);
-        super.set(key2, value);
+      set(key3, value) {
+        if (super.has(key3))
+          super.delete(key3);
+        super.set(key3, value);
         if (this.maxSize && this.size > this.maxSize) {
           const firstKey = super.keys().next().value;
           if (firstKey !== void 0)
@@ -3358,9 +3358,9 @@ var init_decodeErrorResult = __esm({
 var stringify;
 var init_stringify = __esm({
   "node_modules/viem/_esm/utils/stringify.js"() {
-    stringify = (value, replacer, space) => JSON.stringify(value, (key2, value_) => {
+    stringify = (value, replacer, space) => JSON.stringify(value, (key3, value_) => {
       const value2 = typeof value_ === "bigint" ? value_.toString() : value_;
-      return typeof replacer === "function" ? replacer(key2, value2) : value2;
+      return typeof replacer === "function" ? replacer(key3, value2) : value2;
     }, space);
   }
 });
@@ -3564,13 +3564,13 @@ var init_stateOverride = __esm({
 
 // node_modules/viem/_esm/errors/transaction.js
 function prettyPrint(args) {
-  const entries = Object.entries(args).map(([key2, value]) => {
+  const entries = Object.entries(args).map(([key3, value]) => {
     if (value === void 0 || value === false)
       return null;
-    return [key2, value];
+    return [key3, value];
   }).filter(Boolean);
-  const maxLength = entries.reduce((acc, [key2]) => Math.max(acc, key2.length), 0);
-  return entries.map(([key2, value]) => `  ${`${key2}:`.padEnd(maxLength + 1)}  ${value}`).join("\n");
+  const maxLength = entries.reduce((acc, [key3]) => Math.max(acc, key3.length), 0);
+  return entries.map(([key3, value]) => `  ${`${key3}:`.padEnd(maxLength + 1)}  ${value}`).join("\n");
 }
 var FeePayerNonceMismatchError, InvalidLegacyVError, InvalidSerializableTransactionError, InvalidStorageKeySizeError, TransactionExecutionError, TransactionNotFoundError, TransactionReceiptNotFoundError, TransactionReceiptRevertedError, WaitForTransactionReceiptTimeoutError;
 var init_transaction = __esm({
@@ -4851,7 +4851,7 @@ var init_hmac = __esm({
         this.finished = false;
         this.destroyed = false;
         ahash(hash3);
-        const key2 = toBytes2(_key);
+        const key3 = toBytes2(_key);
         this.iHash = hash3.create();
         if (typeof this.iHash.update !== "function")
           throw new Error("Expected instance of class which extends utils.Hash");
@@ -4859,7 +4859,7 @@ var init_hmac = __esm({
         this.outputLen = this.iHash.outputLen;
         const blockLen = this.blockLen;
         const pad4 = new Uint8Array(blockLen);
-        pad4.set(key2.length > blockLen ? hash3.create().update(key2).digest() : key2);
+        pad4.set(key3.length > blockLen ? hash3.create().update(key3).digest() : key3);
         for (let i = 0; i < pad4.length; i++)
           pad4[i] ^= 54;
         this.iHash.update(pad4);
@@ -4909,8 +4909,8 @@ var init_hmac = __esm({
         this.iHash.destroy();
       }
     };
-    hmac = (hash3, key2, message) => new HMAC(hash3, key2).update(message).digest();
-    hmac.create = (hash3, key2) => new HMAC(hash3, key2);
+    hmac = (hash3, key3, message) => new HMAC(hash3, key3).update(message).digest();
+    hmac.create = (hash3, key3) => new HMAC(hash3, key3);
   }
 });
 
@@ -5380,13 +5380,13 @@ function getMinHashLength(fieldOrder) {
   const length = getFieldBytesLength(fieldOrder);
   return length + Math.ceil(length / 2);
 }
-function mapHashToField(key2, fieldOrder, isLE2 = false) {
-  const len = key2.length;
+function mapHashToField(key3, fieldOrder, isLE2 = false) {
+  const len = key3.length;
   const fieldLen = getFieldBytesLength(fieldOrder);
   const minLen = getMinHashLength(fieldOrder);
   if (len < 16 || len < minLen || len > 1024)
     throw new Error("expected " + minLen + "-1024 bytes of input, got " + len);
-  const num2 = isLE2 ? bytesToNumberLE(key2) : bytesToNumberBE(key2);
+  const num2 = isLE2 ? bytesToNumberLE(key3) : bytesToNumberBE(key3);
   const reduced = mod(num2, fieldOrder - _1n3) + _1n3;
   return isLE2 ? numberToBytesLE(reduced, fieldLen) : numberToBytesBE(reduced, fieldLen);
 }
@@ -5734,20 +5734,20 @@ function weierstrassPoints(opts) {
   function isWithinCurveOrder(num2) {
     return inRange(num2, _1n5, CURVE.n);
   }
-  function normPrivateKeyToScalar(key2) {
+  function normPrivateKeyToScalar(key3) {
     const { allowedPrivateKeyLengths: lengths, nByteLength, wrapPrivateKey, n: N } = CURVE;
-    if (lengths && typeof key2 !== "bigint") {
-      if (isBytes2(key2))
-        key2 = bytesToHex2(key2);
-      if (typeof key2 !== "string" || !lengths.includes(key2.length))
+    if (lengths && typeof key3 !== "bigint") {
+      if (isBytes2(key3))
+        key3 = bytesToHex2(key3);
+      if (typeof key3 !== "string" || !lengths.includes(key3.length))
         throw new Error("invalid private key");
-      key2 = key2.padStart(nByteLength * 2, "0");
+      key3 = key3.padStart(nByteLength * 2, "0");
     }
     let num2;
     try {
-      num2 = typeof key2 === "bigint" ? key2 : bytesToNumberBE(ensureBytes("private key", key2, nByteLength));
+      num2 = typeof key3 === "bigint" ? key3 : bytesToNumberBE(ensureBytes("private key", key3, nByteLength));
     } catch (error) {
-      throw new Error("invalid private key, expected hex or " + nByteLength + " bytes, got " + typeof key2);
+      throw new Error("invalid private key, expected hex or " + nByteLength + " bytes, got " + typeof key3);
     }
     if (wrapPrivateKey)
       num2 = mod(num2, N);
@@ -6330,7 +6330,7 @@ function weierstrass(curveDef) {
   function prepSig(msgHash, privateKey, opts = defaultSigOpts) {
     if (["recovered", "canonical"].some((k) => k in opts))
       throw new Error("sign() legacy options not supported");
-    const { hash: hash3, randomBytes: randomBytes2 } = CURVE;
+    const { hash: hash3, randomBytes: randomBytes3 } = CURVE;
     let { lowS, prehash, extraEntropy: ent } = opts;
     if (lowS == null)
       lowS = true;
@@ -6342,7 +6342,7 @@ function weierstrass(curveDef) {
     const d = normPrivateKeyToScalar(privateKey);
     const seedArgs = [int2octets(d), int2octets(h1int)];
     if (ent != null && ent !== false) {
-      const e = ent === true ? randomBytes2(Fp.BYTES) : ent;
+      const e = ent === true ? randomBytes3(Fp.BYTES) : ent;
       seedArgs.push(ensureBytes("extraEntropy", e));
     }
     const seed = concatBytes3(...seedArgs);
@@ -6371,7 +6371,7 @@ function weierstrass(curveDef) {
   }
   const defaultSigOpts = { lowS: CURVE.lowS, prehash: false };
   const defaultVerOpts = { lowS: CURVE.lowS, prehash: false };
-  function sign2(msgHash, privKey, opts = defaultSigOpts) {
+  function sign3(msgHash, privKey, opts = defaultSigOpts) {
     const { seed, k2sig } = prepSig(msgHash, privKey, opts);
     const C = CURVE;
     const drbg = createHmacDrbg(C.hash.outputLen, C.nByteLength, C.hmac);
@@ -6433,7 +6433,7 @@ function weierstrass(curveDef) {
     CURVE,
     getPublicKey,
     getSharedSecret,
-    sign: sign2,
+    sign: sign3,
     verify,
     ProjectivePoint: Point2,
     Signature,
@@ -6663,7 +6663,7 @@ var init_weierstrass = __esm({
 function getHash(hash3) {
   return {
     hash: hash3,
-    hmac: (key2, ...msgs) => hmac(hash3, key2, concatBytes(...msgs)),
+    hmac: (key3, ...msgs) => hmac(hash3, key3, concatBytes(...msgs)),
     randomBytes
   };
 }
@@ -7313,11 +7313,11 @@ function extract(value_, { format: format2 }) {
   const value = {};
   function extract_(formatted2) {
     const keys = Object.keys(formatted2);
-    for (const key2 of keys) {
-      if (key2 in value_)
-        value[key2] = value_[key2];
-      if (formatted2[key2] && typeof formatted2[key2] === "object" && !Array.isArray(formatted2[key2]))
-        extract_(formatted2[key2]);
+    for (const key3 of keys) {
+      if (key3 in value_)
+        value[key3] = value_[key3];
+      if (formatted2[key3] && typeof formatted2[key3] === "object" && !Array.isArray(formatted2[key3]))
+        extract_(formatted2[key3]);
     }
   }
   const formatted = format2(value_ || {});
@@ -7942,9 +7942,9 @@ var init_hex = __esm({
 
 // node_modules/ox/_esm/core/Json.js
 function stringify2(value, replacer, space) {
-  return JSON.stringify(value, (key2, value2) => {
+  return JSON.stringify(value, (key3, value2) => {
     if (typeof replacer === "function")
-      return replacer(key2, value2);
+      return replacer(key3, value2);
     if (typeof value2 === "bigint")
       return value2.toString() + bigIntSuffix;
     return value2;
@@ -11346,14 +11346,14 @@ function includesArgs(parameters) {
     });
   }
   if (typeof args === "object" && !Array.isArray(args) && typeof matchArgs === "object" && !Array.isArray(matchArgs))
-    return Object.entries(matchArgs).every(([key2, value]) => {
+    return Object.entries(matchArgs).every(([key3, value]) => {
       if (value === null || value === void 0)
         return true;
-      const input = inputs.find((input2) => input2.name === key2);
+      const input = inputs.find((input2) => input2.name === key3);
       if (!input)
         return false;
       const value_ = Array.isArray(value) ? value : [value];
-      return value_.some((value2) => isEqual2(input, value2, args[key2]));
+      return value_.some((value2) => isEqual2(input, value2, args[key3]));
     });
   return false;
 }
@@ -11545,13 +11545,13 @@ function observe(observerId, callbacks, fn) {
   if (listeners && listeners.length > 0)
     return unwatch;
   const emit = {};
-  for (const key2 in callbacks) {
-    emit[key2] = ((...args) => {
+  for (const key3 in callbacks) {
+    emit[key3] = ((...args) => {
       const listeners2 = getListeners();
       if (listeners2.length === 0)
         return;
       for (const listener of listeners2)
-        listener.fns[key2]?.(...args);
+        listener.fns[key3]?.(...args);
     });
   }
   const cleanup = fn(emit);
@@ -12522,7 +12522,7 @@ function uid(length = 11) {
 
 // node_modules/viem/_esm/clients/createClient.js
 function createClient(parameters) {
-  const { batch, chain, ccipRead, dataSuffix, key: key2 = "base", name = "Base Client", tokens, type = "base" } = parameters;
+  const { batch, chain, ccipRead, dataSuffix, key: key3 = "base", name = "Base Client", tokens, type = "base" } = parameters;
   const experimental_blockTag = parameters.experimental_blockTag ?? (typeof chain?.experimental_preconfirmationTime === "number" ? "pending" : void 0);
   const blockTime = chain?.blockTime ?? 12e3;
   const defaultPollingInterval = Math.min(Math.max(Math.floor(blockTime / 2), 500), 4e3);
@@ -12542,7 +12542,7 @@ function createClient(parameters) {
     ccipRead,
     chain,
     dataSuffix,
-    key: key2,
+    key: key3,
     name,
     pollingInterval,
     request,
@@ -12555,14 +12555,14 @@ function createClient(parameters) {
   function extend(base) {
     return (extendFn) => {
       const extended = extendFn(base);
-      for (const key3 in client)
-        delete extended[key3];
+      for (const key4 in client)
+        delete extended[key4];
       const combined = { ...base, ...extended };
-      for (const key3 in extended) {
-        const a = base[key3];
-        const b = extended[key3];
+      for (const key4 in extended) {
+        const a = base[key4];
+        const b = extended[key4];
         if (isPlainObject(a) && isPlainObject(b))
-          combined[key3] = { ...a, ...b };
+          combined[key4] = { ...a, ...b };
       }
       return Object.assign(combined, { extend: extend(combined) });
     };
@@ -12577,7 +12577,7 @@ function isPlainObject(value) {
 }
 function bindActionDecorators(client, action) {
   const wrapped = (parameters = {}) => action(client, parameters);
-  for (const key2 of [
+  for (const key3 of [
     "call",
     "calls",
     "callWithPeriod",
@@ -12587,17 +12587,17 @@ function bindActionDecorators(client, action) {
     "predict",
     "simulate"
   ])
-    if (Object.hasOwn(action, key2)) {
-      const helper = action[key2];
-      wrapped[key2] = (args = {}) => {
+    if (Object.hasOwn(action, key3)) {
+      const helper = action[key3];
+      wrapped[key3] = (args = {}) => {
         if (helper.length === 1)
           return helper(args);
         return helper(client, args);
       };
     }
-  for (const key2 of ["extractEvent", "extractEvents"])
-    if (Object.hasOwn(action, key2))
-      wrapped[key2] = action[key2];
+  for (const key3 of ["extractEvent", "extractEvents"])
+    if (Object.hasOwn(action, key3))
+      wrapped[key3] = action[key3];
   return wrapped;
 }
 
@@ -13031,7 +13031,7 @@ init_getChainContractAddress();
 init_toHex();
 init_localBatchGatewayRequest();
 async function getEnsText(client, parameters) {
-  const { blockNumber, blockTag, key: key2, name, gatewayUrls, strict } = parameters;
+  const { blockNumber, blockTag, key: key3, name, gatewayUrls, strict } = parameters;
   const { chain } = client;
   const universalResolverAddress = (() => {
     if (parameters.universalResolverAddress)
@@ -13056,7 +13056,7 @@ async function getEnsText(client, parameters) {
         encodeFunctionData({
           abi: textResolverAbi,
           functionName: "text",
-          args: [namehash(name), key2]
+          args: [namehash(name), key3]
         }),
         gatewayUrls ?? [localBatchGatewayUrl]
       ],
@@ -14738,16 +14738,16 @@ var LruMap2 = class extends Map {
     });
     this.maxSize = size5;
   }
-  get(key2) {
-    const value = super.get(key2);
-    if (super.has(key2) && value !== void 0) {
-      this.delete(key2);
-      super.set(key2, value);
+  get(key3) {
+    const value = super.get(key3);
+    if (super.has(key3) && value !== void 0) {
+      this.delete(key3);
+      super.set(key3, value);
     }
     return value;
   }
-  set(key2, value) {
-    super.set(key2, value);
+  set(key3, value) {
+    super.set(key3, value);
     if (this.maxSize && this.size > this.maxSize) {
       const firstKey = this.keys().next().value;
       if (firstKey)
@@ -19243,10 +19243,10 @@ async function getCapabilities(client, parameters = {}) {
   const capabilities = {};
   for (const [chainId2, capabilities_] of Object.entries(capabilities_raw)) {
     capabilities[Number(chainId2)] = {};
-    for (let [key2, value] of Object.entries(capabilities_)) {
-      if (key2 === "addSubAccount")
-        key2 = "unstable_addSubAccount";
-      capabilities[Number(chainId2)][key2] = value;
+    for (let [key3, value] of Object.entries(capabilities_)) {
+      if (key3 === "addSubAccount")
+        key3 = "unstable_addSubAccount";
+      capabilities[Number(chainId2)][key3] = value;
     }
   }
   return typeof chainId === "number" ? capabilities[chainId] : capabilities;
@@ -19507,11 +19507,11 @@ function walletActions(client) {
 }
 
 // node_modules/viem/_esm/clients/transports/createTransport.js
-function createTransport({ key: key2, methods, name, request, retryCount = 3, retryDelay = 150, timeout, type }, value) {
+function createTransport({ key: key3, methods, name, request, retryCount = 3, retryDelay = 150, timeout, type }, value) {
   const uid2 = uid();
   return {
     config: {
-      key: key2,
+      key: key3,
       methods,
       name,
       request,
@@ -19554,7 +19554,7 @@ function getSignalId(signal) {
   return nextId;
 }
 function http(url, config = {}) {
-  const { batch, fetchFn, fetchOptions, key: key2 = "http", maxResponseBodySize, methods, name = "HTTP JSON-RPC", onFetchRequest, onFetchResponse, retryDelay, raw } = config;
+  const { batch, fetchFn, fetchOptions, key: key3 = "http", maxResponseBodySize, methods, name = "HTTP JSON-RPC", onFetchRequest, onFetchResponse, retryDelay, raw } = config;
   return ({ chain, retryCount: retryCount_, timeout: timeout_ }) => {
     const { batchSize = 1e3, wait: wait2 = 0 } = typeof batch === "object" ? batch : {};
     const retryCount = config.retryCount ?? retryCount_;
@@ -19571,7 +19571,7 @@ function http(url, config = {}) {
       timeout
     });
     return createTransport({
-      key: key2,
+      key: key3,
       methods,
       name,
       async request({ method, params }, options) {
@@ -19763,10 +19763,10 @@ var DECIMAL_RE = /^([+-]?)(\d+)(?:\.(\d+))?$/;
 function decimalToUnits(input) {
   const match = DECIMAL_RE.exec(input);
   if (!match) throw new InvalidValueError("dec", input, "not a decimal literal", 'Write it as sign, digits, and an optional "." with up to 18 fractional digits \u2014 e.g. dec("3.5") or dec("-0.25"). Exponents such as "1e18" are not accepted.');
-  const [, sign2, whole, fraction = ""] = match;
+  const [, sign3, whole, fraction = ""] = match;
   if (fraction.length > DECIMAL_SCALE) throw new InvalidValueError("dec", input, `${fraction.length} fractional digits exceeds the ${DECIMAL_SCALE} the protocol stores`, "Round it yourself before storing \u2014 a dec is never rounded for you, so that what you write is exactly what is stored.");
   const digits = BigInt(whole + fraction.padEnd(DECIMAL_SCALE, "0"));
-  const units = sign2 === "-" ? -digits : digits;
+  const units = sign3 === "-" ? -digits : digits;
   if (units > INT256_MAX || units < INT256_MIN) throw new InvalidValueError("dec", input, "exceeds the int256 range a dec is stored in");
   return units;
 }
@@ -19776,8 +19776,8 @@ function unitsToDecimal(units) {
   const magnitude = negative ? -units : units;
   const whole = magnitude / DECIMAL_UNIT;
   const trimmed = (magnitude % DECIMAL_UNIT).toString().padStart(DECIMAL_SCALE, "0").replace(/0+$/, "");
-  const sign2 = negative ? "-" : "";
-  return trimmed ? `${sign2}${whole}.${trimmed}` : `${sign2}${whole}`;
+  const sign3 = negative ? "-" : "";
+  return trimmed ? `${sign3}${whole}.${trimmed}` : `${sign3}${whole}`;
 }
 var TYPE_IDS = {
   bool: 1,
@@ -21654,10 +21654,10 @@ var RPC_HTTP = "https://rpc.tiramisu.db-chain.testnet.arkiv.network";
 var relayed = import.meta.env?.VITE_RPC_RELAY === "1" && typeof window !== "undefined";
 var READ_RPC = relayed ? `${window.location.origin}/api/rpc` : RPC_HTTP;
 function authHeaders(rpc) {
-  const key2 = typeof process !== "undefined" ? process.env?.ARKIV_ACCESS_KEY : void 0;
-  if (!key2) return {};
+  const key3 = typeof process !== "undefined" ? process.env?.ARKIV_ACCESS_KEY : void 0;
+  if (!key3) return {};
   try {
-    return new URL(rpc).hostname.endsWith("arkiv.network") ? { "X-API-KEY": key2 } : {};
+    return new URL(rpc).hostname.endsWith("arkiv.network") ? { "X-API-KEY": key3 } : {};
   } catch {
     return {};
   }
@@ -21677,6 +21677,54 @@ function makePublicClient(rpc = READ_RPC) {
   });
 }
 
+// server/human.ts
+import { createHash, createHmac, randomBytes as randomBytes2, timingSafeEqual } from "node:crypto";
+var POW_BITS = 16;
+var WINDOW_MS = 5 * 6e4;
+var used = /* @__PURE__ */ new Set();
+function key2(env) {
+  return env.secret || "underthetable-dev-only";
+}
+function sign2(env, body) {
+  return createHmac("sha256", key2(env)).update(body).digest("hex");
+}
+function leadingZeroBits(digest) {
+  let bits = 0;
+  for (const byte of digest) {
+    if (byte === 0) {
+      bits += 8;
+      continue;
+    }
+    bits += Math.clz32(byte) - 24;
+    break;
+  }
+  return bits;
+}
+async function checkHuman(proof, env, client) {
+  if (env.turnstileSecret && env.turnstileSite) {
+    if (!proof?.token) throw new Error("Prove you are a person first.");
+    const form = new URLSearchParams({ secret: env.turnstileSecret, response: proof.token });
+    if (client && client !== "unknown" && client !== "local") form.set("remoteip", client);
+    const response = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", { method: "POST", body: form });
+    const result = await response.json().catch(() => ({}));
+    if (!result.success) throw new Error("The human check failed. Reload and try again.");
+    return;
+  }
+  if (!proof?.challenge || typeof proof.nonce !== "string" || proof.nonce.length > 40) throw new Error("Prove you are a person first.");
+  const parts = proof.challenge.split(".");
+  if (parts.length !== 3) throw new Error("The human check is malformed. Reload and try again.");
+  const [stamp, random, signature] = parts;
+  const expected = sign2(env, `${stamp}.${random}`);
+  if (signature.length !== expected.length || !timingSafeEqual(Buffer.from(signature), Buffer.from(expected))) throw new Error("The human check was not issued here.");
+  const age = Date.now() - Number(stamp);
+  if (!Number.isFinite(age) || age < 0 || age > WINDOW_MS) throw new Error("The human check expired. Reload and try again.");
+  if (used.has(proof.challenge)) throw new Error("That human check was already used.");
+  const digest = createHash("sha256").update(`${proof.challenge}:${proof.nonce}`).digest();
+  if (leadingZeroBits(digest) < POW_BITS) throw new Error("The human check was not solved.");
+  used.add(proof.challenge);
+  if (used.size > 2e3) used.clear();
+}
+
 // server/drip.ts
 var TOP_UP = parseEther("0.02");
 var HOLDS_ENOUGH = parseEther("0.01");
@@ -21684,11 +21732,12 @@ var PER_CLIENT_PER_HOUR = 6;
 var PER_DAY = 300;
 var hits = /* @__PURE__ */ new Map();
 var day = { date: "", count: 0 };
-async function drip(address, client, env) {
+async function drip(address, client, env, proof) {
   if (!env.key || !/^0x[0-9a-fA-F]{64}$/.test(env.key)) {
     throw new Error("The faucet is not configured on this host. Connect a wallet that holds test GLM.");
   }
   if (typeof address !== "string" || !isAddress(address)) throw new Error("That is not an address.");
+  await checkHuman(proof, env.human ?? {}, client);
   const now = Date.now();
   const recent = (hits.get(client) ?? []).filter((time) => now - time < 36e5);
   if (recent.length >= PER_CLIENT_PER_HOUR) throw new Error("The faucet is resting. Try again in an hour.");
@@ -21715,7 +21764,14 @@ async function handler(req, res) {
   const forwarded = req.headers["x-forwarded-for"];
   const client = String(Array.isArray(forwarded) ? forwarded[0] : forwarded ?? "unknown").split(",")[0].trim();
   try {
-    res.status(200).json(await drip(req.body?.address, client, { key: process.env.DRIP_KEY, rpc: process.env.ARKIV_RPC_URL }));
+    res.status(200).json(
+      await drip(
+        req.body?.address,
+        client,
+        { key: process.env.DRIP_KEY, rpc: process.env.ARKIV_RPC_URL, human: { secret: process.env.HUMAN_SECRET || process.env.DRIP_KEY, turnstileSecret: process.env.TURNSTILE_SECRET, turnstileSite: process.env.TURNSTILE_SITEKEY } },
+        req.body?.proof
+      )
+    );
   } catch (error) {
     res.status(429).json({ error: error instanceof Error ? error.message : "The faucet failed." });
   }

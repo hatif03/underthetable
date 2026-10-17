@@ -61,11 +61,11 @@ export function getIdentity(): Identity {
 }
 
 /** Ask the faucet route for gas. It sends once, and only when the address is nearly empty. */
-export async function fundIdentity(address: Address): Promise<void> {
+export async function fundIdentity(address: Address, proof?: unknown): Promise<void> {
   const response = await fetch("/api/drip", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ address }),
+    body: JSON.stringify({ address, proof }),
   }).catch(() => null)
   if (!response) throw new Error("The faucet could not be reached. Connect a wallet that holds test GLM instead.")
   const body = (await response.json().catch(() => ({}))) as { error?: string }
