@@ -9,6 +9,8 @@ export const DEMO_WALLETS = new Set(
     "0xc3A64559E2Bee5E542EF3180934646A89c3dB67B",
     "0x7ca1817218D26f2c6FAc7e63fE2D97307c1fb92F",
     "0x80AA599b39308191f323E4bf1C212f4F241d7365",
+    // A team wallet that drives the wallet-path test (scripts/e2e-wallet.ts).
+    "0x59171D14942E8597311382d36844Df4611846d8C",
   ].map((address) => address.toLowerCase()),
 )
 

@@ -59,7 +59,7 @@ Documenting abuses by authorities is risky for the person documenting. So the de
 - **No free text, no names, no photos, no phone numbers.** The sentence box is parsed on the device and never sent; a tripwire strips digits (Latin and Hindi), UPI handles, spelled-out emails and honorifics before anything is filled in.
 - **A district and a week, never a day.** An exact day plus a district plus a service can single out a reporter, so the day is not stored.
 - **Pins only for public infrastructure.** A pothole may carry a pin; a bribe, a detention or a shutdown never can, because an exact place and a week could identify a person.
-- **No account.** The browser makes a throwaway key and a server pays its first gas, after a human check that is not an identity check.
+- **No account with us.** Report with your own browser wallet (it signs and pays for itself, about 0.0002 test GLM), or, with no wallet, a throwaway key made in the browser and funded by a small faucet after a human check that is not an identity check.
 - **No moderator.** Nobody exists who can be told to empty a queue.
 - **Limits, stated on the page:** a wallet is a pseudonym, three wallets are not three people, a phone can fake a position, a press report is a curator's reading of an article, and everything is a citizen report, not a finding.
 
@@ -135,8 +135,10 @@ All on Tiramisu (chain 7738577). Private keys are in a git-ignored `.env` and ne
 | `0xa81eef553318368e1c98F851c29521Ab247532aD` | Demo creator 3 (`SEED_KEY_3`). Synthetic rows. | demo reports |
 | `0xeE368405802Ca49d38572f88dE24b9ba044F2804` | Flood demo (`FLOOD_KEY`): five slips in one bucket to show five slips are one voice. Also wrote the single demo map pin (a pothole in Nashik). | demo reports, 1 pin |
 | `0xc3A64559E2Bee5E542EF3180934646A89c3dB67B`, `0x7ca1817218D26f2c6FAc7e63fE2D97307c1fb92F`, `0x80AA599b39308191f323E4bf1C212f4F241d7365` | Throwaway browser identities used while testing the filing flow end to end (3 Pune reports, 1 attestation). Treated as demo rows. | test reports |
-| `0x0812fed1e90C8d2bff9C3EdB0D3D46CbEf5FA303` | **Faucet** (`DRIP_KEY`). Pays 0.02 test GLM to a visitor's new key after a human check. | none |
-| *(many, not listed)* | **Visitors' browser identities.** Each report filed from the page is signed by a throwaway key generated in that browser and funded through `/api/drip`. They cannot be listed in advance. The page counts each as one citizen wallet. | citizen reports |
+| `0x0812fed1e90C8d2bff9C3EdB0D3D46CbEf5FA303`, `0xfaD126048f668816aE3E91b4567770494D7a3f16`, `0x2F5031CB5F05Bd09F09cDc88dB66BcBA11fAd15A` | **Faucet** (`DRIP_KEY`, `DRIP_KEY_2`, `DRIP_KEY_3`). Pay 0.005 test GLM to a visitor's new one-tap key after a human check. Used in random order, one transaction at a time each. | none |
+| `0xdD25212Db1C463209fc4bEc3D93f81edCF30d94E` | **Second location checker** (`ATTEST_KEY_2`). Same role as the first checker; listed in `data/attesters.json`. | attestations |
+| `0x59171D14942E8597311382d36844Df4611846d8C` | Team wallet for the stand-in-wallet test (`npm run e2e:wallet`). Treated as a demo wallet. | test reports |
+| *(many, not listed)* | **Reporters' own wallets, and one-tap keys.** The main path is a visitor's own browser wallet, which signs and pays for its own report. A visitor with no wallet gets a throwaway key generated in the browser and funded through `/api/drip`. They cannot be listed in advance. The page counts each as one citizen wallet. | citizen reports |
 
 Demo and test wallets are hidden by default on the page ("Hiding the team's synthetic demo rows") and never counted as citizens. Details with transaction hashes: [arkiv/wallets.md](../arkiv/wallets.md).
 
@@ -182,7 +184,7 @@ The Sealed page lists the others. `$owner = addr(0x…dEaD)` returns the number 
 
 **5. Block our site.** Open [public/mirror.html](../public/mirror.html) from disk: one file, no build, it reads Arkiv directly and applies the same validity rule.
 
-**6. File a report yourself (writes to Tiramisu).** In the live app press **Report**, say "Last week in Nashik there is a deep pothole near the bus stand", drop a pin, file. The receipt shows `$creator` (your throwaway wallet), `$owner` (`0x…dEaD`), the human check, the location check and an attestation link. Press **Try to delete it** and watch it fail. Your report will then appear in `npm run audit`.
+**6. File a report yourself (writes to Tiramisu).** In the live app press **Report**, say "Last week in Nashik there is a deep pothole near the bus stand", drop a pin, press **Connect wallet** (any browser wallet; it adds the Tiramisu network, and test GLM is free at https://hub.arkiv.network/faucet) and file. With no wallet, choose the one-tap key instead. The receipt shows `$creator` (your wallet), `$owner` (`0x…dEaD`), the human check, the location check and an attestation link. Press **Try to delete it** and watch it fail. Your report will then appear in `npm run audit`.
 
 **7. Tests.** `npm test` runs 32 tests, including the hostile-input cases for names, off-list slugs, pins in the wrong place, and proof-of-work replay.
 

@@ -7,6 +7,7 @@ import { privateKeyToAccount } from "viem/accounts"
 import { attestMessage } from "../src/lib/attest.ts"
 import { DEAD, keyedHttp, makePublicClient } from "../src/lib/client.ts"
 import { reportProblem } from "../src/lib/validate.ts"
+import { inLane, shuffled, walletBusy } from "./keys.ts"
 import states from "./geo/states.json" with { type: "json" }
 
 /**
@@ -43,9 +44,10 @@ export function insideState(lat: number, lon: number, state: string): boolean {
 export async function attest(
   body: { entityKey?: unknown; lat?: unknown; lon?: unknown; signature?: unknown },
   client: string,
-  env: { key?: string; rpc?: string },
+  env: { key?: string; keys?: string[]; rpc?: string },
 ) {
-  if (!env.key || !/^0x[0-9a-fA-F]{64}$/.test(env.key)) throw new Error("The location checker is not configured on this host.")
+  const secrets = (env.keys && env.keys.length > 0 ? env.keys : env.key ? [env.key] : []).filter((secret) => /^0x[0-9a-fA-F]{64}$/.test(secret))
+  if (secrets.length === 0) throw new Error("The location checker is not configured on this host.")
   const { entityKey, lat, lon, signature } = body
   if (typeof entityKey !== "string" || !isHex(entityKey, { strict: true }) || entityKey.length !== 66) throw new Error("That is not a report key.")
   if (typeof signature !== "string" || !isHex(signature)) throw new Error("The request was not signed.")
@@ -81,22 +83,36 @@ export async function attest(
     .fetch()
   if (existing.entities.length > 0) return { scope: "state", state, already: true }
 
-  const account = privateKeyToAccount(env.key as Hex)
-  const wallet = createWalletClient({ account, chain: tiramisu, transport: keyedHttp(rpc) })
-  const [predicted] = await reader.predictEntityKeys({ owner: account.address, count: 1 })
-  const result = await wallet.executeBatch({
-    creates: [
-      {
-        payload: jsonToPayload({ v: 1 }),
-        contentType: "application/json",
-        attributes: { project: str("underthetable"), type: str("attestation"), report: key(entityKey as Hex), method: str("geo"), scope: str("state"), state: str(state) },
-        expires: ExpirationTime.fromDays(180),
-        flags: { readonly: true, permissionlessExtension: false },
-        salt: predicted.salt,
-      },
-    ],
-    ownershipChanges: [{ entityKey: predicted.key, newOwner: DEAD }],
-  })
+  // Several checker wallets share the load. Each signs one batch at a time, and every one is listed in data/attesters.json.
+  let failure: unknown
+  let result: Awaited<ReturnType<ReturnType<typeof createWalletClient>["executeBatch"]>> | undefined
+  for (const secret of shuffled(secrets)) {
+    const account = privateKeyToAccount(secret as Hex)
+    try {
+      result = await inLane(account.address, async () => {
+        const wallet = createWalletClient({ account, chain: tiramisu, transport: keyedHttp(rpc) })
+        const [predicted] = await reader.predictEntityKeys({ owner: account.address, count: 1 })
+        return wallet.executeBatch({
+          creates: [
+            {
+              payload: jsonToPayload({ v: 1 }),
+              contentType: "application/json",
+              attributes: { project: str("underthetable"), type: str("attestation"), report: key(entityKey as Hex), method: str("geo"), scope: str("state"), state: str(state) },
+              expires: ExpirationTime.fromDays(180),
+              flags: { readonly: true, permissionlessExtension: false },
+              salt: predicted.salt,
+            },
+          ],
+          ownershipChanges: [{ entityKey: predicted.key, newOwner: DEAD }],
+        })
+      })
+      break
+    } catch (error) {
+      failure = error
+      if (!walletBusy(error)) break
+    }
+  }
+  if (!result) throw failure instanceof Error ? failure : new Error("The location checker is busy. Try again.")
   hits.set(client, [...recent, now])
   return { scope: "state", state, txHash: result.txHash, attestationKey: result.createdEntities[0] }
 }

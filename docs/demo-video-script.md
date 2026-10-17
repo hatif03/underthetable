@@ -2,7 +2,7 @@
 
 > **Live:** [underthetable.vercel.app](https://underthetable.vercel.app) · [repository](https://github.com/hatif03/underthetable) · [pitch](pitch.md) · [submission](submission.md)
 
-**Limit: 3 minutes (180 s).** Aim for **2:45**. The narration below is about 400 words, which at a calm pace (about 150 words a minute) is 2:40. Judges score Why Arkiv and How you use Arkiv on 25 points each, so a third of the time is spent proving Arkiv does something a normal database cannot. Everything else serves the story.
+**Limit: 3 minutes (180 s).** Aim for **2:50**. The narration below is about 490 words, which at a fast but clear pace (about 170 words a minute) is 2:55, so rehearse it with a timer and use the cut list in section 2 if you run over. Judges score Why Arkiv and How you use Arkiv on 25 points each, so a third of the time is spent proving Arkiv does something a normal database cannot. Everything else serves the story.
 
 The one idea the video must land: **"Nobody can delete this, and you can check that yourself."** Every scene either tells the story or proves that sentence.
 
@@ -28,17 +28,24 @@ The one idea the video must land: **"Nobody can delete this, and you can check t
 2. Map tab: you should see 11 pins across India. Press **Search this view on Arkiv**. It should say Arkiv returned 11 pinned problems at the zoom you recorded at, and print the query.
 3. In the terminal run `npm run audit` and `npm run query -- --district nashik`. If either says the public node refused the read, wait a minute or make sure `ARKIV_ACCESS_KEY` is in your `.env`, then retry. Do not record a failure.
 4. Open `mirror.html` from disk. It should say about "113 valid of 114 read" (the count moves by one or two as one-hour demo rows expire).
-5. Decide the **report you will file** (see Scene 3). If you file, it writes a **permanent public entity**.
+5. Decide the **report you will file** (see Scene 3) and have a wallet ready with test GLM in it. If you file, it writes a **permanent public entity** from that wallet.
 6. Optional but strong: to make the Entity Expiration panel move on camera, run `npm run seed -- --short` an hour before recording (needs the team keys). It writes a report that expires in about an hour.
 
 ### A decision about Scene 3 (filing a report)
 
-Filing creates a real, permanent, public entity from a throwaway key. You have two honest options:
+You now file with **your own wallet**, so you need one ready before you record:
 
-- **A. File one real report** about something you actually saw (a pothole near you, with a pin on it). This is the strongest proof, and the app's whole point is real reports. Pick something true and public. Do **not** invent an incident.
-- **B. Do not file.** Use the Map tab and the demo pin, then show "you cannot delete it" in the terminal with `npm run verify` (it uses the team's demo wallets and a report that already exists). Say plainly that it is the demo.
+1. A browser wallet extension (MetaMask, Rabby, or similar) in the Chrome profile you record in. Create a fresh account for the video; do not show a wallet that holds anything real. Test GLM is worth nothing, but a seed phrase is not: **never show the seed phrase, and close the wallet's "reveal" screens**.
+2. **Test GLM in that account.** Get it from https://hub.arkiv.network/faucet (connect the wallet, solve the CAPTCHA). One report costs about 0.0002 GLM, so a faucet drip covers hundreds. Do this the day before, not on camera.
+3. Do **one full dry run** with the wallet before recording. The first time, the wallet asks to **add the Tiramisu network** (chain 7738577) and then to **switch** to it. Approve both. Decide whether you want that on camera (it is a good ten seconds: "the app adds the network for me") or already done (cleaner).
+4. Know what the wallet pop-up looks like for **File** (a confirmation for a transaction to the Arkiv address) so you are not surprised on camera.
 
-Whichever you choose, say which it is out loud. Never present a demo report as a real citizen's.
+Filing creates a real, permanent, public entity from that wallet. You have two honest options:
+
+- **A. File one real report** about something you actually saw (a pothole near you, with a pin on it). This is the strongest proof. Pick something true and public. Do **not** invent an incident.
+- **B. Do not file.** Use the Map tab, then show "you cannot delete it" in the terminal with `npm run verify` (it uses the team's demo wallets and a report that already exists). Say plainly that it is the demo.
+
+Whichever you choose, say which it is out loud. Never present a demo report as a real citizen's. The team's stand-in-wallet test (`npm run e2e:wallet`) already proved the whole path works; do not use its output as if it were a person.
 
 ---
 
@@ -68,7 +75,7 @@ Read it as written, slowly. **[Brackets]** are actions, not words. Times are tar
 
 *(about 60 words)*
 
-### Scene 3: report something (0:45 to 1:35)
+### Scene 3: report something, with your own wallet (0:45 to 1:40)
 
 **On screen:** Pulse. Click **Report**.
 
@@ -77,16 +84,18 @@ Read it as written, slowly. **[Brackets]** are actions, not words. Times are tar
 2. **[Point at "Taken out of what was read", then at "Filled: kind, desk, district…"]**
 3. **[Scroll to the pin map. Click "Use my current location" or click the map on the pothole, then point at the public summary box]**
    > A pothole may carry an exact pin, because it is a broken public thing. A bribe or a detention never can: an exact place and a week could identify a person. And this box is everything that becomes public. No name, no day.
-4. **[Leave "Check my location" on. Press "File the report". Let the status lines run: human check, test gas, sealing]**
-   > A human check, then one transaction on Arkiv.
-5. **[The receipt appears with the SEALED stamp. Point at `$owner`]**
-   > The report is created and handed to this address, a dead address that nobody holds, in the same transaction. If the hand-over fails, the report is never created.
-6. **[Press "Try to delete it". The red failure text appears. Hold on it for two seconds]**
+4. **[Scroll to "Report with". "My wallet" is already selected. Press "Connect wallet". Approve in the wallet pop-up. The line changes to "Connected 0x… on Tiramisu · 0.0xxx test GLM"]**
+   > I report with my own wallet. No account with us, no sign-up. It connects, adds the network if it has to, and shows my balance. There is a one-tap key for people without a wallet, but this is the way: nothing of ours pays for it or can stop it.
+5. **[Leave "Check my location" on. Press "File the report". Approve the transaction in the wallet pop-up. Let the status lines run: Reading your location, Sealing on Tiramisu, Asking the checker to vouch]**
+   > One transaction. I sign it myself.
+6. **[The receipt appears with the SEALED stamp. Point at `$creator` (your address) and `$owner`]**
+   > The creator is my address. The owner is this one, a dead address that nobody holds, set in the same transaction. If the hand-over fails, the report is never created.
+7. **[Press "Try to delete it". The failure text appears (the wallet may show a warning that the transaction is expected to fail; that is the point). Hold on it for two seconds]**
    > Watch me try to delete my own report.
 
-*(about 150 words with the narration split across steps; speak over the clicking, do not wait in silence)*
+*(about 190 words with the narration split across steps; speak over the clicking, do not wait in silence. If this runs long, cut the pin sentence in step 3 and the "one-tap key" sentence in step 4.)*
 
-> **If you chose option B (no filing):** replace steps 4 to 6 with a cut to the terminal, run `npm run verify`, and say: "This is a report that already exists. I try to patch it, delete it, extend its life, and extend it from a stranger's wallet. All four fail, because the owner is a dead address."
+> **If you chose option B (no filing):** replace steps 5 to 7 with a cut to the terminal, run `npm run verify`, and say: "This is a report that already exists. I try to patch it, delete it, extend its life, and extend it from a stranger's wallet. All four fail, because the owner is a dead address."
 
 ### Scene 4: the map, and a question only Arkiv answers (1:35 to 1:58)
 
@@ -129,11 +138,11 @@ Read it as written, slowly. **[Brackets]** are actions, not words. Times are tar
 | --- | --- | --- | --- |
 | 1 Hook | 0:00 | 22 s | 65 |
 | 2 Why | 0:22 | 23 s | 60 |
-| 3 Report | 0:45 | 50 s | 150 |
-| 4 Map | 1:35 | 23 s | 40 |
-| 5 Proof | 1:58 | 34 s | 85 |
-| 6 Close | 2:32 | 18 s | 55 |
-| **Total** | | **2:50** | **about 455** |
+| 3 Report | 0:45 | 55 s | 190 |
+| 4 Map | 1:40 | 23 s | 40 |
+| 5 Proof | 2:03 | 34 s | 85 |
+| 6 Close | 2:37 | 18 s | 55 |
+| **Total** | | **2:55** | **about 495** |
 
 If your read-through is over 2:55: cut the Napoleon sentence in Scene 1 to *"'History is a set of lies agreed upon.' An agreed history needs a record that can be edited."*, drop step 3's pin explanation to one sentence, and skip the Look back in Scene 5. **Never cut**: the phone number struck out, "Try to delete it", the map's range query, `npm run audit`, and `mirror.html`. Those are the proof.
 

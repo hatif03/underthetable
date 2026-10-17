@@ -79,7 +79,7 @@ Arkiv is *"a chain with a database engine instead of the EVM"*: *"A transaction 
 
 ### 3.7 Ordinary Ethereum tooling, so ordinary people can use it **[official] [ours]**
 
-Wallets, transactions, receipts and JSON-RPC keep their Ethereum shape ([Fundamentals](https://docs.arkiv.network/start-here/fundamentals/)). That is why a visitor with no wallet gets a throwaway key made in the browser, funded with a few cents of test GLM by a faucet route behind a human check, and files in about 16 seconds ([friction F8](../arkiv/friction.md)); why a one-file page ([`public/mirror.html`](../public/mirror.html)) and a `curl` command read the whole ledger with no build and no server of ours; and why a judge, a journalist or a lawyer can verify a record themselves on the [explorer](https://tiramisu.explorer.arkiv.network).
+Wallets, transactions, receipts and JSON-RPC keep their Ethereum shape ([Fundamentals](https://docs.arkiv.network/start-here/fundamentals/)). That is why a reporter can simply **bring their own wallet** (any browser wallet: it adds the Tiramisu network, signs the one batch, pays about 0.0002 test GLM, and the report's `$creator` is their address, [friction F19](../arkiv/friction.md)), and why someone with no wallet can still get a throwaway key made in the browser, funded with a few cents by a faucet behind a human check, and file in about 16 seconds ([friction F8](../arkiv/friction.md)); why a one-file page ([`public/mirror.html`](../public/mirror.html)) and a `curl` command read the whole ledger with no build and no server of ours; and why a judge, a journalist or a lawyer can verify a record themselves on the [explorer](https://tiramisu.explorer.arkiv.network).
 
 ### 3.8 Open reads, with an optional key **[official] [ours]**
 

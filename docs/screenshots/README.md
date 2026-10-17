@@ -18,6 +18,7 @@ Taken 17 October 2026 from the running app with `npm run screenshots` (reads onl
 | [13-pulse-hindi.png](13-pulse-hindi.png) | The Hindi interface |
 | [14-pulse-mobile.png](14-pulse-mobile.png), [15-map-mobile.png](15-map-mobile.png) | A 390 px phone |
 | [16-mirror.png](16-mirror.png) | `mirror.html`: one file, no server of ours, reads Arkiv directly |
+| [17-report-with-wallet.png](17-report-with-wallet.png) | "Report with": connecting your own wallet (a stand-in wallet in a test run), balance shown |
+| [18-receipt-wallet.png](18-receipt-wallet.png) | The receipt after filing from a wallet: `$creator` is the wallet, `$owner` is `0x…dEaD`, location checked. Filed from a team test wallet, hidden by default as a demo wallet |
 | [terminal-query.txt](terminal-query.txt), [terminal-audit.txt](terminal-audit.txt), [terminal-verify.txt](terminal-verify.txt), [terminal-repro.txt](terminal-repro.txt) | Terminal output of `npm run query`, `audit`, `verify` and `repro` against the live chain |
 
-Not included: a filing receipt. Filing writes a permanent public entity, so no synthetic citizen report was created just for a picture. The receipt, with its `$creator`, `$owner`, human-check and location-check lines, can be produced by following step 6 of [../submission.md](../submission.md).

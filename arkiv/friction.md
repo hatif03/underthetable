@@ -143,6 +143,14 @@ Append a section only after a call is actually made. For each one, record the su
 - Steps: put the key in `.env` as `ARKIV_ACCESS_KEY`, run `npm run query` and `npm run audit`. For the page, set the same variable on the host; `server/rpc.ts` and `src/lib/client.ts` add the header on the server side only.
 - What would fix it: nothing, this is the intended path. It should be in the quickstart, before the first 429, and the response to an anonymous refusal should say that a key exists. A key pasted into a chat or a repo is a leaked key, so the guide could also say where not to put it: a browser build cannot hold one, which is why this project reads through its own route.
 
+## F19. An injected browser wallet, end to end
+
+- Version: `@arkiv-network/sdk` 0.8.1, `viem` 2.57.7, headless Chrome with a stand-in `window.ethereum`, Tiramisu, 17 October 2026. The stand-in signs with a team test key in Node; it is not a real extension, so wallet pop-ups were not exercised.
+- Expected: the SDK's `executeBatch` works through an EIP-1193 provider, so a person with their own wallet can create and hand over a report with nothing of ours paying.
+- Actual: it worked. The page called `wallet_switchEthereumChain`, then the SDK sent an `eth_sendTransaction` call with only `from`, `to` and `data` (the `execute` call to the Arkiv address), leaving gas to the wallet. The report was created, owned by `0x…dEaD`, with `$creator` the wallet; a location attestation signed with `personal_sign` was accepted; the wallet's balance dropped by about 0.00016 test GLM (0.05 to 0.04984). Two things to know: `writeContract` gives the wallet no gas figure, so a wallet that estimates badly will fail with "Execution error without revert data" (the same text as F15), and a custom `Content-Type` header on the HTTP transport makes the node answer "Supplied content type is not allowed" (our test harness' mistake, not Arkiv's, but the message does not say which header).
+- Steps: `npm run dev`, then `npm run e2e:wallet` (needs `WALLET_TEST_KEY` in `.env`).
+- What would fix it: nothing needed. A line in the docs that `executeBatch` leaves gas to the wallet would help people debugging a wallet that refuses.
+
 ```markdown
 ## F1. <surface>
 

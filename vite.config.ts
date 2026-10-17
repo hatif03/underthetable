@@ -4,6 +4,7 @@ import react from "@vitejs/plugin-react"
 import { suggestSlip } from "./server/assist.ts"
 import { attest } from "./server/attest.ts"
 import { drip } from "./server/drip.ts"
+import { keysFrom } from "./server/keys.ts"
 import { humanMode } from "./server/human.ts"
 import { relay } from "./server/rpc.ts"
 import { snapshot } from "./server/snapshot.ts"
@@ -51,7 +52,7 @@ function apiPlugin(env: Record<string, string>): Plugin {
           try {
             const body = JSON.parse(await readBody(req)) as { address?: string; proof?: { mode?: string; challenge?: string; nonce?: string; token?: string } }
             const client = req.socket.remoteAddress ?? "local"
-            send(res, 200, await drip(body.address, client, { key: env.DRIP_KEY || env.SEED_KEY_1, rpc: upstream, human: humanEnv }, body.proof))
+            send(res, 200, await drip(body.address, client, { keys: keysFrom(env, "DRIP_KEY").length > 0 ? keysFrom(env, "DRIP_KEY") : (env.SEED_KEY_1 ? [env.SEED_KEY_1 as `0x${string}`] : []), rpc: upstream, human: humanEnv }, body.proof))
           } catch (error) {
             send(res, 429, { error: error instanceof Error ? error.message : "The faucet failed." })
           }
@@ -62,7 +63,7 @@ function apiPlugin(env: Record<string, string>): Plugin {
         void (async () => {
           try {
             const body = JSON.parse(await readBody(req)) as Record<string, unknown>
-            send(res, 200, await attest(body, req.socket.remoteAddress ?? "local", { key: env.ATTEST_KEY, rpc: upstream }))
+            send(res, 200, await attest(body, req.socket.remoteAddress ?? "local", { keys: keysFrom(env, "ATTEST_KEY"), rpc: upstream }))
           } catch (error) {
             send(res, 400, { error: error instanceof Error ? error.message : "The location check failed." })
           }

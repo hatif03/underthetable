@@ -1,13 +1,13 @@
 import { AnimatePresence, motion } from "motion/react"
 import * as Switch from "@radix-ui/react-switch"
-import { ExternalLink, Lock, MapPin, RotateCcw, ShieldCheck, Trash2, UserRound, Wallet } from "lucide-react"
+import { ExternalLink, Lock, MapPin, ShieldCheck, Trash2 } from "lucide-react"
 import { lazy, Suspense, useEffect, useMemo, useRef, useState } from "react"
 import districts from "../../data/districts.json"
 import vocab from "../../data/vocab.json"
 import { proveHuman } from "../lib/human"
 import type { Pin } from "../ui/PinPicker"
 import type { ReportRow } from "../lib/aggregate"
-import { DEAD, entityUrl, txUrl } from "../lib/client"
+import { DEAD, entityUrl, makePublicClient, txUrl } from "../lib/client"
 import { findPrivate, KINDS, redactText, sealReport, type ReportKind } from "../lib/guard"
 import { departmentLabel, labelize } from "../lib/labels"
 import { currentAddress, forgetIdentity, fundIdentity, getIdentity } from "../lib/identity"
@@ -15,11 +15,12 @@ import { departmentsFor, guess, rolesFor, servicesFor } from "../lib/parse"
 import { rupees, shortAddress } from "../lib/format"
 import { requestAttestation } from "../lib/attest"
 import { coarsePosition, sameArea, stateAt, stateName, type Coarse } from "../lib/geo"
-import { connectWallet, type Connection } from "../lib/wallet"
+import { assertSameAccount, connectWallet, type Connection } from "../lib/wallet"
 import { kolkataDay, weekChoices } from "../lib/week"
 import { fileAsIdentity, fileReport, tryDelete, type SealReceipt } from "../lib/write"
 import { addRow, reload } from "../state/store"
 import { DistrictPicker } from "../ui/DistrictPicker"
+import { FAUCET_URL, glm, MIN_WALLET_GLM, Reporter, walletProblem, type Who } from "../ui/Reporter"
 import { t } from "../lib/i18n"
 import { Pick, Seg, Sheet } from "../ui/kit"
 import { KIND_META, OUTCOME_LABEL } from "../ui/meta"
@@ -68,12 +69,60 @@ export function FileSheet({ open, onOpenChange, prefill }: { open: boolean; onOp
   const [receipt, setReceipt] = useState<(SealReceipt & { delete: () => Promise<string>; check: Check | null }) | null>(null)
   const [verify, setVerify] = useState(true)
   const [sealText, setSealText] = useState<string | null>(null)
-  const [mode, setMode] = useState<"identity" | "wallet">("identity")
+  // A wallet is the main path. A person with no wallet extension starts on the one-tap key.
+  const [mode, setMode] = useState<Who>(() => {
+    try {
+      const saved = localStorage.getItem("utt:who")
+      if (saved === "wallet" || saved === "identity") return saved === "wallet" && !window.ethereum ? "identity" : saved
+    } catch {
+      // no saved choice
+    }
+    return window.ethereum ? "wallet" : "identity"
+  })
+  const [balance, setBalance] = useState<bigint | null>(null)
+  const [connecting, setConnecting] = useState(false)
   const [connection, setConnection] = useState<Connection | null>(null)
   const [address, setAddress] = useState(currentAddress())
   const [pin, setPin] = useState<Pin | null>(null)
   const [human, setHuman] = useState<string | null>(null)
   const humanSlot = useRef<HTMLDivElement>(null)
+
+  function chooseWho(next: Who) {
+    setMode(next)
+    setError(null)
+    try {
+      localStorage.setItem("utt:who", next)
+    } catch {
+      // remembering the choice is a convenience
+    }
+  }
+
+  async function connect() {
+    setError(null)
+    setConnecting(true)
+    try {
+      if (!window.ethereum) throw new Error("No wallet found in this browser. Install a wallet extension, or use the one-tap key.")
+      const wallet = await connectWallet(window.ethereum)
+      setConnection(wallet)
+      setBalance(await makePublicClient().getBalance({ address: wallet.address }).catch(() => null))
+    } catch (problem) {
+      setError(walletProblem(problem))
+    } finally {
+      setConnecting(false)
+    }
+  }
+
+  // A wallet that switches account or network is a different reporter: connect again.
+  useEffect(() => {
+    const provider = window.ethereum
+    if (!provider?.on) return
+    const drop = () => {
+      setConnection(null)
+      setBalance(null)
+    }
+    provider.on("accountsChanged", drop)
+    provider.on("chainChanged", drop)
+  }, [])
 
   function chooseKind(next: ReportKind, keepDesk?: { department: string; service: string }) {
     setKind(next)
@@ -204,9 +253,16 @@ export function FileSheet({ open, onOpenChange, prefill }: { open: boolean; onOp
       } else {
         let wallet = connection
         if (!wallet) {
-          if (!window.ethereum) throw new Error("This browser has no wallet. Use the throwaway identity instead.")
+          if (!window.ethereum) throw new Error("This browser has no wallet. Use the one-tap key instead.")
           wallet = await connectWallet(window.ethereum)
           setConnection(wallet)
+        }
+        await assertSameAccount(wallet)
+        // The balance check is a courtesy. If the public node will not answer it, let the wallet decide.
+        const held = await makePublicClient().getBalance({ address: wallet.address }).catch(() => null)
+        setBalance(held)
+        if (held !== null && held < MIN_WALLET_GLM) {
+          throw new Error(`This wallet holds ${glm(held)} test GLM, too little to pay for a report. Get test GLM at ${FAUCET_URL} and try again.`)
         }
         setPhase("sealing")
         filed = await fileReport(wallet, sealed)
@@ -251,7 +307,7 @@ export function FileSheet({ open, onOpenChange, prefill }: { open: boolean; onOp
       addRow(row)
       window.setTimeout(() => void reload(), check?.ok ? 3000 : 6000)
     } catch (problem) {
-      setError(problem instanceof Error ? problem.message : String(problem))
+      setError(walletProblem(problem))
     } finally {
       setPhase("idle")
     }
@@ -420,35 +476,24 @@ export function FileSheet({ open, onOpenChange, prefill }: { open: boolean; onOp
               </p>
             </div>
 
-            <div className="identity">
-              <span className="identity-who">
-                {mode === "identity" ? <UserRound size={16} /> : <Wallet size={16} />}
-                {mode === "identity" ? (
-                  <span>
-                    {t("form.asThrowaway")} {address ? <code>{shortAddress(address)}</code> : <span className="muted">(made on your first report)</span>}
-                  </span>
-                ) : (
-                  <span>Reporting from your wallet {connection ? <code>{shortAddress(connection.address)}</code> : <span className="muted">(connects when you file)</span>}</span>
-                )}
-              </span>
-              <span className="identity-actions">
-                {mode === "identity" && address ? (
-                  <button
-                    type="button"
-                    className="link"
-                    onClick={() => {
-                      forgetIdentity()
-                      setAddress(null)
-                    }}
-                  >
-                    <RotateCcw size={12} /> {t("form.newIdentity")}
-                  </button>
-                ) : null}
-                <button type="button" className="link" onClick={() => setMode(mode === "identity" ? "wallet" : "identity")}>
-                  {mode === "identity" ? t("form.useWallet") : t("form.useThrowaway")}
-                </button>
-              </span>
-            </div>
+            <Reporter
+              who={mode}
+              onWho={chooseWho}
+              connection={connection}
+              balance={balance}
+              connecting={connecting}
+              onConnect={() => void connect()}
+              onDisconnect={() => {
+                setConnection(null)
+                setBalance(null)
+              }}
+              identity={address}
+              onNewIdentity={() => {
+                forgetIdentity()
+                setAddress(null)
+              }}
+              hasProvider={Boolean(window.ethereum)}
+            />
 
             <div id="human-slot" ref={humanSlot} hidden />
             {error ? <p className="error" role="alert">{error}</p> : null}
@@ -522,7 +567,7 @@ function Receipt({ receipt, check, human, sealText, onDelete, onAnother, onClose
         </div>
         <div>
           <dt>Human check</dt>
-          <dd>{human ? <span className="hit">✓ {human}</span> : <span className="muted">Not needed: the wallet already held test GLM.</span>}</dd>
+          <dd>{human ? <span className="hit">✓ {human}</span> : <span className="muted">Not needed: your own wallet paid its own gas.</span>}</dd>
         </div>
         <div>
           <dt>Leaves queries at block</dt>

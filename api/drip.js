@@ -21725,34 +21725,77 @@ async function checkHuman(proof, env, client) {
   if (used.size > 2e3) used.clear();
 }
 
+// server/keys.ts
+var VALID = /^0x[0-9a-fA-F]{64}$/;
+function keysFrom(env, name) {
+  const found = [];
+  for (const variable of [name, ...Array.from({ length: 8 }, (_, index2) => `${name}_${index2 + 2}`)]) {
+    const value = env[variable];
+    if (value && VALID.test(value) && !found.includes(value)) found.push(value);
+  }
+  return found;
+}
+var lanes = /* @__PURE__ */ new Map();
+function inLane(wallet, job) {
+  const run = (lanes.get(wallet) ?? Promise.resolve()).then(job, job);
+  lanes.set(wallet, run.catch(() => void 0));
+  return run;
+}
+function shuffled(items) {
+  const copy = [...items];
+  for (let index2 = copy.length - 1; index2 > 0; index2--) {
+    const other = Math.floor(Math.random() * (index2 + 1));
+    [copy[index2], copy[other]] = [copy[other], copy[index2]];
+  }
+  return copy;
+}
+function walletBusy(error) {
+  return /nonce|underpriced|replacement|insufficient|already known/i.test(error instanceof Error ? error.message : String(error));
+}
+
 // server/drip.ts
-var TOP_UP = parseEther("0.02");
-var HOLDS_ENOUGH = parseEther("0.01");
+var TOP_UP = parseEther("0.005");
+var HOLDS_ENOUGH = parseEther("0.003");
 var PER_CLIENT_PER_HOUR = 6;
 var PER_DAY = 300;
 var hits = /* @__PURE__ */ new Map();
 var day = { date: "", count: 0 };
 async function drip(address, client, env, proof) {
-  if (!env.key || !/^0x[0-9a-fA-F]{64}$/.test(env.key)) {
+  const keys = (env.keys && env.keys.length > 0 ? env.keys : env.key ? [env.key] : []).filter((key3) => /^0x[0-9a-fA-F]{64}$/.test(key3));
+  if (keys.length === 0) {
     throw new Error("The faucet is not configured on this host. Connect a wallet that holds test GLM.");
   }
   if (typeof address !== "string" || !isAddress(address)) throw new Error("That is not an address.");
   await checkHuman(proof, env.human ?? {}, client);
   const now = Date.now();
   const recent = (hits.get(client) ?? []).filter((time) => now - time < 36e5);
-  if (recent.length >= PER_CLIENT_PER_HOUR) throw new Error("The faucet is resting. Try again in an hour.");
+  if (recent.length >= PER_CLIENT_PER_HOUR) throw new Error("The faucet is resting. Try again in an hour, or connect your own wallet.");
   const today = new Date(now).toISOString().slice(0, 10);
   if (day.date !== today) day = { date: today, count: 0 };
-  if (day.count >= PER_DAY) throw new Error("The faucet is out for today.");
+  if (day.count >= PER_DAY) throw new Error("The faucet is out for today. Connect your own wallet to report now.");
   const rpc = env.rpc || tiramisu.rpcUrls.default.http[0];
   const reader = makePublicClient(rpc);
   const held = await reader.getBalance({ address });
   if (held >= HOLDS_ENOUGH) return { sent: false };
-  const account = privateKeyToAccount(env.key);
-  const wallet = createWalletClient({ account, chain: tiramisu, transport: keyedHttp(rpc) });
-  const hash3 = await wallet.sendTransaction({ to: address, value: TOP_UP });
-  const receipt = await reader.waitForTransactionReceipt({ hash: hash3, timeout: 3e4 });
-  if (receipt.status !== "success") throw new Error("The faucet transfer did not succeed.");
+  let failure;
+  let paid = false;
+  for (const key3 of shuffled(keys)) {
+    const account = privateKeyToAccount(key3);
+    try {
+      await inLane(account.address, async () => {
+        const wallet = createWalletClient({ account, chain: tiramisu, transport: keyedHttp(rpc) });
+        const hash3 = await wallet.sendTransaction({ to: address, value: TOP_UP });
+        const receipt = await reader.waitForTransactionReceipt({ hash: hash3, timeout: 3e4 });
+        if (receipt.status !== "success") throw new Error("The faucet transfer did not succeed.");
+      });
+      paid = true;
+      break;
+    } catch (error) {
+      failure = error;
+      if (!walletBusy(error)) break;
+    }
+  }
+  if (!paid) throw failure instanceof Error ? failure : new Error("The faucet is busy. Try again, or connect your own wallet.");
   hits.set(client, [...recent, now]);
   day.count += 1;
   return { sent: true };
@@ -21768,7 +21811,7 @@ async function handler(req, res) {
       await drip(
         req.body?.address,
         client,
-        { key: process.env.DRIP_KEY, rpc: process.env.ARKIV_RPC_URL, human: { secret: process.env.HUMAN_SECRET || process.env.DRIP_KEY, turnstileSecret: process.env.TURNSTILE_SECRET, turnstileSite: process.env.TURNSTILE_SITEKEY } },
+        { keys: keysFrom(process.env, "DRIP_KEY"), rpc: process.env.ARKIV_RPC_URL, human: { secret: process.env.HUMAN_SECRET || process.env.DRIP_KEY, turnstileSecret: process.env.TURNSTILE_SECRET, turnstileSite: process.env.TURNSTILE_SITEKEY } },
         req.body?.proof
       )
     );

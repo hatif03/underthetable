@@ -20,7 +20,9 @@ Deployed 17 October 2026 to Vercel (project `underthetable`, production): **http
 | `/api/snapshot` | `ARKIV_ACCESS_KEY` (optional) | One shared read of Arkiv, cached five minutes |
 | `/api/human` | `HUMAN_SECRET` (optional), `TURNSTILE_SITEKEY` + `TURNSTILE_SECRET` (optional) | Says how the browser must prove it is a person: a Cloudflare Turnstile widget, or a signed proof-of-work challenge |
 | `/api/drip` | `DRIP_KEY` | Checks the human proof, then sends 0.02 test GLM to a visitor's new browser key |
-| `/api/attest` | `ATTEST_KEY` | Writes a location attestation |
+| `/api/attest` | `DRIP_KEY_2`, `DRIP_KEY_3` | More faucet wallets, used in random order, one transaction at a time each | Vercel, and your `.env` | Made with `npm run wallet -- DRIP_KEY_2` and funded with `npm run wallet -- fund 0xADDRESS 1`. Optional; each extra wallet raises how many new throwaway keys can be funded at once. |
+| `ATTEST_KEY_2` | A second location checker. Its address must also be in `data/attesters.json`. | Vercel, and your `.env` | Made and funded the same way (0.3 GLM). Optional. |
+| `ATTEST_KEY` | Writes a location attestation |
 | `/api/rpc` | `ARKIV_ACCESS_KEY` (optional) | Read-only relay. Off unless the build sets `VITE_RPC_RELAY=1`. |
 | `/api/assist` | `HUMAN_SECRET` | Signs proof-of-work challenges | Vercel | Any long random string, for example `node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"`. If unset, the route falls back to `DRIP_KEY`. |
 | `TURNSTILE_SITEKEY`, `TURNSTILE_SECRET` | Cloudflare Turnstile (optional, a real CAPTCHA) | Vercel | dash.cloudflare.com, Turnstile, add a site for your domain, copy both. Without them the proof of work is used, and the interface says so. |

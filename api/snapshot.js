@@ -18239,7 +18239,8 @@ var MAX_PAYLOAD_BYTES = 128 * 1024;
 var attesters_default = {
   note: "Wallets whose attestation entities this app trusts. Addresses only.",
   addresses: [
-    "0xabd68359A33fAb9A03Bb706B56272370A011E5b6"
+    "0xabd68359A33fAb9A03Bb706B56272370A011E5b6",
+    "0xdD25212Db1C463209fc4bEc3D93f81edCF30d94E"
   ]
 };
 

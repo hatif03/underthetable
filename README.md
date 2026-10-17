@@ -85,7 +85,7 @@ A name, a phone number, an email, a street, a photograph, a free-text story, the
 - A desk shows a figure only when **3 different wallets** reported it. Five slips from one wallet are one voice.
 - An optional **location check**: a checker wallet vouches that the filer was inside the state, and stores only the word "inside".
 - A **press curator** wallet writes labelled, sourced records from published news. They seed the board, link their articles, and **never count as a citizen**.
-- A **human check** before the faucet funds a throwaway key (Cloudflare Turnstile, or a signed proof of work).
+- **You report with your own wallet.** Your address is the creator, you pay your own gas (about 0.0002 test GLM a report), and nothing of ours is in the way. For people with no wallet there is a one-tap throwaway key, funded by a small faucet behind a human check (Cloudflare Turnstile, or a signed proof of work).
 - A public chain cannot be cleaned, so **every reader refuses what is off the closed lists**: the page, the CLI, the audit and the one-file mirror apply one rule.
 
 Honest limits, stated on the page: a wallet is a pseudonym, three wallets are not three people, a phone can fake a position, a press record is a curator's reading of an article. Citizen reports, not findings.
@@ -135,7 +135,7 @@ Every Arkiv feature we use, where it lives and how to check it: [docs/arkiv-usag
 **In the browser, in a minute: https://underthetable.vercel.app**
 
 1. Open the **Map** tab: 11 pins, each a broken road, light, drain or garbage pile named in a news report from this fortnight (click one for its explorer link). Press **Search this view on Arkiv**.
-2. Press **Report**. Type "Last week in Nashik there is a deep pothole near the bus stand", drop a pin, file. The receipt shows `$creator`, `$owner` (`0x…dEaD`), the human check and the location check. Press **Try to delete it**.
+2. Press **Report**. Type "Last week in Nashik there is a deep pothole near the bus stand", drop a pin, **Connect wallet** (any browser wallet; it adds the Tiramisu network for you; test GLM from the [faucet](https://hub.arkiv.network/faucet)), file. No wallet? Choose the one-tap key. The receipt shows `$creator` (your address), `$owner` (`0x…dEaD`) and the location check. Press **Try to delete it**.
 3. Open [`/mirror.html`](https://underthetable.vercel.app/mirror.html): one file, no server of ours, reads Arkiv directly. It still works if our site does not.
 
 **From the terminal (no website; the read-only commands need no wallet):**
@@ -145,7 +145,7 @@ git clone https://github.com/hatif03/underthetable && cd underthetable && npm ci
 npm run query -- --district nashik   # the same predicates the page uses
 npm run audit                         # every entity on Tiramisu against the closed lists; expect "outside the schema: 0"
 npm run repro                         # friction entries F13, F5, F14, F15 against the live chain (writes nothing)
-npm test                              # 32 tests: the rules, parser, PII tripwire, quote rule, pins, the human check
+npm test                              # 35 tests: the rules, parser, PII tripwire, quote rule, pins, the human check, server wallet lanes
 ```
 
 [Step-by-step for judges](docs/submission.md#g-how-can-judges-reproduce-our-arkiv-usage) · [terminal output of query, audit, verify and repro](docs/screenshots/README.md).
@@ -177,13 +177,13 @@ Node 20 or newer.
 
 ```bash
 npm install
-npm test            # 32 tests
+npm test            # 35 tests
 npm run dev         # http://localhost:5173
 npm run build:api   # rebuilds api/*.js from server/handlers (committed; Vercel runs them as they are)
 npm run build       # type-checks, then builds to dist/
 ```
 
-The page reads Tiramisu directly; no key is needed to read. To file from the page with no wallet, the dev server needs funded keys:
+The page reads Tiramisu directly; no key is needed to read. To file with your own wallet you need nothing from us. To offer the one-tap key, the dev server needs funded keys:
 
 ```bash
 cp .env.example .env     # fill DRIP_KEY (or SEED_KEY_1) and ATTEST_KEY, a funded key whose address is in data/attesters.json
@@ -201,6 +201,7 @@ npm run seed:press      # writes data/press-records.json to Arkiv from PRESS_KEY
 npm run seed:pin        # writes one demo map pin (needs FLOOD_KEY)
 npm run catalog         # regenerates docs/what-is-recorded.md from the vocabulary
 npm run screenshots     # retakes docs/screenshots from a running dev server (reads only)
+npm run e2e:wallet      # drives the page with a stand-in browser wallet and files one real report from a team test wallet (needs WALLET_TEST_KEY)
 npm run ai:check        # optional: a language model re-reads cited articles against the records (needs IFM_API_KEY; advisory only)
 ```
 
@@ -210,7 +211,8 @@ npm run ai:check        # optional: a language model re-reads cited articles aga
 - `ARKIV_ACCESS_KEY` is a Hub access key, server side only, sent as `X-API-KEY`. Never a `VITE_` variable. ([Access keys](https://docs.arkiv.network/start-here/access-keys/))
 - `PRESS_KEY` is the press curator wallet. It writes `source = press` reports only. `ATTEST_KEY` is the checker wallet. It writes attestations only.
 - `TURNSTILE_SECRET` and `HUMAN_SECRET` (optional) belong to the human check; without them a signed proof of work is used.
-- The browser makes a throwaway key for a person with no wallet and keeps it in `localStorage`. It holds a few cents of test GLM. "New identity" drops it.
+- **Your own wallet** signs and pays for its own reports; no key of yours ever reaches us. The one-tap option makes a throwaway key in the browser, keeps it in `localStorage`, and holds a few cents of test GLM ("New identity" drops it).
+- The server can use several wallets for each job (`DRIP_KEY`, `DRIP_KEY_2`, `DRIP_KEY_3`; `ATTEST_KEY`, `ATTEST_KEY_2`): each wallet sends one transaction at a time, and a busy or empty one hands over to the next.
 
 ### Layout
 
