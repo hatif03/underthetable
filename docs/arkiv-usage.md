@@ -1,5 +1,11 @@
 # How underthetable uses Arkiv
 
+> **Live:** [underthetable.vercel.app](https://underthetable.vercel.app) · [mirror](https://underthetable.vercel.app/mirror.html) · [repository](https://github.com/hatif03/underthetable) · [all screenshots](screenshots/README.md)
+>
+<img src="screenshots/07-map-arkiv-range-query.png" alt="Map with the Arkiv range query printed" width="720">
+
+*Feature 14 live: four range predicates on `i32` attributes, with the exact query printed.*   [The Record's "Look back" (feature 9c)](screenshots/10-record.png) · [the one-file mirror reading Arkiv directly](screenshots/16-mirror.png) · [terminal output](screenshots/terminal-audit.txt)
+
 Last updated 17 October 2026. Each row says which Arkiv feature is used, why the product breaks without it, where the code is, and how to check it without the website. The data contract is [arkiv/schema.md](../arkiv/schema.md); what actually happened on each call is [arkiv/friction.md](../arkiv/friction.md).
 
 ## Why Arkiv and not something else

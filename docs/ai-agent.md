@@ -1,5 +1,7 @@
 # Is there a genuine use for an AI agent here?
 
+> **Live:** [underthetable.vercel.app](https://underthetable.vercel.app) · [mirror](https://underthetable.vercel.app/mirror.html) · [repository](https://github.com/hatif03/underthetable) · [all screenshots](screenshots/README.md)
+
 Written 17 October 2026. Short answer: **one, narrow, and it is built as a script, not as a feature of the app.** An AI should not be a verifier in the sense of a judge of what is true, and it should not write to the chain.
 
 ## The question that matters

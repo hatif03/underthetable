@@ -1,5 +1,11 @@
 # Verifying a claim without putting a person on Arkiv
 
+> **Live:** [underthetable.vercel.app](https://underthetable.vercel.app) · [mirror](https://underthetable.vercel.app/mirror.html) · [repository](https://github.com/hatif03/underthetable) · [all screenshots](screenshots/README.md)
+>
+<img src="screenshots/08-report-form-pin.png" alt="The report form, with the public summary before filing" width="720">
+
+*The form shows exactly what becomes public before anything is filed. A location check is optional and stores only the word "inside".*
+
 Written 16 October 2026. The question: a report is a claim, and anyone can write one. Can the website check a claim itself, using location or something else, when nothing personal may go on Arkiv?
 
 Short answer: partly, and only by being honest about what each check proves. One check is built (a location check by state). The others are listed with why they were not built.

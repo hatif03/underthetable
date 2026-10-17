@@ -1,6 +1,14 @@
 # Deploying, and where each key comes from
 
+> **Live:** [underthetable.vercel.app](https://underthetable.vercel.app) · [mirror](https://underthetable.vercel.app/mirror.html) · [repository](https://github.com/hatif03/underthetable) · [all screenshots](screenshots/README.md)
+>
+<img src="screenshots/01-pulse.png" alt="The deployed Pulse" width="640">
+
 Written 16 October 2026. Everything here was checked against the official Arkiv documentation or run on this machine, except the Vercel and Hub screens, which I could not open and so describe from their documentation.
+
+## Deployed
+
+Deployed 17 October 2026 to Vercel (project `underthetable`, production): **https://underthetable.vercel.app**. The four server-side variables are set as hidden production variables: `DRIP_KEY`, `ATTEST_KEY`, `ARKIV_ACCESS_KEY`, `HUMAN_SECRET`. Turnstile is not configured, so the human check uses the signed proof of work. Checked on the live URL: the page and `/mirror.html` load, `/api/snapshot` answers `X-Snapshot: fresh`, `/api/human` serves a challenge, and `/api/drip` funds a key after a solved proof, refuses a replayed proof and refuses a call with no proof. The location check and a full filing were not exercised from production. The per-deployment URLs under `*.vercel.app` are behind Vercel login protection; use the short URL above. To redeploy: `vercel deploy --prod` from this folder (`.vercelignore` keeps `.env` out of the upload).
 
 ## What runs where
 

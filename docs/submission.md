@@ -6,6 +6,8 @@ Arkiv: Global Tour Stop, tracks **Best Indian Use Case** and **Censorship Resist
 - Live app: https://underthetable.vercel.app
 - Screenshots of every feature and the terminal output: [docs/screenshots/](screenshots/README.md)
 
+<p align="center"><a href="https://underthetable.vercel.app"><img src="media/corruption-animation.gif" alt="A blindfolded figure of justice with hands pushing cash toward her" width="520"></a></p>
+
 ---
 
 ## a. The problem it solves

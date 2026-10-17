@@ -1,5 +1,11 @@
 # Press-sourced reports
 
+> **Live:** [underthetable.vercel.app](https://underthetable.vercel.app) · [mirror](https://underthetable.vercel.app/mirror.html) · [repository](https://github.com/hatif03/underthetable) · [all screenshots](screenshots/README.md)
+>
+<img src="screenshots/05-press-records.png" alt="Press-sourced records on the Pulse" width="720">
+
+*How the records appear on the Pulse: labelled Press, each with its articles, never counted as a citizen.*
+
 Written by the curator wallet `0xC26DEbe828cd500c6d31F184BaeCce2782847eA3` from published news, between 2 and 17 October 2026. Each is one Arkiv entity with `source = press`. None names a person. They are not citizen reports and do not count toward a 3-wallet figure. Severity is the curator's reading of the article, with the basis given below; a figure in rupees is the amount the article states.
 
 | Record | Kind | District | Service | Week | Figure | Entity | Sources |

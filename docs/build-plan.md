@@ -1,5 +1,7 @@
 # Build plan: the live, usable underthetable
 
+> **Live:** [underthetable.vercel.app](https://underthetable.vercel.app) · [mirror](https://underthetable.vercel.app/mirror.html) · [repository](https://github.com/hatif03/underthetable) · [all screenshots](screenshots/README.md)
+
 Written 16 October 2026, 19:30 IST, two days before the 18 October 23:59 London deadline. Companion to [plan.md](../plan.md) (product spec), [arkiv/schema.md](../arkiv/schema.md) (data contract) and [decisions.md](decisions.md) (log). Where this file changes the spec, it says so, and the same change is made in the schema and the log.
 
 ## 1. Is the protest and police idea worth building, and does Arkiv justify it?

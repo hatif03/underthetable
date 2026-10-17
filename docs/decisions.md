@@ -1,5 +1,7 @@
 # Decision log
 
+> **Live:** [underthetable.vercel.app](https://underthetable.vercel.app) · [mirror](https://underthetable.vercel.app/mirror.html) · [repository](https://github.com/hatif03/underthetable) · [all screenshots](screenshots/README.md)
+
 Written 16 October 2026, after the app was running and before seed or deployment. This file records decisions and the changes that followed them. [plan.md](../plan.md) is still the original product spec. [arkiv/schema.md](../arkiv/schema.md) is still the judge-facing data contract. If those two disagree on an attribute, the schema wins.
 
 `AGENTS.md`, `CLAUDE.md`, `README.md`, `RULES.md`, `docs/scoring-rubric.md`, and `docs/submission-checklist.md` are the organiser copies. They were not rewritten. `docs/setup.md` and this file were added for the product.

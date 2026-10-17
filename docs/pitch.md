@@ -1,5 +1,15 @@
 # The pitch
 
+> **Live:** [underthetable.vercel.app](https://underthetable.vercel.app) · [mirror](https://underthetable.vercel.app/mirror.html) · [repository](https://github.com/hatif03/underthetable) · [all screenshots](screenshots/README.md)
+>
+<img src="screenshots/01-pulse.png" alt="The Pulse" width="720">
+
+*The Pulse: what can be documented, a dot map of India and the live feed.*
+
+<img src="screenshots/07-map-arkiv-range-query.png" alt="The map and its Arkiv range query" width="720">
+
+*The Map: pins on broken public infrastructure, and the range query the chain answers.*
+
 Written for: the team, to rehearse and to paste into Devfolio. Every example is a real, dated, sourced report from 9 to 16 October 2026 and is in [press-records.md](press-records.md).
 
 ## One line

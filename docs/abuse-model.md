@@ -1,5 +1,11 @@
 # Fake reports and personal data: what stops them, and what cannot be stopped
 
+> **Live:** [underthetable.vercel.app](https://underthetable.vercel.app) · [mirror](https://underthetable.vercel.app/mirror.html) · [repository](https://github.com/hatif03/underthetable) · [all screenshots](screenshots/README.md)
+>
+<img src="screenshots/09-report-form-shutdown.png" alt="A sentence filling a rights-violation slip on the device" width="720">
+
+*The sentence is read on the device and never sent; only closed-list fields can reach the chain.*   [The Sealed page: the checks anyone can run](screenshots/11-sealed.png) · [the audit output](screenshots/terminal-audit.txt)
+
 Written 16 October 2026. Two promises this product makes, and the honest limits of each.
 
 1. **Nothing personal ever goes on Arkiv.**

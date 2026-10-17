@@ -1,5 +1,7 @@
 # Setup
 
+> **Live:** [underthetable.vercel.app](https://underthetable.vercel.app) · [mirror](https://underthetable.vercel.app/mirror.html) · [repository](https://github.com/hatif03/underthetable) · [all screenshots](screenshots/README.md)
+
 The root [README.md](../README.md) is the setup guide. This file keeps the chain facts in one place.
 
 Tiramisu, chain ID `7738577` (`0x7614d1`). HTTP `https://rpc.tiramisu.db-chain.testnet.arkiv.network`. WebSocket `wss://rpc.tiramisu.db-chain.testnet.arkiv.network`. Explorer `https://tiramisu.explorer.arkiv.network`. Gas token: test GLM. Faucet: <https://hub.arkiv.network/faucet>.
