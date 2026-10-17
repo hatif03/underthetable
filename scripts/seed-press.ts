@@ -99,7 +99,7 @@ for (const [index, record] of records.entries()) {
 const lines = [
   "# Press-sourced reports",
   "",
-  `Written by the curator wallet \`${account.address}\` from published news, between 9 and 16 October 2026. Each is one Arkiv entity with \`source = press\`. None names a person. They are not citizen reports and do not count toward a 3-wallet figure. Severity is the curator's reading of the article, with the basis given below; a figure in rupees is the amount the article states.`,
+  `Written by the curator wallet \`${account.address}\` from published news, between 2 and 17 October 2026. Each is one Arkiv entity with \`source = press\`. None names a person. They are not citizen reports and do not count toward a 3-wallet figure. Severity is the curator's reading of the article, with the basis given below; a figure in rupees is the amount the article states.`,
   "",
   "| Record | Kind | District | Service | Week | Figure | Entity | Sources |",
   "| --- | --- | --- | --- | --- | --- | --- | --- |",

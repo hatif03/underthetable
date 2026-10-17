@@ -102,5 +102,149 @@
   "fat-w41-grain": {
     "txHash": "0xee6cf5d6a204ccead6e1ff00d2846b403b0924743350b3ad725170f96b840774",
     "entityKey": "0x9691e6c8357b6bfc09e5ced58c183bae8314daba5c7e629f9d974256779df596"
+  },
+  "dl-w40-shutdown": {
+    "txHash": "0xaf47c15b2f9ebf13257025ebd8074f1b980bc36faa6e247163eb6848294ebd3a",
+    "entityKey": "0x27fca1609e5ee3ed988bfa164e236e7cd3552b73e98415db369bb780766e5bb9"
+  },
+  "dl-w41-shutdown": {
+    "txHash": "0x6f1de946b8613fd3bf115b2b808f0f380f8b14fc43213bef143bcd591da5986c",
+    "entityKey": "0x5b2a22bb1b28044cb49fb0c67d575921fa3b2b95a0dc805380dd58521ecc6fe4"
+  },
+  "dl-w41-blocking": {
+    "txHash": "0x642ff7aafb7a837f5cab52a09eabcb043dd8c9f1c8525c1fc1a325058a271fe6",
+    "entityKey": "0x2d58c17badee9fbd9dc1aa034c698e1ffdf59c091f15ff3171480e4c9474ff0a"
+  },
+  "hoj-w42-eviction": {
+    "txHash": "0x090073a6b7a8b9a19fdf1b313108396904a9079d4ee132f1eb1a89d395686441",
+    "entityKey": "0x5abc298f8999c81d8650f497660737cc1d73c43304fcfb0185562a22a737183e"
+  },
+  "gol-w42-eviction": {
+    "txHash": "0x030b20854ca6361227565763224cb12c5d55c795e9f4e1d691c71e2765e7d49d",
+    "entityKey": "0x169a350d0a8106ba46bef518b380af3bd0da14a6ceb3a017272d40ff584f8943"
+  },
+  "agr-w42-demolition": {
+    "txHash": "0x0c1e13ce58a10e049b38d94a9ba64684bfe3c6b594594dd85dbd54a5ae386016",
+    "entityKey": "0x3fbf0e0d5a2291d38d08c28f690d0d71aacbc32e943d44e11396c3ff6da7520d"
+  },
+  "bir-w42-custody": {
+    "txHash": "0x772e91050c5d8d3288137124186516f0661ee313c21649860bf7d32500de6339",
+    "entityKey": "0x2eeb281fe3006a3b9bc46875a20c6ad2785b077c44e43dff1b473f8603c7140c"
+  },
+  "dl-w41-journalists": {
+    "txHash": "0xd4cc713789d592997773dde1fd15cda940d8f2720f2c8bc624fb7f40d7413248",
+    "entityKey": "0x8528311d45ff0afe187ecde081582721359ffa445331ee0089cb90507a6435b0"
+  },
+  "blr-w42-journalists": {
+    "txHash": "0x435913fdc589a20caa1634fe35fa6b7d04aabb53fbeec12316e96978026125f3",
+    "entityKey": "0x86673dc11600e0ecc48e095db1315a6d1416155d11b0f523bf33e3a873272d64"
+  },
+  "ahd-w41-journalist": {
+    "txHash": "0x79f004372712eaf2853c5c2d89f9efa8e87a2be9cd16b77ee552d5339aa52962",
+    "entityKey": "0x547000442651eab59a921c864b3b9e4bc8fcaa1a7a01c3096a681f54ffeec750"
+  },
+  "pun-w41-journalist": {
+    "txHash": "0x4f5c181959f2e305057d8d2c1539b5f951ed2082c9b1d910870a3e6c1e958d59",
+    "entityKey": "0x1f18a6d756a13880b1d10c53e029301054b9fb540fcfcb7c80fa685d690ea209"
+  },
+  "dl-w41-march-detentions": {
+    "txHash": "0x9a4a9bf05c2a17678b57d6e8b174c25f4bede31db84742a95c49b66ce3f622d9",
+    "entityKey": "0xd96f4356d0ea41148430d814fd2ee3a204f3f5cf83fd8be302e320a52651617c"
+  },
+  "dl-w42-venue": {
+    "txHash": "0xa6ef9d1c668b230bdab0b3a7f73804db7a4782a0754a0904468db252c129d682",
+    "entityKey": "0xc3cf28d0732545035dfd41b4dcb9ed6f6a98097e8cc6e6f98bd5f275839aadd6"
+  },
+  "dl-w42-leaders": {
+    "txHash": "0x487aba66a742cffb3fb6bd399101d744298d8cd1dd8255e921cb8fada313f5e3",
+    "entityKey": "0xc7d4de9ed55a45be02f1cc35b46b29b6bd1fe393095068b237fb829380459e93"
+  },
+  "ahd-w41-detention": {
+    "txHash": "0x88ea9f49883007b826965e2606b33df0c295be8c8aba5238183870350823a85f",
+    "entityKey": "0x6d8b79d49d7b7c6a7892c8837cd1c810bcc454aa064d87f1409446a3899a2d86"
+  },
+  "blr-w42-detention": {
+    "txHash": "0x9fd8d00f8dada3d87cd9d41d7aebe3a4af41655bc06d15db202118cdeee434b0",
+    "entityKey": "0x984c346b946cce793b816f4868a031d1ad5119911a98d65e424e43954f35980d"
+  },
+  "tvm-w42-force": {
+    "txHash": "0xcd474ca0640ef85376242cfdde09da12d6c6d2518bf8d626d3f9ec777a1438df",
+    "entityKey": "0xc3f4fa545820379b6232f79813adca12f0e08b71b0c06ee82b08733648696667"
+  },
+  "jal-w41-mutation": {
+    "txHash": "0x0f0928dedd02fe619883bed701caa3a517e77792981c652f1d60878b7f288dc3",
+    "entityKey": "0x1c7190b0115cc30780675f3d91a41bae21033b691dd5e1fa4ceba81e66c69687"
+  },
+  "pal-w42-mutation": {
+    "txHash": "0x96873ab0cfc9846c51215b4ea6244a368a4aa189bc1c45968e6ad5fb78c04df8",
+    "entityKey": "0x22a120589e99b6898f4fb8a35485383d4fe41c6c147f9b1b0032563c6cad55d0"
+  },
+  "bar-w41-water": {
+    "txHash": "0x0ecfa24e7e3533da50d1a7370020ca021a34bb6babbaf626fa1333a3c85b9824",
+    "entityKey": "0x61d0e63f4d9440df9039da4e8b072b007e580943bee03a0324242a8820737977"
+  },
+  "sri-w40-water": {
+    "txHash": "0x909b21effeecb7612d8e7b852362dc8084d874b3a27dd69e12a95c28f28078f5",
+    "entityKey": "0x8d985422eba1e24bf2ec154220bcfe9153c555f36abe4355f8788cbce495efe6"
+  },
+  "did-w42-water": {
+    "txHash": "0xfb39b5867a2898aa2e66ab401d90530e056eadfc89f9974519d7ac726d6e1841",
+    "entityKey": "0xad22c996daca399e4e5ba02f1a20be64b616a5bd47323f58e62524c7e5e043af"
+  },
+  "lak-w42-water": {
+    "txHash": "0x6c8de69d919fcd6988be016263ccc96ee91c0c5465f190021f1580fb1b6db894",
+    "entityKey": "0x0ed79a913898d6793af872cca90beb60a853ef5e8a398222383cd09a8bd06408"
+  },
+  "man-w42-power": {
+    "txHash": "0x2e26ac2f072c9c0ab9888035a362f0f2370f1b132ec27c998868a8ccaa1fc8a6",
+    "entityKey": "0xd8cebc0870a65560cec302cbc3f43aea30f11d275c609567598e87a6413dc627"
+  },
+  "sur-w41-power": {
+    "txHash": "0xe555e9ec4ecd17c31f22d3dd2740a2f58c5aa8c9273b43cd0eae34d473b65676",
+    "entityKey": "0xda51c3a28205c94abeb35701d564029b3a149bcdd333867addc39521a3efa8db"
+  },
+  "niz-w41-power": {
+    "txHash": "0xb7ff7b15f9d5fcc7999c8f243f68fe06c0def463f92cc1e07055ce8319339c94",
+    "entityKey": "0x58f58b8ac482f4c82222e545c84b27c03e5eb7f0fa99e5cacf36ac32fc160b23"
+  },
+  "chs-w42-garbage": {
+    "txHash": "0xa9b1d8f7542b08f3611b1b5997cdffd6eff355a009ccbbd5d0b54259fb9c2f29",
+    "entityKey": "0x4d5f2e8be059e25ff03fb63c5cc15a83898c44b3fbbccffcd39fc936fa6e7e8f"
+  },
+  "edl-w42-garbage": {
+    "txHash": "0xab61b29098e507728b7c337e00d718fdaafd423c0cfa48468ff2efdd3b62e2db",
+    "entityKey": "0x4854b55f1c0040c58bd73c132a8f4a068b131e6c4c5928f0d11dcb677ece9d1d"
+  },
+  "usn-w42-pothole": {
+    "txHash": "0x9beeb33f68935223af82c910782b15998d6ba6702aaf26a914ca00bb13a2ee7f",
+    "entityKey": "0x0f00bf2b541d818e7c5f94d8776caa0ad61fa0f83a5adcc06b56bb5c46869b4b"
+  },
+  "nai-w42-pothole": {
+    "txHash": "0xa94af533c2e241ecf016c8008a0ed455d5aaf940f15527dfa8b56facba936ca1",
+    "entityKey": "0xaf0bb0673d0a6b5373b3ab5952bf2c2765f2d6530f92c926c94bd4c2ef935533"
+  },
+  "son-w42-streetlight": {
+    "txHash": "0x3409918ade8676952ac872ecad18bb977a3d9112fd5426cf4227efb5d42d0f64",
+    "entityKey": "0x9c0f3de71a41614ed59f57b397e88da1f110868d2c12ddb5e19ee27d19109394"
+  },
+  "hap-w41-doctors": {
+    "txHash": "0x48bbe0a970fe0c5fcf9f0c58f6013dadeb92e084bd1eebffe05d8a0855ab9810",
+    "entityKey": "0x95c60254296bb6989b712aacc6d2dbcb44741be836fe3f1e6af1702a5e796ba5"
+  },
+  "ayo-w41-doctors": {
+    "txHash": "0x5afd992d867ab11fbc768af824ec7a56ca6b8f98f7d375c559c2d5787b85c3f5",
+    "entityKey": "0xc27a5c5488ae1ec3f271cf8997d24b97e4a8a901c0f561ce35926f4a1fabc364"
+  },
+  "fth-w40-medicine": {
+    "txHash": "0x69c6f6d2f4a992052784b471c02961605a1f35a663b2936d08aeb13b1334dd6f",
+    "entityKey": "0x1e1899f9d9a95d663a6e43f8dabbbc2762df0c823793238f9892f6de691de550"
+  },
+  "sit-w42-teachers": {
+    "txHash": "0x3823ace33f1388bd0b19461598c93d7500aade7b6f9ac256b10f63df71b3bf4f",
+    "entityKey": "0x01b75bc30d409842d0eb5ac286845bf98411112492e647d6b03659e3a017af99"
+  },
+  "dha-w42-meal": {
+    "txHash": "0x857d7127549a46d28beaa84d6e8e1862d870e3e23508c291a9f16922d5dbe996",
+    "entityKey": "0xbfa4ac0d6e888e6cd4524cdefbbfe4f1c67baf63c7b2a0551e0a6ae3c7b5a2a1"
   }
 }
