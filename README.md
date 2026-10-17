@@ -66,12 +66,13 @@ The numbers behind it: India recorded **65 internet shutdowns in 2025, second on
 
 5 kinds, 13 departments, 52 services, 36 states and union territories, 338 districts. Nothing is free text. [Every kind, desk and field, and why each is an Arkiv attribute.](docs/what-is-recorded.md)
 
-| | |
-| --- | --- |
-| ![The Pulse: totals, categories, dot map and live feed](docs/screenshots/01-pulse.png) | ![Report form: a pothole with the exact pin and the public summary](docs/screenshots/08-report-form-pin.png) |
-| **The Pulse.** What is being recorded, where, as it is sealed. | **Report.** Say it in a sentence; it is read on your device. Everything that becomes public is shown before you file. |
-| ![Map: pinned problems and the Arkiv range query](docs/screenshots/07-map-arkiv-range-query.png) | ![A rights violation read from a sentence](docs/screenshots/09-report-form-shutdown.png) |
-| **The map.** Drop a pin on a broken thing. "Search this view on Arkiv" is four range predicates the chain answers itself, printed on the page. | **Rights and shutdowns.** "Mobile internet was shut down in New Delhi" fills the slip, on the device. |
+<p align="center"><img src="docs/screenshots/01-pulse.png" alt="The Pulse: totals, categories, dot map and live feed" width="100%"><br><sub><b>The Pulse.</b> What is being recorded, where, as it is sealed.</sub></p>
+
+<p align="center"><img src="docs/screenshots/08-report-form-pin.png" alt="Report form: a pothole with the exact pin and the public summary" width="100%"><br><sub><b>Report.</b> Say it in a sentence; it is read on your device. Everything that becomes public is shown before you file.</sub></p>
+
+<p align="center"><img src="docs/screenshots/07-map-arkiv-range-query.png" alt="Map: pinned problems and the Arkiv range query" width="100%"><br><sub><b>The map.</b> Drop a pin on a broken thing. "Search this view on Arkiv" is four range predicates the chain answers itself, printed on the page.</sub></p>
+
+<p align="center"><img src="docs/screenshots/09-report-form-shutdown.png" alt="A rights violation read from a sentence" width="100%"><br><sub><b>Rights and shutdowns.</b> "Mobile internet was shut down in New Delhi" fills the slip, on the device.</sub></p>
 
 More: [press records](docs/screenshots/05-press-records.png) · [the Record and "Look back"](docs/screenshots/10-record.png) · [how it is sealed](docs/screenshots/11-sealed.png) · [Hindi](docs/screenshots/13-pulse-hindi.png) · [on a phone](docs/screenshots/14-pulse-mobile.png) · [the one-file mirror](docs/screenshots/16-mirror.png).
 
@@ -164,6 +165,7 @@ npm test                              # 32 tests: the rules, parser, PII tripwir
 | [verification.md](docs/verification.md), [abuse-model.md](docs/abuse-model.md) | How a claim is checked, and what stops fakes and personal data |
 | [press-records.md](docs/press-records.md) | The 62 sourced press records and their articles |
 | [ai-agent.md](docs/ai-agent.md) | Is there a genuine use for an AI here? One, narrow, advisory |
+| [demo-video-script.md](docs/demo-video-script.md) | What to say and how to record the 3-minute demo video |
 | [CONTRIBUTING.md](CONTRIBUTING.md) | Add a district, a service or a sourced record; fork it |
 | [pitch.md](docs/pitch.md), [deploy.md](docs/deploy.md), [decisions.md](docs/decisions.md), [build-plan.md](docs/build-plan.md), [assets.md](docs/assets.md) | The pitch and demo script, deploying, the decision log, the build plan, credits |
 
