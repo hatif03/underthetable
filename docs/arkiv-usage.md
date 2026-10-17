@@ -1,6 +1,6 @@
 # How underthetable uses Arkiv
 
-Last updated 16 October 2026, evening. Each row says which Arkiv feature is used, why the product breaks without it, where the code is, and how to check it without the website. The data contract is [arkiv/schema.md](../arkiv/schema.md); what actually happened on each call is [arkiv/friction.md](../arkiv/friction.md).
+Last updated 17 October 2026. Each row says which Arkiv feature is used, why the product breaks without it, where the code is, and how to check it without the website. The data contract is [arkiv/schema.md](../arkiv/schema.md); what actually happened on each call is [arkiv/friction.md](../arkiv/friction.md).
 
 ## Why Arkiv and not something else
 
@@ -12,9 +12,9 @@ Last updated 16 October 2026, evening. Each row says which Arkiv feature is used
 
 ## What is on Arkiv, and what is kept off on purpose
 
-On Arkiv: two entity types. `report`: 11 closed-list attributes (12 on a press-sourced one, which adds `source = press`) and the payload `{"v":1}`. `attestation`: 6 attributes and the same payload. Three kinds of wallet write them: citizens (a browser key or their own wallet), the press curator, and the location checker.
+On Arkiv: two entity types. `report`: 11 closed-list attributes (12 on a press-sourced one, which adds `source = press`; 13 on a pinned pothole, which adds the `i32` pair `lat_e5` and `lon_e5`) and the payload `{"v":1}`. `attestation`: 6 attributes and the same payload. Three kinds of wallet write them: citizens (a browser key or their own wallet), the press curator, and the location checker.
 
-Off Arkiv, always: names, phone numbers, email, Aadhaar, offices, streets, GPS, photos, video, free text, the sentence a person types, the day of an incident, the person's position, and any hash of those. The sentence is parsed on the device. The position is rounded to about 5 km, used once by the checker, and not stored.
+Off Arkiv, always: names, phone numbers, email, Aadhaar, offices, streets, GPS, photos, video, free text, the sentence a person types, the day of an incident, the person's position, and any hash of those. The one exact place on chain is the pin on a broken public thing, never on a person-related report. The sentence is parsed on the device. The position is rounded to about 5 km, used once by the checker, and not stored.
 
 ## Feature by feature
 
@@ -35,6 +35,8 @@ Off Arkiv, always: names, phone numbers, email, Aadhaar, offices, streets, GPS, 
 | 10 | **Entity-key reference** | An attestation points at its report without copying data. | `server/attest.ts`, `src/lib/query.ts` | `type = attestation AND report = key(...)` |
 | 11 | **Two entity types, one query** | Reports and their checks arrive in the same read, so verification costs no extra queries against the anonymous budget. | `src/lib/query.ts` | `npm run query` shows both counts |
 | 12 | **WebSocket `watchEntityEvents`** | New reports appear without a poll loop. The chain is shared (about 0.85 creates a second), so events are filtered by `creationFlags` and lifetime before any read (friction F6). | `src/state/store.ts` | open two browsers, file in one |
+| 14 | **Range queries on `i32` attributes (map pins)** | A pothole may carry `lat_e5` and `lon_e5` (degrees times 100,000). "What is inside this rectangle" is four `gte`/`lte` predicates answered by the chain's index, one round trip, no download of the rest. The Map tab prints the query it sent. | `src/lib/query.ts` (`fetchInBox`), `src/views/MapView.tsx`, `scripts/seed-pin.ts` | Map, "Search this view on Arkiv"; friction F17 |
+| 15 | **A Hub access key** | Raises the anonymous read budget. Tested: 120 consecutive reads, all 200. Read from `ARKIV_ACCESS_KEY` by servers and scripts only, sent as `X-API-KEY`. | `src/lib/client.ts`, `server/rpc.ts`, `server/snapshot.ts` | friction F18 |
 | 13 | **Wallet clients** | Browser throwaway key, injected wallet, seed keys and the checker key all use the same batch code. Reads use the public client only, because the 0.8.1 wallet client does not expose them. | `src/lib/identity.ts`, `src/lib/wallet.ts` | friction F8 |
 
 ## Evidence on Tiramisu
@@ -47,6 +49,7 @@ Real entities, each openable on the explorer. Open one and look at **Owner**: it
 | The attestation that vouches for it. It carries a `report` key attribute and no position | [`0x625764fe47…`](https://tiramisu.explorer.arkiv.network/entity/0x625764fe47d01acd05544e65c51852fb5c6a9fcdb734ec29486bd1065b05978c) | open the entity page |
 | A press report (Delhi, a detention, 16 October). Creator is the curator wallet, `source = press` | [`0xd9d6fdee29…`](https://tiramisu.explorer.arkiv.network/entity/0xd9d6fdee29b7adf2e667fb1e1c8da1cef67a77fe3af284aeb3a8275ba4a8eaf9) | [`0xd23c4f687d…`](https://tiramisu.explorer.arkiv.network/tx/0xd23c4f687dc7757368fe73fa1eb46d151e80ba3fabf1f0580e2a400f70350ec9) |
 | A press report with a rupee amount (Barnala, ₹30,000, a land transfer) | [`0x783f80ff56…`](https://tiramisu.explorer.arkiv.network/entity/0x783f80ff56de6fe9c8d0c4cb8fb469bf9a05794427ba6cc980758b66968f857e) | [`0xcc8126b487…`](https://tiramisu.explorer.arkiv.network/tx/0xcc8126b4872b89a3249d65e5b4a9b692ff3c057201aeb9835ddbfe8b9b372430) |
+| The demo map pin: a pothole with `lat_e5 = 1999751`, `lon_e5 = 7378981` | [`0x311025deec…`](https://tiramisu.explorer.arkiv.network/entity/0x311025deec017feb6f5242bcc6aa5fd09781ab22f9d99d190bc0c906aac08ab8) | `0x1641e7a6…6032` |
 | A seed report, one of the synthetic demo rows | [`0x8070d5ef45…`](https://tiramisu.explorer.arkiv.network/entity/0x8070d5ef45bc22af1dce0ed027ff601e2aef763b6aa2182bf2b3de5052c551a6) | [`0xeeebd142ce…`](https://tiramisu.explorer.arkiv.network/tx/0xeeebd142ce5f50aca6c5d20fe05b04083d30f55441a7cfe2e7ea2561b3e069c3) |
 | A report written with a one-hour Entity Expiration, now expired. The explorer still shows its creation | [`0x3922f6cbef…`](https://tiramisu.explorer.arkiv.network/entity/0x3922f6cbef9b03c6615eda04510103a4b2992d89693517cef89184ac1c509e18) | [`0xefc8ee1ae1…`](https://tiramisu.explorer.arkiv.network/tx/0xefc8ee1ae19dd68e803d9c2c5ed094bfa3d480bd6e4b64701d670e575f922348) |
 
@@ -70,7 +73,8 @@ Real entities, each openable on the explorer. Open one and look at **Owner**: it
 
 | Route | Does | Never does |
 | --- | --- | --- |
-| `/api/drip` | Sends 0.02 test GLM to a new browser key | Sign a report, store an address, log a client |
+| `/api/human` | Says how a browser must prove it is a person (Cloudflare Turnstile, or a signed proof of work) | Store anything, identify anyone |
+| `/api/drip` | Checks the human proof, then sends 0.02 test GLM to a new browser key | Sign a report, store an address, log a client |
 | `/api/attest` | Compares a rounded position with a state, then has the checker wallet write one attestation | Store or log the position; write a report; touch a report once sealed |
 | `/api/rpc` (optional) | Relays read methods only with a short cache, so an access key can stay on the server | Relay a write |
 | `/api/assist` (optional, not used by the page) | Fills the slip from a cleaned sentence | Anything with Arkiv |

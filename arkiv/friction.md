@@ -127,6 +127,22 @@ Append a section only after a call is actually made. For each one, record the su
 - Steps: open Record, "Look back", "As of 1 hour ago".
 - What would fix it: nothing needed. The documented retention window would be useful.
 
+## F17. `i32` coordinates and a bounding-box query
+
+- Version: `@arkiv-network/sdk` 0.8.1, `viem` 2.57.7, Node v24.20.0, Tiramisu, 17 October 2026.
+- Expected: an optional pair of signed integer attributes (`lat_e5`, `lon_e5`, degrees times 100,000) can be written on a report, read back as numbers, and a rectangle can be asked for with four range predicates.
+- Actual: it worked. `npm run seed:pin` wrote one pothole pin (Nashik) with `lat_e5: i32(1999751)` and `lon_e5: i32(7378981)`; the receipt was `success` (entity `0x311025de…8ab8`). A query with `gte`/`lte` on both attributes around Nashik returned 1 row; the same query around Bengaluru returned 0. Attributes came back as `{type: "i32", value: 1999751}`. The only trap is the one in F13 in reverse: the amount is `u64` and the coordinates are `i32`, so each must be written with its own constructor, and a query that uses the wrong one matches nothing without an error. The map tab's "Search this view on Arkiv" runs this query and prints it.
+- Steps: `npm run seed:pin`, open the Map tab, press "Search this view on Arkiv" with the pin in view.
+- What would fix it: nothing for this call. A documented example of a range query on a signed attribute would have saved the check that negative longitudes (the Americas) also work; ours are all positive, so negative values were not tested.
+
+## F18. An access key removes the anonymous read budget in practice
+
+- Version: `@arkiv-network/sdk` 0.8.1, raw JSON-RPC over HTTP, Node v24.20.0, 17 October 2026. The key is sent as the `X-API-KEY` header from the server side only. Its value is not recorded here.
+- Expected: with an access key from hub.arkiv.network, a burst of reads that the anonymous budget refuses (F2, F3, F11) goes through.
+- Actual: 120 `arkiv_getEntityCount` calls in a row, 31 seconds, all HTTP 200, none 429. The same shape of burst without a key is what F2 refused after about a dozen calls. `npm run query` and `npm run audit` then read every report back (78 entities, 77 valid reports, 1 attestation) straight after a seeding run, which F11 could not.
+- Steps: put the key in `.env` as `ARKIV_ACCESS_KEY`, run `npm run query` and `npm run audit`. For the page, set the same variable on the host; `server/rpc.ts` and `src/lib/client.ts` add the header on the server side only.
+- What would fix it: nothing, this is the intended path. It should be in the quickstart, before the first 429, and the response to an anonymous refusal should say that a key exists. A key pasted into a chat or a repo is a leaked key, so the guide could also say where not to put it: a browser build cannot hold one, which is why this project reads through its own route.
+
 ```markdown
 ## F1. <surface>
 

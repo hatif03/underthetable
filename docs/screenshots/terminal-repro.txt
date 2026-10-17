@@ -1,0 +1,16 @@
+
+SDK @arkiv-network/sdk 0.8.1, block 687587
+
+R1  a bare number against a u64 attribute (friction F13)
+    gte("amount_inr", 500)      -> 0 rows
+    gte("amount_inr", u64(500n)) -> 38 rows
+
+R2  $createdAt cannot be filtered (friction F5)
+    threw: "$createdAt" is returned in query results but carries no index, so it cannot be filtered on. Select it and filter the results in JavaScript instead.
+
+R3  expired and never-existed look alike to getEntity (friction F14)
+    an expired entity: No live entity with key 0x3922f6cbef9b03c6615eda04510103a4b2992d89693517cef89184ac1c509e18. It was never created, or it has been deleted or has expired.
+    a key that never existed: No live entity with key 0x1111111111111111111111111111111111111111111111111111111111111111. It was never created, or it has been deleted or has expired.
+
+R4  a write from an unfunded key (friction F15)
+    threw: Transaction failed: Execution error without revert data

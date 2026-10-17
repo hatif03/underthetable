@@ -1,0 +1,7 @@
+
+block 687582
+entities read: 114
+valid reports: 113
+valid attestations: 1
+outside the schema: 0
+clean: nothing on chain is outside the closed lists

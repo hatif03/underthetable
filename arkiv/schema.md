@@ -8,7 +8,9 @@ If this file and [plan.md](../plan.md) disagree on an attribute, this file wins.
 
 ## report
 
-A single non-identifying observation in a district, in a given week. `kind` says what it is. A `demand` is a rupee amount asked for a routine service. A `failure`, `absence`, or `diversion` is another district-level public condition: a broken road or light, a counter or post that is empty, or grain, fuel, a meal, or material that did not arrive. A `restriction` is a public freedom that was restricted: permission to assemble denied, a ban on gatherings, barricades or closures, force used at a gathering, a detention without notice, or an FIR not registered. None of these name a person, a unit, an office, or a street.
+A single non-identifying observation in a district, in a given week. `kind` says what it is. A `demand` is a rupee amount asked for a routine service. A `failure`, `absence`, or `diversion` is another district-level public condition: a broken road or light, a counter or post that is empty, or grain, fuel, a meal, or material that did not arrive. A `restriction` is a right that an authority restricted or violated: permission to assemble denied, a ban on gatherings, barricades or closures, force used at a gathering, a detention without notice, an FIR not registered, violence in custody, a journalist detained or attacked, an internet shutdown, websites or accounts blocked, a demolition without notice, or a forced eviction. None of these name a person, a unit, an office, or a street.
+
+Changed 17 October 2026: `restriction` grew from six services to twelve, with a new department `administration` (internet shutdown, content blocked, demolition without notice, forced eviction), and a `failure` at a public-infrastructure service (`pothole`, `streetlight`, `open_drain`, `garbage_pile`, `broken_road`) may now carry an exact map pin, two `i32` attributes `lat_e5` and `lon_e5`. Nothing else moved. The full catalogue of what can be recorded is generated from the vocabulary into [docs/what-is-recorded.md](../docs/what-is-recorded.md).
 
 Changed 16 October 2026: `restriction` was added as a fifth kind, and new reports no longer write `day`. A day plus a district plus a service lets the official identify the reporter. The writer picks a week (this week, last week, or earlier) and the ISO week is the only date on chain. The 48 rows written before the change still carry `day`; readers treat it as optional and do not display it.
 
@@ -22,7 +24,7 @@ All names are snake_case. Values are wrapped in the SDK constructors at write ti
 | `type` | `str` | `eq` | Always `report`. |
 | `state` | `str` | `eq` | State or union-territory slug, for example `mh`. |
 | `district` | `str` | `eq` | District slug, for example `nashik`. No street, no GPS. |
-| `department` | `str` | `eq` | One of `police`, `rto`, `revenue`, `passport`, `municipal`, `gst`, `electricity`, `income_tax`, `fda`, `ration`, `health`, `school`. |
+| `department` | `str` | `eq` | One of `police`, `rto`, `revenue`, `passport`, `municipal`, `gst`, `electricity`, `income_tax`, `fda`, `ration`, `health`, `school`, `administration`. |
 | `role` | `str` | `eq` | A role title from the vocabulary, never a person's name. |
 | `service` | `str` | `eq` | A service slug from the vocabulary for that department. |
 | `outcome` | `str` | `eq` | For `demand`: `asked`, `paid`, or `refused`. For the other kinds: `noted`, `worsened`, or `cleared`. |
@@ -31,6 +33,10 @@ All names are snake_case. Values are wrapped in the SDK constructors at write ti
 | `day` | `str` | `eq` | Legacy, optional, no longer written. It was the incident date, `YYYY-MM-DD`. |
 | `source` | `str` | `eq` | Optional. `press` only, and only believed when `$creator` is a wallet in [data/curators.json](../data/curators.json). A report a curator wrote from a published news article. Absent on every citizen report. |
 | `amount_inr` | `u64` | `eq`, `gte`, `lte` | For `demand`, whole rupees from 1 to 10000000. For the other kinds, a severity from 1 to 5. The same number field is used because ranges only work on numeric attributes. The page labels it rupees or severity from `kind`. |
+| `lat_e5` | `i32` | `gte`, `lte` | Optional. Latitude in degrees times 100,000, so `1999751` is 19.99751. Only on a `failure` at a `municipal` infrastructure service. Always with `lon_e5`. |
+| `lon_e5` | `i32` | `gte`, `lte` | Optional. Longitude in degrees times 100,000. Both coordinates fit in `i32`, so they are written with `i32(...)`. |
+
+A pin is the place of a broken thing, not of a person. It is allowed only for `failure` at `municipal` + `pothole`, `streetlight`, `open_drain`, `garbage_pile` or `broken_road` (`geoServices` in `data/vocab.json`). A bribe, a detention, a shutdown, an absence never carries a pin: an exact place plus a week could identify a person. The writer rejects a pin outside India's bounding box (latitude 6 to 38, longitude 68 to 98) and a pin that is not within one dot (about 50 km) of the report's own state. The reader repeats both checks, so a pin written straight to the chain by someone else is dropped from the map.
 
 `week` is computed by one shared function (`src/lib/week.ts`) from the week the writer picks. The week is not in the future, and not more than 180 days before the write, in Asia/Kolkata. `day` is accepted by the guard only as the input to that function and is never put on an entity.
 
@@ -48,9 +54,9 @@ Role slugs are only valid for their department:
 | `income_tax` | `assessing_officer`, `clerk` | `refund`, `pan` |
 | `fda` | `inspector`, `clerk` | `licence` |
 
-`demand` uses the role and service columns above. The other kinds use the role `public` and a service from `data/vocab.json` `conditions`. Examples: municipal `pothole` or `broken_road` as a failure, health `medicine_missing` as an absence, ration `grain_short` as a diversion, police `assembly_permission_denied`, `gathering_ban_order`, `barricades_or_closures`, `force_at_gathering`, `detention_without_notice` or `fir_not_registered` as a restriction. The bucket includes `kind`, so a severity is never averaged with a rupee amount.
+`demand` uses the role and service columns above (the table is abridged: `revenue` also has `revenue_inspector` and `land_conversion`). The other kinds use the role `public` and a service from `data/vocab.json` `conditions`. Examples: municipal `pothole`, `water_supply` or electricity `power_cut` as a failure, health `medicine_missing` as an absence, ration `grain_short` as a diversion, and as a restriction police `assembly_permission_denied`, `gathering_ban_order`, `barricades_or_closures`, `force_at_gathering`, `detention_without_notice`, `fir_not_registered`, `custodial_violence`, `journalist_detained_or_attacked`, or administration `internet_shutdown`, `content_blocked`, `demolition_without_notice`, `forced_eviction`. The bucket includes `kind`, so a severity is never averaged with a rupee amount.
 
-Internet shutdown orders are deliberately not a `restriction` service: they are a statutory order recorded elsewhere, not a district-level citizen report.
+An internet shutdown is a district-level public condition, like a power cut, and is recorded the same way: a district, a week and a severity, from people who lost the network. It is a citizen's account, not the order. The orders themselves, where they exist, are public records recorded elsewhere.
 
 The quote rule is unchanged. Three distinct creators, earliest amount per creator, median. For a failure, absence, or diversion, that median is a severity.
 
@@ -62,7 +68,7 @@ Added 16 October 2026. A curator wallet (`0xC26DEbe828cd500c6d31F184BaeCce278284
 - It is believed only if its `$creator` is in `data/curators.json`. Anyone can write `source = press`; a row from any other wallet is read as an ordinary citizen row.
 - The articles behind it are not on Arkiv (a URL is free text). They are in [data/press-sources.json](../data/press-sources.json), keyed by entity key, and listed in [docs/press-records.md](../docs/press-records.md).
 - Severity on a non-demand press report is the curator's reading of the article, with the rule: 5 a death or serious harm, 4 mass detention or many people affected for days, 3 clearly reported with local impact or an order enforced, 2 limited or an order with no enforcement reported, 1 minor. A rupee amount is the amount the article states.
-- Only incidents dated 9 to 16 October 2026 were written. No name appears in any field or note.
+- Only incidents dated 2 to 17 October 2026 were written (the first batch covered 9 to 16 October). No name appears in any field or note.
 
 ### Payload
 
@@ -120,7 +126,7 @@ Anyone can write anything to a public chain, and an entity cannot be removed. So
 
 A **report** is valid if all of these hold:
 
-- Its attributes are a subset of the schema's twelve names. Any other attribute makes it invalid.
+- Its attributes are a subset of the schema's fourteen names. Any other attribute makes it invalid.
 - `project` is `underthetable` and `type` is `report`.
 - Its payload is exactly `{"v":1}`.
 - Its **owner is `0x…dEaD`**, so its writer could not delete it later.
@@ -128,6 +134,7 @@ A **report** is valid if all of these hold:
 - `amount_inr` is a `u64`: 1 to 10,000,000 for a demand, 1 to 5 otherwise.
 - `week` looks like `2026-W42`, is not in the future, and is not more than 400 days old.
 - `day`, if present, looks like a date. `source`, if present, is `press`.
+- `lat_e5` and `lon_e5`, if present, are both `i32`, the kind is `failure`, the service is in `geoServices`, the point is inside India's bounds and within one dot of the report's state.
 
 An **attestation** is valid if its attributes are exactly `project`, `type`, `report` (a key), `method = geo`, `scope = state` and `state`, its payload is `{"v":1}`, and its owner is the dead address. A position field makes it invalid.
 
@@ -179,6 +186,30 @@ Flood wallet:
 ```
 
 Count for the header: `getEntityCount` with the district predicate.
+
+Pins inside a rectangle (the map's "Search this view on Arkiv"). Four range predicates on the two `i32` attributes, one round trip, no download of the rest. Latitude and longitude are floored and ceiled to 1e-5 degrees:
+
+```
+project = str('underthetable') AND type = str('report') AND lat_e5 >= i32(1990000) AND lat_e5 <= i32(2010000) AND lon_e5 >= i32(7370000) AND lon_e5 <= i32(7390000)
+```
+
+```ts
+publicClient
+  .select({ key: true, creator: true, owner: true, createdAt: true, expiresAt: true, attributes: true, payload: true })
+  .where(
+    eq("project", str("underthetable")),
+    eq("type", str("report")),
+    gte("lat_e5", i32(1990000)),
+    lte("lat_e5", i32(2010000)),
+    gte("lon_e5", i32(7370000)),
+    lte("lon_e5", i32(7390000)),
+  )
+  .atBlock(snapshot)
+  .limit(200)
+  .fetch()
+```
+
+Postgres could answer this too, with two indexed columns, but it would be our server, our table and our copy. Here the numeric range is answered by the shared chain's own index, from a browser, with no server of ours in the path. The query was run against Tiramisu: one row in a box around Nashik, none in a box around Bengaluru (`npm run seed:pin` writes the demo pin).
 
 The attestation for one report:
 
@@ -242,4 +273,6 @@ await walletClient.executeBatch({
 })
 ```
 
-The guard rejects the write before RPC if any slug is off-list, the amount is out of range, the payload is not `{"v":1}`, or any string contains an email, `+91`, or a run of 10 or more digits.
+The guard rejects the write before RPC if any slug is off-list, the amount is out of range, the payload is not `{"v":1}`, a pin is on the wrong kind or outside the state, or any string contains an email, `+91`, or a run of 10 or more digits.
+
+Before a browser's new throwaway key is funded with test GLM, the faucet asks for a human check: Cloudflare Turnstile when the host has the keys, otherwise a 16-bit proof of work signed by the server. This is not Arkiv and is not on chain; it is there so a script cannot mint wallets for free. It does not make a wallet "a person", and the interface says so.

@@ -1,0 +1,19 @@
+
+entity   0x311025deec017feb6f5242bcc6aa5fd09781ab22f9d99d190bc0c906aac08ab8
+creator  0xeE368405802Ca49d38572f88dE24b9ba044F2804
+owner    0x000000000000000000000000000000000000dEaD
+expires  block 8462795
+PASS  owner is the dead address
+PASS  patchEntity from the creator reverted
+        Transaction failed: entity 0x311025de…c08ab8 is owned by 0x000000000000000000000000000000000000dEaD, not 0xeE368405802Ca49d38572f88dE24b9ba044F2804
+PASS  deleteEntity from the creator reverted
+        Transaction failed: entity 0x311025de…c08ab8 is owned by 0x000000000000000000000000000000000000dEaD, not 0xeE368405802Ca49d38572f88dE24b9ba044F2804
+PASS  extendEntity from the creator reverted
+        Transaction failed: entity 0x311025de…c08ab8 is owned by 0x000000000000000000000000000000000000dEaD, not 0xeE368405802Ca49d38572f88dE24b9ba044F2804
+PASS  extendEntity from a stranger reverted
+        Transaction failed: entity 0x311025de…c08ab8 is owned by 0x000000000000000000000000000000000000dEaD, not 0x13398a1803eCa909D909193F1547FfFc1e05eF4F
+attestation 0x625764fe47d01acd05544e65c51852fb5c6a9fcdb734ec29486bd1065b05978c for report 0x647f040eda4574ca23db9312a54e2c632a9a80a4ece4baa08fdc9e741b7665a0
+PASS  attestation owner is the dead address
+PASS  attestation written by a trusted attester
+PASS  deleteEntity from a stranger on the attestation reverted
+        Transaction failed: entity 0x625764fe…05978c is owned by 0x000000000000000000000000000000000000dEaD, not 0x13398a1803eCa909D909193F1547FfFc1e05eF4F

@@ -5,15 +5,18 @@ Written 16 October 2026. Everything here was checked against the official Arkiv 
 ## What runs where
 
 - **The page** is static (`dist/`). It needs no key. It reads Arkiv through `/api/snapshot`, and falls back to the public RPC.
-- **Five server routes** are in `api/*.js`, plain JavaScript with their dependencies bundled inside (built by `npm run build:api` from `server/handlers/`, and committed, so Vercel runs them as they are). They are tested by calling each one directly.
+- **Six server routes** are in `api/*.js`, plain JavaScript with their dependencies bundled inside (built by `npm run build:api` from `server/handlers/`, and committed, so Vercel runs them as they are). They are tested by calling each one directly.
 
 | Route | Needs | Does |
 | --- | --- | --- |
 | `/api/snapshot` | `ARKIV_ACCESS_KEY` (optional) | One shared read of Arkiv, cached five minutes |
-| `/api/drip` | `DRIP_KEY` | Sends 0.02 test GLM to a visitor's new browser key |
+| `/api/human` | `HUMAN_SECRET` (optional), `TURNSTILE_SITEKEY` + `TURNSTILE_SECRET` (optional) | Says how the browser must prove it is a person: a Cloudflare Turnstile widget, or a signed proof-of-work challenge |
+| `/api/drip` | `DRIP_KEY` | Checks the human proof, then sends 0.02 test GLM to a visitor's new browser key |
 | `/api/attest` | `ATTEST_KEY` | Writes a location attestation |
 | `/api/rpc` | `ARKIV_ACCESS_KEY` (optional) | Read-only relay. Off unless the build sets `VITE_RPC_RELAY=1`. |
-| `/api/assist` | `IFM_API_KEY` | Not used by the page. Leave it unset. |
+| `/api/assist` | `HUMAN_SECRET` | Signs proof-of-work challenges | Vercel | Any long random string, for example `node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"`. If unset, the route falls back to `DRIP_KEY`. |
+| `TURNSTILE_SITEKEY`, `TURNSTILE_SECRET` | Cloudflare Turnstile (optional, a real CAPTCHA) | Vercel | dash.cloudflare.com, Turnstile, add a site for your domain, copy both. Without them the proof of work is used, and the interface says so. |
+| `IFM_API_KEY` | Not used by the page. Leave it unset. |
 
 ## The keys
 
@@ -53,6 +56,8 @@ vercel link                    # create a new project, accept the detected Vite 
 vercel env add DRIP_KEY production
 vercel env add ATTEST_KEY production
 vercel env add ARKIV_ACCESS_KEY production      # skip if you have no key yet
+vercel env add HUMAN_SECRET production           # a long random string
+# optional: vercel env add TURNSTILE_SITEKEY production, then TURNSTILE_SECRET
 vercel deploy --prod
 ```
 
@@ -64,7 +69,7 @@ The office art is committed, so it ships with the deploy. If you decide it must 
 
 1. The page loads with data and the footer says "through our snapshot cache".
 2. `/api/snapshot` returns JSON with a header `X-Snapshot: fresh`.
-3. Press Report with the location check on, allow the position, file. The receipt shows the dead owner and a link to the attestation. If the faucet or the checker is missing a variable, the receipt says so in a sentence.
+3. Press Report with the location check on, allow the position, file. For a pothole, drop a pin. The receipt shows a human-check line. The receipt shows the dead owner and a link to the attestation. If the faucet or the checker is missing a variable, the receipt says so in a sentence.
 4. `/mirror.html` lists the same rows.
 5. In the Vercel dashboard, Functions, check that `/api/attest` and `/api/drip` show no errors.
 
