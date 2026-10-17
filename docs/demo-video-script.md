@@ -183,3 +183,47 @@ If your read-through is over 2:55: cut the Napoleon sentence in Scene 1 to *"'Hi
 ## 6. If you only have 90 seconds
 
 Scene 1 (cut to two sentences), Scene 3 steps 1, 3 and 6 (type the sentence, show the public summary, try to delete), Scene 4, and `npm run audit` plus `mirror.html` from Scene 5. Close with the last line. That covers the story and the proof.
+
+---
+
+## 7. Pre-recorded footage (silent, for your voice-over)
+
+`npx tsx scripts/record-demo.ts` records the whole app working as a silent 1080p video with a visible cursor and human-speed typing, so you only add the voice. The footage is not in the repository (it is 55 MB; `recordings/` is git-ignored). It is on this machine at `recordings/demo-full.mp4` (desktop, 3:54), with `recordings/demo-mobile.mp4` (a 390 px phone, 2:12, rehearsal without filing) for a cutaway.
+
+### What is in it, and when
+
+Times are in `demo-full.mp4`, before any editing. They follow the scenes above.
+
+| Time | What you see | Script scene |
+| --- | --- | --- |
+| 0:00 | The GitHub front page, scrolling down to the README title and animation, then the live app's Pulse | 1 |
+| 0:35 | "How it is sealed", scrolling | 2 |
+| 0:58 | Report: the sentence typed (phone number struck out, slip filled), the pin placed, "This is everything that becomes public", **Connect wallet**, balance shown, **File**, the status lines, the SEALED receipt, **Try to delete it** failing | 3 |
+| 2:15 | The Map: eleven pins, one popup opened, **Search this view on Arkiv** and the printed query | 4 |
+| 2:40 | `npm run audit` in a terminal (real output) | 5 |
+| 2:49 | `npm run query -- --district nashik` (real output) | 5 |
+| 2:58 | The Record, **Look back**, "As of 1 hour ago" | 5 |
+| 3:13 | `mirror.html`, the one-file page reading Arkiv directly | 5 |
+| 3:28 | The dark theme toggle, Hindi and back, the end card | 6 |
+
+### Be straight about what it shows
+
+- **The wallet is a stand-in.** The footage drives the app with a stand-in browser wallet (`scripts/standin-wallet.ts`), so there are **no wallet pop-ups** and no extension on screen. Say "my wallet" in the voice-over only if you mean it; if you want the real pop-ups, record Scene 3 yourself with a real wallet (section 0) and keep this footage for everything else.
+- **The report is a team test report.** It was filed from the team's test wallet (`0x5917…6d8C`), which the app treats as a demo wallet and hides by default. It is a real, permanent entity on Tiramisu, and it is not a citizen's report. Do not describe it as one.
+- **The terminal scenes are a replay.** The text is the real output of `npm run audit` and `npm run query`, captured just before recording and typed out in a terminal-styled page. If you would rather show your own terminal, record those two over the same words.
+- **The delete message** reads "Transaction failed: Execution error without revert data". That is the stand-in wallet's wording; a real wallet may word it differently.
+
+### It is longer than the 3:00 limit
+
+The raw footage is 3:54 because it pauses so you have room to talk. To fit 3:00:
+
+| Cut or speed up | Where | Saves |
+| --- | --- | --- |
+| Speed the "Reading your location… Sealing… Asking the checker to vouch" wait to 4x | about 1:41 to 1:57 | about 12 s |
+| Trim the typing of the sentence (speed 2x after the phone number appears) | about 1:05 to 1:20 | about 8 s |
+| Shorten the pin and public-summary hold | about 1:25 to 1:40 | about 8 s |
+| Shorten "How it is sealed" to the first scroll | 0:35 to 0:58 | about 12 s |
+| Shorten the GitHub opening | 0:00 to 0:20 | about 10 s |
+| Trim the Hindi and theme toggles at the end | 3:28 to 3:50 | about 10 s |
+
+Rerun any scene by editing `scripts/record-demo.ts`. `SKIP_FILE=1` records everything except the write (use it for rehearsals so you do not add another test report), `HOOK_ONLY=1` records only the opening, and `MOBILE=1` records the phone clip.
