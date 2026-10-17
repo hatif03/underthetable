@@ -10,7 +10,7 @@
 
 *The Map: pins on broken public infrastructure, and the range query the chain answers.*
 
-Written for: the team, to rehearse and to paste into Devfolio. Every example is a real, dated, sourced report from 9 to 16 October 2026 and is in [press-records.md](press-records.md).
+Entered in three tracks: Best Indian Use Case, Censorship Resistance, Open Source. Written for: the team, to rehearse and to paste into Devfolio. Every example is a real, dated, sourced report from 9 to 16 October 2026 and is in [press-records.md](press-records.md).
 
 ## One line
 

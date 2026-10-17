@@ -13,7 +13,7 @@ Base for code links: `https://github.com/hatif03/underthetable/blob/main/`
 | Project links | Repo https://github.com/hatif03/underthetable · Live https://underthetable.vercel.app · **YOU:** demo video, 3 minutes or less ([pitch.md](pitch.md) has the script) |
 | The problem it solves (required) | [submission.md, section a](submission.md) |
 | Challenges I ran into (required) | [submission.md, section b](submission.md) |
-| Tracks | **Best Indian Use Case** (needs an Indian-national team member), **Censorship Resistance (Global)**, and, if you want a third, **Privacy (Global)**. One prize per team at most. Each selected track is judged on four 25-point criteria: its own first criterion, plus Why Arkiv, How you use Arkiv, and the Friction report. The first criterion answers are at the bottom of this file. |
+| Tracks | **Best Indian Use Case** (needs an Indian-national team member), **Censorship Resistance (Global)** and **Open Source (Global)**. One prize per team at most. (**Privacy (Global)** also fits; its answer is kept at the bottom in case you add it.) Each selected track is judged on four 25-point criteria: its own first criterion, plus Why Arkiv, How you use Arkiv, and the Friction report. The first criterion answers are at the bottom of this file. |
 
 ## The 18 questions
 
@@ -73,6 +73,15 @@ The git history contains `scripts/split-commits.ps1`, a one-off script that spli
 - No **moderator or admin** exists who could be told to empty a queue. The expiry is automatic (180 days), not editorial.
 - A rival cannot **pin or amplify** a record: `permissionlessExtension: false`.
 - Honest limit: a public chain cannot erase abusive content either, so the reader refuses anything off the closed lists, and the vocabulary has no free text.
+
+### Why this pillar? (Open Source)
+
+- **A public MIT repository, built to be forked.** [LICENSE](https://github.com/hatif03/underthetable/blob/main/LICENSE) is MIT; nothing needed to run the project is private except the team's own wallet keys, which are never in the repository (`.env.example` lists every variable).
+- **Everything that makes a claim checkable is in the repo.** The closed vocabularies (`data/vocab.json`, `data/districts.json`), the 62 press records with every source article, the lists of trusted wallets (`data/attesters.json`, `data/curators.json`), the server routes (`server/`, bundled to `api/`), 32 tests, and the scripts that re-check the live chain (`npm run audit`, `query`, `repro`). A judge can rebuild the verdict without us.
+- **The data is open too.** The ledger is public on Arkiv and readable with `curl` and a one-file page, with no API of ours in the way.
+- **Contribution paths that are real.** [CONTRIBUTING.md](https://github.com/hatif03/underthetable/blob/main/CONTRIBUTING.md): add a district, a service, a translation, or a sourced press record (with a dry-run check), challenge a record with its entity key, and fork the whole thing for another country by replacing two JSON files.
+- **Documented like a library.** [Schema](https://github.com/hatif03/underthetable/blob/main/arkiv/schema.md), a generated catalogue of everything recordable, an Arkiv feature-by-feature table, and a friction report from real calls that other Arkiv builders can use.
+- **Honest limit.** Two things in the repository are not MIT: the office pixel art (LimeZu, used under the team's licence) and the stock animation in the README. Both are listed in [docs/assets.md](https://github.com/hatif03/underthetable/blob/main/docs/assets.md) and THIRD_PARTY_NOTICES.md, and both can be removed without breaking anything.
 
 ### Why this pillar? (Privacy), if you select it
 

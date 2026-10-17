@@ -1,6 +1,6 @@
 # underthetable: hackathon submission answers
 
-Arkiv: Global Tour Stop, tracks **Best Indian Use Case** and **Censorship Resistance**. Drafted 17 October 2026 for the 18 October 23:59 London deadline. Each answer below is written to be pasted into the matching Devfolio field (Markdown is supported there).
+Arkiv: Global Tour Stop, tracks **Best Indian Use Case**, **Censorship Resistance** and **Open Source**. Drafted 17 October 2026 for the 18 October 23:59 London deadline. Each answer below is written to be pasted into the matching Devfolio field (Markdown is supported there).
 
 - Repository: https://github.com/hatif03/underthetable (MIT)
 - Live app: https://underthetable.vercel.app
@@ -81,6 +81,8 @@ Documenting abuses by authorities is risky for the person documenting. So the de
 ---
 
 ## c. Why Arkiv?
+
+> The long form, with every claim tagged official / ours / limit and linked to Arkiv's documentation, is [why-arkiv.md](why-arkiv.md).
 
 **Short version: the product's central promise is "nobody can take a record down, including us". That is a property of who holds the delete key, and only one of the four alternatives takes the key away from the operator.**
 
