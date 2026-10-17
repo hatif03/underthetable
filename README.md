@@ -6,7 +6,7 @@ People report what they were asked to pay for a routine service, what is broken,
 
 Built for the Arkiv Global Tour Stop (9 to 18 October 2026). Tracks: **Best Indian Use Case** and **Censorship Resistance**. The organisers' brief is kept in [docs/challenge-brief.md](docs/challenge-brief.md).
 
-- Live app: _add the deployed URL here_
+- Live app: https://underthetable.vercel.app
 - Hackathon submission answers (problem, challenges, why Arkiv, wallets, reproduction): [docs/submission.md](docs/submission.md)
 - Everything a person can document, field by field, and why each is an Arkiv attribute: [docs/what-is-recorded.md](docs/what-is-recorded.md)
 - Screenshots of every feature: [docs/screenshots/](docs/screenshots/)

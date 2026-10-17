@@ -3,7 +3,7 @@
 Arkiv: Global Tour Stop, tracks **Best Indian Use Case** and **Censorship Resistance**. Drafted 17 October 2026 for the 18 October 23:59 London deadline. Each answer below is written to be pasted into the matching Devfolio field (Markdown is supported there).
 
 - Repository: https://github.com/hatif03/underthetable (MIT)
-- Live app: `LIVE_URL` (fill in after the Vercel deploy; see [deploy.md](deploy.md))
+- Live app: https://underthetable.vercel.app
 - Screenshots of every feature and the terminal output: [docs/screenshots/](screenshots/README.md)
 
 ---
@@ -150,7 +150,7 @@ Two entity types, `report` and `attestation`, with every attribute, type, query 
 
 You need Node 20 or later. No key is required for the read-only steps; they work on the public RPC (about 100 reads an hour), and faster with a Hub access key as `ARKIV_ACCESS_KEY`.
 
-**1. Open the live app** at `LIVE_URL`. The Pulse tab shows 62 press-sourced records (toggle the demo rows to see the 51 synthetic ones). Open the **Map** tab, switch on the demo pin, and press **Search this view on Arkiv**: the page prints the exact range query it sent and what Tiramisu returned.
+**1. Open the live app** at https://underthetable.vercel.app. The Pulse tab shows 62 press-sourced records (toggle the demo rows to see the 51 synthetic ones). Open the **Map** tab, switch on the demo pin, and press **Search this view on Arkiv**: the page prints the exact range query it sent and what Tiramisu returned.
 
 **2. Read the chain without our site.**
 
