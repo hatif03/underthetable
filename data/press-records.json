@@ -1,0 +1,265 @@
+[
+  {
+    "id": "dl-w41-permission",
+    "kind": "restriction", "state": "dl", "district": "new_delhi",
+    "department": "police", "role": "public", "service": "assembly_permission_denied",
+    "outcome": "noted", "amountInr": 3, "eventDate": "2026-10-10",
+    "sources": [
+      { "outlet": "LiveLaw", "url": "https://www.livelaw.in/top-stories/delhi-protests-supreme-court-directs-police-to-produce-prohibitory-orders-under-s-163-bnss-preserve-cctv-footage-554828", "title": "Delhi protests: Supreme Court directs police to produce prohibitory orders under S. 163 BNSS, preserve CCTV footage", "published": "2026-10-15" }
+    ],
+    "note": "Police denied permission for a protest on 10 October, citing a late application. Severity 3: the denial was enforced."
+  },
+  {
+    "id": "dl-w41-ban",
+    "kind": "restriction", "state": "dl", "district": "new_delhi",
+    "department": "police", "role": "public", "service": "gathering_ban_order",
+    "outcome": "noted", "amountInr": 3, "eventDate": "2026-10-10",
+    "sources": [
+      { "outlet": "LiveLaw", "url": "https://www.livelaw.in/top-stories/delhi-protests-supreme-court-directs-police-to-produce-prohibitory-orders-under-s-163-bnss-preserve-cctv-footage-554828", "title": "Delhi protests: Supreme Court directs police to produce prohibitory orders under S. 163 BNSS, preserve CCTV footage", "published": "2026-10-15" }
+    ],
+    "note": "Section 163 BNSS orders across the district barred gatherings of five or more people without written permission. The Supreme Court asked police to place them on record. Severity 3."
+  },
+  {
+    "id": "dl-w41-closures",
+    "kind": "restriction", "state": "dl", "district": "new_delhi",
+    "department": "police", "role": "public", "service": "barricades_or_closures",
+    "outcome": "noted", "amountInr": 3, "eventDate": "2026-10-10",
+    "sources": [
+      { "outlet": "Al Jazeera", "url": "https://www.aljazeera.com/news/2026/10/10/indias-cockroach-leaders-detained-new-delhi-in-lockdown", "title": "India's 'Cockroach' leaders released from detention after police crackdown", "published": "2026-10-10" }
+    ],
+    "note": "Barricades, concrete blocks and checkpoints on major roads, and dozens of metro stations and markets shut. Severity 3."
+  },
+  {
+    "id": "dl-w41-detention",
+    "kind": "restriction", "state": "dl", "district": "new_delhi",
+    "department": "police", "role": "public", "service": "detention_without_notice",
+    "outcome": "noted", "amountInr": 4, "eventDate": "2026-10-10",
+    "sources": [
+      { "outlet": "Al Jazeera", "url": "https://www.aljazeera.com/news/2026/10/10/indias-cockroach-leaders-detained-new-delhi-in-lockdown", "title": "India's 'Cockroach' leaders released from detention after police crackdown", "published": "2026-10-10" }
+    ],
+    "note": "More than 2,000 people detained on 10 October by the outlet's count; it cites nearly 2,500 (The Hindu, from police sources) and about 2,000 (Reuters, from a ministry official). Severity 4: mass detention."
+  },
+  {
+    "id": "dl-w42-permission",
+    "kind": "restriction", "state": "dl", "district": "new_delhi",
+    "department": "police", "role": "public", "service": "assembly_permission_denied",
+    "outcome": "noted", "amountInr": 3, "eventDate": "2026-10-16",
+    "sources": [
+      { "outlet": "The Tribune", "url": "https://www.tribuneindia.com/live-blog/delhi/cjp-lehra-do-tiranga-march-live-abhijeet-dipke-detained-by-delhi-police", "title": "Live blog: Flash protests in Connaught Place and Mandi House after permission for a march was denied; over 150 detained", "published": "2026-10-16" }
+    ],
+    "note": "Police denied permission for a march at Connaught Place on 16 October. Severity 3: the denial was enforced with detentions."
+  },
+  {
+    "id": "dl-w42-ban",
+    "kind": "restriction", "state": "dl", "district": "new_delhi",
+    "department": "police", "role": "public", "service": "gathering_ban_order",
+    "outcome": "noted", "amountInr": 3, "eventDate": "2026-10-16",
+    "sources": [
+      { "outlet": "The Tribune", "url": "https://www.tribuneindia.com/live-blog/delhi/cjp-lehra-do-tiranga-march-live-abhijeet-dipke-detained-by-delhi-police", "title": "Live blog: Flash protests in Connaught Place and Mandi House after permission for a march was denied; over 150 detained", "published": "2026-10-16" }
+    ],
+    "note": "Police cited Section 163 BNSS orders barring mass gatherings in Connaught Place and adjoining areas. Severity 3."
+  },
+  {
+    "id": "dl-w42-closures",
+    "kind": "restriction", "state": "dl", "district": "new_delhi",
+    "department": "police", "role": "public", "service": "barricades_or_closures",
+    "outcome": "noted", "amountInr": 2, "eventDate": "2026-10-16",
+    "sources": [
+      { "outlet": "The Tribune", "url": "https://www.tribuneindia.com/live-blog/delhi/cjp-lehra-do-tiranga-march-live-abhijeet-dipke-detained-by-delhi-police", "title": "Live blog: Flash protests in Connaught Place and Mandi House after permission for a march was denied; over 150 detained", "published": "2026-10-16" }
+    ],
+    "note": "A central park was closed to the public for two days and cordoned by police, with stepped-up security across Connaught Place. Severity 2."
+  },
+  {
+    "id": "dl-w42-detention",
+    "kind": "restriction", "state": "dl", "district": "new_delhi",
+    "department": "police", "role": "public", "service": "detention_without_notice",
+    "outcome": "noted", "amountInr": 3, "eventDate": "2026-10-16",
+    "sources": [
+      { "outlet": "The Tribune", "url": "https://www.tribuneindia.com/live-blog/delhi/cjp-lehra-do-tiranga-march-live-abhijeet-dipke-detained-by-delhi-police", "title": "Live blog: Flash protests in Connaught Place and Mandi House after permission for a march was denied; over 150 detained", "published": "2026-10-16" }
+    ],
+    "note": "Around 150 people detained so far, according to a police officer quoted by the outlet. Severity 3."
+  },
+  {
+    "id": "gbn-w41-ban",
+    "kind": "restriction", "state": "up", "district": "gautam_buddh_nagar",
+    "department": "police", "role": "public", "service": "gathering_ban_order",
+    "outcome": "noted", "amountInr": 2, "eventDate": "2026-10-10",
+    "sources": [
+      { "outlet": "India.com", "url": "https://www.india.com/news/india/noida-imposes-section-163-under-bns-till-october-20-amid-cec-protests-what-is-banned-gautam-buddha-nagar-uttar-pradesh-8534526/", "title": "Noida imposes Section 163 till October 20 amid protests: what is banned", "published": "2026-10-09" }
+    ],
+    "note": "A district-wide Section 163 order from 10 to 20 October bars assemblies of five or more and processions without permission. Severity 2: an order, with no enforcement incident reported."
+  },
+  {
+    "id": "mum-w41-detention",
+    "kind": "restriction", "state": "mh", "district": "mumbai",
+    "department": "police", "role": "public", "service": "detention_without_notice",
+    "outcome": "noted", "amountInr": 4, "eventDate": "2026-10-11",
+    "sources": [
+      { "outlet": "Free Press Journal", "url": "https://www.freepressjournal.in/mumbai/mumbai-cjp-protest-around-300-detained-at-shivaji-park-shiv-sena-ubt-leader-aaditya-thackeray-amit-thackeray-oppose-police-action", "title": "Mumbai protest: around 300 detained at Shivaji Park", "published": "2026-10-11" },
+      { "outlet": "Al Jazeera", "url": "https://www.aljazeera.com/news/2026/10/10/indias-cockroach-leaders-detained-new-delhi-in-lockdown", "title": "India's 'Cockroach' leaders released from detention after police crackdown", "published": "2026-10-10" }
+    ],
+    "note": "About 600 detained on 10 October (per ANI, cited by Al Jazeera and Free Press Journal) and around 300 on 11 October (a deputy commissioner of police, quoted by Free Press Journal). Severity 4: mass detention."
+  },
+  {
+    "id": "che-w41-detention",
+    "kind": "restriction", "state": "tn", "district": "chennai",
+    "department": "police", "role": "public", "service": "detention_without_notice",
+    "outcome": "noted", "amountInr": 2, "eventDate": "2026-10-10",
+    "sources": [
+      { "outlet": "The News Minute", "url": "https://www.thenewsminute.com/tamil-nadu/chennai-police-detain-over-30-people-protesting-in-solidarity-with-cjps-delhi-chalo", "title": "Chennai police detain over 30 people at a solidarity protest", "published": "2026-10-10" }
+    ],
+    "note": "More than 30 detained at a beach-side protest that police said was not permitted at that location. Severity 2: small count, single outlet."
+  },
+  {
+    "id": "blr-w42-permission",
+    "kind": "restriction", "state": "ka", "district": "bengaluru_urban",
+    "department": "police", "role": "public", "service": "assembly_permission_denied",
+    "outcome": "noted", "amountInr": 2, "eventDate": "2026-10-16",
+    "sources": [
+      { "outlet": "Gulte", "url": "https://www.gulte.com/news/436674/congress-government-denied-permission-for-cjp-protest", "title": "Police deny permission for a protest outside Town Hall", "published": "2026-10-16" }
+    ],
+    "note": "City police rejected a request to protest outside Town Hall, citing High Court directions that limit demonstrations to Freedom Park. Severity 2: no enforcement reported, single outlet."
+  },
+  {
+    "id": "bln-w42-bribe",
+    "kind": "demand", "state": "or", "district": "balangir",
+    "department": "revenue", "role": "revenue_inspector", "service": "land_conversion",
+    "outcome": "paid", "amountInr": 3000, "eventDate": "2026-10-13",
+    "sources": [
+      { "outlet": "OdishaTV", "url": "https://odishatv.in/odisha/odisha-vigilance-arrests-bolangir-ri-for-accepting-rs-3000-bribe-searches-launched-at-his-residence-office-12674326", "title": "Odisha Vigilance arrests Bolangir revenue inspector for accepting Rs 3,000 bribe", "published": "2026-10-14" },
+      { "outlet": "The Hans India", "url": "https://www.thehansindia.com/odisha/ri-held-while-taking-bribe-1132331", "title": "Revenue inspector held while taking bribe", "published": "2026-10-14" }
+    ],
+    "note": "Vigilance trap on 13 October. Rs 6,000 was demanded and reduced to Rs 3,000 for processing a conversion of agricultural land to homestead land."
+  },
+  {
+    "id": "brn-w42-bribe",
+    "kind": "demand", "state": "pb", "district": "barnala",
+    "department": "revenue", "role": "patwari", "service": "mutation",
+    "outcome": "paid", "amountInr": 30000, "eventDate": "2026-10-16",
+    "sources": [
+      { "outlet": "Jalandhar Breeze", "url": "https://www.jalandharbreeze.com/vigilance-bureau-nabs-patwari-red-handed-accepting-bribe/", "title": "Vigilance Bureau nabs patwari red-handed accepting bribe", "published": "2026-10-16" }
+    ],
+    "note": "Vigilance Bureau arrest announced on 16 October for Rs 30,000 to enter a land transfer (mutation). Single outlet; the arrest date is taken from the announcement."
+  },
+  {
+    "id": "sur-w42-phc",
+    "kind": "absence", "state": "ct", "district": "surajpur",
+    "department": "health", "role": "public", "service": "doctor_absent",
+    "outcome": "noted", "amountInr": 5, "eventDate": "2026-10-15",
+    "sources": [
+      { "outlet": "ETV Bharat", "url": "https://www.etvbharat.com/en/state/chhattisgarh-newborn-dies-after-locked-hospital-forces-birth-on-pavement-two-staffers-suspended-enn26101504779", "title": "Chhattisgarh: newborn dies after locked hospital forces birth on pavement; two staffers suspended", "published": "2026-10-15" },
+      { "outlet": "Dainik Jagran English", "url": "https://english.dainikjagranmpcg.com/states/chhattisgarh/surajpur-newborn-death-two-phc-health-workers-suspended/article-38961", "title": "Surajpur newborn death: two PHC health workers suspended", "published": "2026-10-16" }
+    ],
+    "note": "A primary health centre was reported locked when a woman in labour arrived at night; the newborn died. The locked door is the family's account. Two staff were suspended and an inquiry panel formed. Severity 5: a death."
+  },
+  {
+    "id": "knj-w41-pothole",
+    "kind": "failure", "state": "up", "district": "kannauj",
+    "department": "municipal", "role": "public", "service": "pothole",
+    "outcome": "noted", "amountInr": 5, "eventDate": "2026-10-09",
+    "sources": [
+      { "outlet": "Amar Ujala", "url": "https://www.amarujala.com/uttar-pradesh/kannauj/bike-loses-control-after-hitting-a-pothole-woman-dies-kannauj-news-c-214-1-knj1007-157510-2026-10-09", "title": "Bike loses control after hitting a pothole; woman dies", "published": "2026-10-09" }
+    ],
+    "note": "A motorcycle fell after hitting a pothole on a village road and a pillion rider died, per the report. Severity 5: a death. Single outlet."
+  },
+  {
+    "id": "sit-w42-doctors",
+    "kind": "absence", "state": "up", "district": "sitapur",
+    "department": "health", "role": "public", "service": "doctor_absent",
+    "outcome": "noted", "amountInr": 3, "eventDate": "2026-10-12",
+    "sources": [
+      { "outlet": "Amar Ujala", "url": "https://www.amarujala.com/uttar-pradesh/sitapur/surgeons-and-physicians-absent-from-opd-patients-distressed-sitapur-news-c-102-1-slko1053-165777-2026-10-13", "title": "Surgeons and physicians absent from OPD; patients distressed", "published": "2026-10-13" }
+    ],
+    "note": "A surgeon's and a physician's room at a district hospital OPD were empty on a Monday, with a trainee seeing patients. The chief medical superintendent said several doctors were on leave and promised an inquiry. Single outlet."
+  },
+  {
+    "id": "agr-w42-medicine",
+    "kind": "absence", "state": "up", "district": "agra",
+    "department": "health", "role": "public", "service": "medicine_missing",
+    "outcome": "noted", "amountInr": 3, "eventDate": "2026-10-16",
+    "sources": [
+      { "outlet": "Amar Ujala", "url": "https://www.amarujala.com/uttar-pradesh/agra/agra-government-hospitals-face-medicine-shortage-patients-forced-to-buy-drugs-outside-2026-10-16", "title": "Agra government hospitals face medicine shortage; patients forced to buy drugs outside", "published": "2026-10-16" }
+    ],
+    "note": "A medical college hospital and a district hospital were short of medicines for dental, skin, stomach and ENT conditions; patients bought the rest outside. Single outlet."
+  },
+  {
+    "id": "rat-w42-medicine",
+    "kind": "absence", "state": "mp", "district": "ratlam",
+    "department": "health", "role": "public", "service": "medicine_missing",
+    "outcome": "noted", "amountInr": 3, "eventDate": "2026-10-16",
+    "sources": [
+      { "outlet": "Patrika", "url": "https://www.patrika.com/ratlam-news/scarcity-of-medicines-at-ratlam-medical-college-20987969", "title": "Scarcity of medicines at Ratlam medical college (Hindi)", "published": "2026-10-16" }
+    ],
+    "note": "Acidity, allergy and nerve-pain medicines were unavailable at a medical college hospital counter; patients were told to buy part of their prescriptions outside. Single outlet."
+  },
+  {
+    "id": "har-w42-power",
+    "kind": "failure", "state": "up", "district": "hardoi",
+    "department": "electricity", "role": "public", "service": "power_cut",
+    "outcome": "noted", "amountInr": 4, "eventDate": "2026-10-15",
+    "sources": [
+      { "outlet": "Amar Ujala", "url": "https://amarujala.com/uttar-pradesh/hardoi/darkness-in-village-madiya-for-15-days-hardoi-news-c-213-1-hra1021-158517-2026-10-15", "title": "Darkness in a village for 15 days", "published": "2026-10-15" }
+    ],
+    "note": "A village has had no electricity for 15 days after a storm knocked down four poles; a junior engineer said line reconstruction was under way. Single outlet."
+  },
+  {
+    "id": "bal-w41-power",
+    "kind": "failure", "state": "up", "district": "balrampur",
+    "department": "electricity", "role": "public", "service": "power_cut",
+    "outcome": "noted", "amountInr": 4, "eventDate": "2026-10-11",
+    "sources": [
+      { "outlet": "Amar Ujala", "url": "https://www.amarujala.com/uttar-pradesh/balrampur/power-supply-not-restored-even-after-20-days-consumers-distressed-balrampur-news-c-99-1-brp1003-156213-2026-10-11", "title": "Power supply not restored even after 20 days; consumers distressed", "published": "2026-10-11" }
+    ],
+    "note": "About 20 days without power in a village after storm damage; a broken pole had not been replaced, and a junior engineer said a new one was being arranged. Single outlet."
+  },
+  {
+    "id": "bij-w42-road",
+    "kind": "failure", "state": "up", "district": "bijnor",
+    "department": "municipal", "role": "public", "service": "broken_road",
+    "outcome": "noted", "amountInr": 3, "eventDate": "2026-10-14",
+    "sources": [
+      { "outlet": "Amar Ujala", "url": "https://www.amarujala.com/uttar-pradesh/bijnor/bijnor-news-state-highway-caves-in-at-dhampur-s-nagina-crossing-locals-prevent-loaded-dumper-accident-2026-10-14", "title": "State highway caves in at a busy crossing; locals prevent a loaded dumper accident", "published": "2026-10-14" }
+    ],
+    "note": "A section of a state highway caved in at a crossing, leaving a pit several feet deep. Residents barricaded it; no accident was reported and the roads department said it would act. Single outlet."
+  },
+  {
+    "id": "agr-w42-culvert",
+    "kind": "failure", "state": "up", "district": "agra",
+    "department": "municipal", "role": "public", "service": "broken_road",
+    "outcome": "noted", "amountInr": 3, "eventDate": "2026-10-14",
+    "sources": [
+      { "outlet": "Amar Ujala", "url": "https://www.amarujala.com/uttar-pradesh/agra/culvert-collapses-in-raja-mandi-market-in-agra-2026-10-14", "title": "Culvert collapses in a market in Agra", "published": "2026-10-14" }
+    ],
+    "note": "A dilapidated culvert in a market gave way and trapped a car; three bike riders were reported injured at the same spot in the previous 15 days. The municipal commissioner said repair had been directed. Single outlet."
+  },
+  {
+    "id": "ram-w42-water",
+    "kind": "failure", "state": "up", "district": "rampur",
+    "department": "municipal", "role": "public", "service": "water_supply",
+    "outcome": "noted", "amountInr": 4, "eventDate": "2026-10-13",
+    "sources": [
+      { "outlet": "Amar Ujala", "url": "https://www.amarujala.com/uttar-pradesh/rampur/drinking-water-supply-disrupted-for-20-days-population-of-3000-to-4000-facing-hardship-rampur-news-c-282-1-rmp1001-182358-2026-10-13", "title": "Drinking water supply disrupted for 20 days; 3,000 to 4,000 people facing hardship", "published": "2026-10-13" }
+    ],
+    "note": "Drinking water has been cut for 20 days in a city locality of about 3,000 to 4,000 people because of a faulty pump. Single outlet."
+  },
+  {
+    "id": "gzb-w42-water",
+    "kind": "failure", "state": "up", "district": "ghaziabad",
+    "department": "municipal", "role": "public", "service": "water_supply",
+    "outcome": "noted", "amountInr": 4, "eventDate": "2026-10-13",
+    "sources": [
+      { "outlet": "Amar Ujala", "url": "https://www.amarujala.com/delhi-ncr/ghaziabad/more-than-six-lakh-people-have-been-without-ganga-water-for-three-days-ghaziabad-news-c-198-1-gbd1023-25343-2026-10-13", "title": "More than six lakh people without Ganga water for three days", "published": "2026-10-13" }
+    ],
+    "note": "The headline says more than six lakh people were without Ganga water for three days after parts were stolen from a canal gate. Single outlet."
+  },
+  {
+    "id": "fat-w41-grain",
+    "kind": "diversion", "state": "up", "district": "fatehpur",
+    "department": "ration", "role": "public", "service": "grain_short",
+    "outcome": "noted", "amountInr": 3, "eventDate": "2026-10-10",
+    "sources": [
+      { "outlet": "Amar Ujala", "url": "https://www.amarujala.com/uttar-pradesh/fatehpur/a-shortage-of-77-quintals-of-rice-and-22-quintals-of-wheat-was-found-at-the-ration-shop-fatehpur-news-c-217-1-sknp1022-164236-2026-10-10", "title": "A shortage of 77 quintals of rice and 22 quintals of wheat found at a ration shop", "published": "2026-10-10" }
+    ],
+    "note": "An inspection on 5 October found about 77 quintals of rice and 23 quintals of wheat less than the portal records at a ration shop; a case under the Essential Commodities Act was filed on 10 October. Single outlet."
+  }
+]

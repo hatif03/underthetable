@@ -1,0 +1,106 @@
+{
+  "dl-w41-permission": {
+    "txHash": "0xe554596180b4a9ba92482d9034493e7cfcbd75ece97260d77911c46324747dd1",
+    "entityKey": "0xb8a366b5a4f876a4fa544b72e9f27bbc494237bf5500fdf38c9fcf5643d9f8e2"
+  },
+  "dl-w41-ban": {
+    "txHash": "0xa4de7978f38f6366c732934ac1a83c0ade20e92e108a563149ad148cff11fea1",
+    "entityKey": "0x0ae8270959fb3e5e527f5a9fcf9ca0629f4a3f7fb52e29de8e8f697741ab160c"
+  },
+  "dl-w41-closures": {
+    "txHash": "0x527bbfa92bdca9e5a96d77a3973aa7f42e28a1cff8853ffeb71bba3ecf8ee167",
+    "entityKey": "0x1db6d56820e7e34c41baa815089a343d0edb9a426248630aa11f4996e1cd65c9"
+  },
+  "dl-w41-detention": {
+    "txHash": "0xab94abfb575d6ffecaa04329000ff60988067bb3d0da96f0b8124d07a274a8d9",
+    "entityKey": "0x6f724cd1e18602f0e68acfea2f6c57624ae5da9e3482c390f457b1e2e7d872ee"
+  },
+  "dl-w42-permission": {
+    "txHash": "0x224a23890f3e021b500d39904407ad0b403f6ba3b98969aa6c1438ffbed898a9",
+    "entityKey": "0xe943e0b4f8e91b9b9240a558d7272b150b7ef26c175c36114c63a5217d27f317"
+  },
+  "dl-w42-ban": {
+    "txHash": "0x43f5ae8821c4592f1e345a82f89675341bde5c88f9dafb8aa5513bb6d9d48d3c",
+    "entityKey": "0x29d3910e0096719017c38bdc726af0aae12018ca7f277fd9f8e5ec83e7fc0cdd"
+  },
+  "dl-w42-closures": {
+    "txHash": "0xf8d638640cdd7c3deae59813ff055d678d3b713f05a0a00ec22dff8998a0424c",
+    "entityKey": "0x87cc8c77acc655c9a4543468083007181d0b875c63d1ce2cc625d5287653afd4"
+  },
+  "dl-w42-detention": {
+    "txHash": "0xd23c4f687dc7757368fe73fa1eb46d151e80ba3fabf1f0580e2a400f70350ec9",
+    "entityKey": "0xd9d6fdee29b7adf2e667fb1e1c8da1cef67a77fe3af284aeb3a8275ba4a8eaf9"
+  },
+  "gbn-w41-ban": {
+    "txHash": "0xc742559e45f77e6afec4c2e047ed1ad04423a4a038e9cb8276f4263ba3bbee5d",
+    "entityKey": "0xf4587c7db969ea446c97017469f1d1c58c593a73de9165796074964acb12e7c3"
+  },
+  "mum-w41-detention": {
+    "txHash": "0x73c8bafdada72a6bc4a550471012e7e1ee9bd822e99894849f0a9560d59bcd73",
+    "entityKey": "0x6de010c4831b4941425d4b267e2ddd654d2dd3b2359894eff19d913f5112ac61"
+  },
+  "che-w41-detention": {
+    "txHash": "0x88660f09671a26a37f482da8d4707b6b13e68a7540c08778fc6f37cc894cda8b",
+    "entityKey": "0x0991f698a7d3d93394ca7e6da7716c1f55202f967627610838af16e89e848f10"
+  },
+  "blr-w42-permission": {
+    "txHash": "0x60bc5d570d89046d7334f88710768308f03fdd1de16f4473c2b7b0ea5cc926d9",
+    "entityKey": "0x0f67ad8e87fd25776199915d0021b383e0bc8edb991c1b5dbfe4ddc0d52d88d0"
+  },
+  "bln-w42-bribe": {
+    "txHash": "0x97efacaf407a2355bf79ad0705b57182158ae7c2025d767ec8e6c86db80c1ed8",
+    "entityKey": "0x3ce23afd20e9887303af63732bb7a10484404cd33f0b36bba45f7be343348b62"
+  },
+  "brn-w42-bribe": {
+    "txHash": "0xcc8126b4872b89a3249d65e5b4a9b692ff3c057201aeb9835ddbfe8b9b372430",
+    "entityKey": "0x783f80ff56de6fe9c8d0c4cb8fb469bf9a05794427ba6cc980758b66968f857e"
+  },
+  "sur-w42-phc": {
+    "txHash": "0x533d973947ade33da8145574f458e4b773477979a0c2ad62abc8d4e5eb42df0a",
+    "entityKey": "0x6459ab6b99db1a3e6b451b7780f0a67b42d360b21e0be129b415a07b45d5de4f"
+  },
+  "knj-w41-pothole": {
+    "txHash": "0xee1ebe4df29821bad2b00b8dbd5278db59339796c744587d36dc37c78d5d88c3",
+    "entityKey": "0x491132d028f7632e145c341bcbc7c7cfba75275370b0adb23256a4ed0f62711e"
+  },
+  "sit-w42-doctors": {
+    "txHash": "0x027008dc8622fd1498bc115ef5eb54e95f81d90a65f1f997974975c7b5e3d920",
+    "entityKey": "0x1101590894d60ad06abe93d6e8c26926986365736cde33c7f88b663048b083bf"
+  },
+  "agr-w42-medicine": {
+    "txHash": "0x3905aafcb6d71da742c4e9abc60b96b0a63fe6cf73c98af289a6054fc7177124",
+    "entityKey": "0x4e97a6d48c09ffabea8d7264a5f5570aa30961cc56302d3c87a1763a855ab586"
+  },
+  "rat-w42-medicine": {
+    "txHash": "0xaba52850094dbf29cf0d7f36ec0a9f6ddaced53d6caee76fe26c759399ffee61",
+    "entityKey": "0xf506756680fc5dd4bcce186883f8f49f96bba382b3c89fb64d4c62b4ea7873e6"
+  },
+  "har-w42-power": {
+    "txHash": "0x203a6fb53a3437783c2259fc0b92beb88a02fc332f491e69771d69bbcb67b04d",
+    "entityKey": "0xfe04f5ed1fddbd5ff586706971be9861c9b4e7c7eaf051536fc3c53f0483f214"
+  },
+  "bal-w41-power": {
+    "txHash": "0x3544867e29ca1c6c38ad37796b348ed246e51df495c773c60ea19cd143fd530b",
+    "entityKey": "0x0cbf1c36ead1698e1e472c0aa5729e43ce5ae309578463ddac18ee69aa8aa655"
+  },
+  "bij-w42-road": {
+    "txHash": "0x5c3de6a978e1baf6ea6dd0045e2ad290255b7dcbbef05c33504c8fc3481a0264",
+    "entityKey": "0xd928ab25b105af53dfe702144319643a013970c6039546e685e424a88fd3d9f7"
+  },
+  "agr-w42-culvert": {
+    "txHash": "0x254d4ff19915a41bad3641c5b534bf10cd72c24bf4f7d64f4d4fb6cdff93f4c0",
+    "entityKey": "0x014a8c88aa66181e7f9eba26bde1ef34b46509836dcbc3abc18feb2d0b1f3988"
+  },
+  "ram-w42-water": {
+    "txHash": "0xd8114a8097d8892bd8f3c0c91a9bf6f88ad0f14cbd08ee393d7e991c79514174",
+    "entityKey": "0xa46d402a3ac9855e07a3e30f0e476fdfb61ca3988571393e2074d0f6ba48bef8"
+  },
+  "gzb-w42-water": {
+    "txHash": "0x41d6dc561d300b7ababb2af802c5999f04d8a7a504eeb042c3232e4fa77af9fb",
+    "entityKey": "0xe1fc26d5c625e363ca7f91e7c70e16ca4474cb9dd467c3d94994d8749251e599"
+  },
+  "fat-w41-grain": {
+    "txHash": "0xee6cf5d6a204ccead6e1ff00d2846b403b0924743350b3ad725170f96b840774",
+    "entityKey": "0x9691e6c8357b6bfc09e5ced58c183bae8314daba5c7e629f9d974256779df596"
+  }
+}
