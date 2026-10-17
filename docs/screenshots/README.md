@@ -14,7 +14,7 @@ Taken 17 October 2026 from the running app with `npm run screenshots` (reads onl
 | [09-report-form-shutdown.png](09-report-form-shutdown.png) | A sentence ("Mobile internet was shut down in New Delhi...") filling a rights-violation slip on the device |
 | [10-record.png](10-record.png) | The Record, with "Look back" (an `atBlock` query) |
 | [11-sealed.png](11-sealed.png) | "How it is sealed": the checks anyone can run |
-| [12-office.png](12-office.png) | The Office tab (Phaser) |
+| [12-pulse-dark.png](12-pulse-dark.png) | The dark theme, from the sun/moon toggle in the header |
 | [13-pulse-hindi.png](13-pulse-hindi.png) | The Hindi interface |
 | [14-pulse-mobile.png](14-pulse-mobile.png), [15-map-mobile.png](15-map-mobile.png) | A 390 px phone |
 | [16-mirror.png](16-mirror.png) | `mirror.html`: one file, no server of ours, reads Arkiv directly |

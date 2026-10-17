@@ -24,8 +24,8 @@ The one idea the video must land: **"Nobody can delete this, and you can check t
 
 ### Pre-flight checks (do each once, in private, before recording)
 
-1. Open the live app. The footer should say it read from Tiramisu. The Pulse shows **62** sealed reports with the demo rows hidden.
-2. Map tab: switch on the demo pin and press **Search this view on Arkiv**. It should say it returned 1 pinned problem.
+1. Open the live app. The footer should say it read from Tiramisu. The Pulse shows **73** sealed reports with the demo rows hidden.
+2. Map tab: you should see 11 pins across India. Press **Search this view on Arkiv**. It should say Arkiv returned 11 pinned problems at the zoom you recorded at, and print the query.
 3. In the terminal run `npm run audit` and `npm run query -- --district nashik`. If either says the public node refused the read, wait a minute or make sure `ARKIV_ACCESS_KEY` is in your `.env`, then retry. Do not record a failure.
 4. Open `mirror.html` from disk. It should say about "113 valid of 114 read" (the count moves by one or two as one-hour demo rows expire).
 5. Decide the **report you will file** (see Scene 3). If you file, it writes a **permanent public entity**.
@@ -90,7 +90,7 @@ Read it as written, slowly. **[Brackets]** are actions, not words. Times are tar
 
 ### Scene 4: the map, and a question only Arkiv answers (1:35 to 1:58)
 
-**On screen:** tab 2 (Map). Switch on **Show the demo pin** if asked. Press **Search this view on Arkiv**. Hold on the printed query.
+**On screen:** tab 2 (Map): eleven pins across India, each from a news report. Click one pin to show its popup and explorer link. Press **Search this view on Arkiv**. Hold on the printed query.
 
 > The map asks the chain a question directly: what is inside this rectangle? Four range predicates on two integer attributes. That is the query, printed here, and Arkiv answers it. There is no server of ours in the way.
 

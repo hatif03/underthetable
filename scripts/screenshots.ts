@@ -77,20 +77,23 @@ await page.waitForTimeout(1500)
 await shot(page, "09-report-form-shutdown")
 await page.keyboard.press("Escape")
 
-// Record, Sealed, Hindi, Office
+// Record, Sealed, the dark theme, Hindi
 await page.goto(`${base}/#record`)
 await settle(page, 3000)
 await shot(page, "10-record", true)
 await page.goto(`${base}/#sealed`)
 await settle(page, 2500)
 await shot(page, "11-sealed", true)
-await page.goto(`${base}/#office`)
-await settle(page, 7000)
-await shot(page, "12-office")
+await page.goto(base)
+await page.waitForSelector(".hero")
+await page.locator("button.theme").click()
+await settle(page, 1500)
+await shot(page, "12-pulse-dark")
+await page.locator("button.theme").click()
 
 await page.goto(base)
 await page.waitForSelector(".hero")
-await page.locator("button.lang").click()
+await page.locator("button[aria-label=Language]").click()
 await settle(page, 2000)
 await shot(page, "13-pulse-hindi")
 

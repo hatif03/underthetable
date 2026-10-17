@@ -6,9 +6,9 @@ import { ago } from "./lib/derive"
 import { setLang, t, useLang } from "./lib/i18n"
 import { reload, setDirect, start } from "./state/store"
 import { useLive } from "./state/useDerived"
+import { ThemeToggle } from "./ui/ThemeToggle"
 import { DistrictSheet } from "./views/DistrictSheet"
 import { FileSheet } from "./views/FileSheet"
-import { Office } from "./views/Office"
 import { Palette } from "./views/Palette"
 import { Pulse, type Prefill } from "./views/Pulse"
 import { Record } from "./views/Record"
@@ -18,7 +18,7 @@ import { Sealed } from "./views/Sealed"
 const MapView = lazy(() => import("./views/MapView").then((m) => ({ default: m.MapView })))
 
 const closed = new URLSearchParams(window.location.search).get("mode") === "closed"
-const VIEWS = ["pulse", "map", "office", "record", "sealed"] as const
+const VIEWS = ["pulse", "map", "record", "sealed"] as const
 type View = (typeof VIEWS)[number]
 
 function viewFromHash(): View {
@@ -78,11 +78,11 @@ export function App() {
           <Tabs.List className="nav" aria-label="Views">
             <Tabs.Trigger value="pulse">{t("nav.pulse")}</Tabs.Trigger>
             <Tabs.Trigger value="map">{t("nav.map")}</Tabs.Trigger>
-            <Tabs.Trigger value="office">{t("nav.office")}</Tabs.Trigger>
             <Tabs.Trigger value="record">{t("nav.record")}</Tabs.Trigger>
             <Tabs.Trigger value="sealed">{t("nav.sealed")}</Tabs.Trigger>
           </Tabs.List>
           <div className="top-right">
+            <ThemeToggle />
             <button type="button" className="pill lang" aria-label="Language" onClick={() => setLang(lang === "en" ? "hi" : "en")}>
               {lang === "en" ? "हिन्दी" : "English"}
             </button>
@@ -122,9 +122,6 @@ export function App() {
                 <MapView live={live} closed={closed} onReport={report} />
               </Suspense>
             ) : null}
-          </Tabs.Content>
-          <Tabs.Content value="office" tabIndex={-1}>
-            {view === "office" ? <Office live={live} onDistrict={setDistrict} /> : null}
           </Tabs.Content>
           <Tabs.Content value="record" tabIndex={-1}>
             <Record live={live} onDistrict={setDistrict} />

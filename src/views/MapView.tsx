@@ -24,7 +24,7 @@ function marker(row: ReportRow): L.Marker {
   const title = document.createElement("strong")
   title.textContent = `${departmentLabel(row.department)} · ${labelize(row.service)}`
   const line = document.createElement("div")
-  line.textContent = `${labelize(row.district)}, ${stateLabel(row.state)} · ${row.week} · severity ${row.amountInr}${isDemoWallet(row.creator) ? " · demo" : ""}`
+  line.textContent = `${labelize(row.district)}, ${stateLabel(row.state)} · ${row.week} · severity ${row.amountInr}${isDemoWallet(row.creator) ? " · demo" : ""}${row.source === "press" ? " · from a news report" : ""}`
   const link = document.createElement("a")
   link.href = entityUrl(row.key)
   link.target = "_blank"
@@ -47,7 +47,7 @@ export function MapView({ live, closed, onReport }: { live: Live; closed: boolea
   useEffect(() => {
     if (!host.current || map.current) return
     const instance = L.map(host.current).setView([22.5, 79], 5)
-    L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", { maxZoom: 19, attribution: "© OpenStreetMap contributors" }).addTo(instance)
+    L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", { maxZoom: 19, referrerPolicy: "origin", attribution: "© OpenStreetMap contributors" }).addTo(instance)
     layer.current = L.layerGroup().addTo(instance)
     map.current = instance
     return () => {
@@ -61,7 +61,7 @@ export function MapView({ live, closed, onReport }: { live: Live; closed: boolea
     if (!map.current || !layer.current) return
     layer.current.clearLayers()
     for (const row of pinned) marker(row).addTo(layer.current)
-    if (pinned.length > 0) map.current.fitBounds(L.latLngBounds(pinned.map((row) => [row.lat as number, row.lon as number] as [number, number])).pad(0.5), { maxZoom: 15 })
+    if (pinned.length > 0) map.current.fitBounds(L.latLngBounds(pinned.map((row) => [row.lat as number, row.lon as number] as [number, number])).pad(0.12), { maxZoom: 15 })
   }, [pinned])
 
   async function searchHere() {

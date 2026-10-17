@@ -32,4 +32,4 @@ Replace `data/vocab.json` and `data/districts.json` (and the state map with `nod
 
 ## What is not MIT
 
-The office pixel art is LimeZu's and is used under the team's licence, and the animation in the README is a stock download. Neither is covered by the MIT licence. See [docs/assets.md](docs/assets.md) and [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md). Do not add other third-party assets without recording their licence there.
+The animation in the README is a stock download and is not covered by the MIT licence. See [docs/assets.md](docs/assets.md) and [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md). Do not add other third-party assets without recording their licence there.

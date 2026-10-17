@@ -28,7 +28,7 @@ export default function PinPicker({ value, onChange, state }: { value: Pin | nul
     if (!host.current || map.current) return
     const centre = value ?? stateCenter(state)
     const instance = L.map(host.current, { zoomControl: true, attributionControl: true }).setView([centre.lat, centre.lon], value ? 17 : 7)
-    L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", { maxZoom: 19, attribution: "© OpenStreetMap contributors" }).addTo(instance)
+    L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", { maxZoom: 19, referrerPolicy: "origin", attribution: "© OpenStreetMap contributors" }).addTo(instance)
     map.current = instance
     const place = (lat: number, lon: number) => {
       const next = { lat: round(lat), lon: round(lon) }

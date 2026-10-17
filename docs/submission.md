@@ -40,7 +40,7 @@ The last fortnight is the case, not an illustration of it.
 - **Prohibitory orders.** Delhi Police imposed Section 163 BNSS orders in New Delhi district on 2 October, barring gatherings of five or more without written permission, and a Section 163 order was in force for the 20 July march too.
 - **Evictions and demolitions.** On 17 October, eviction drives began in Assam's Hojai (152 families) and Golaghat (59 families), with bulldozers; in Agra, residents say homes were demolished without notice.
 - **Deaths in custody.** In West Bengal's Birbhum on 15 October, a man was declared dead after being taken from a police station; the family alleges assault.
-- **And the everyday.** Water cut for weeks in Kashmir, farmers besieging substations in Telangana, absent doctors in Uttar Pradesh, an anti-corruption trap over ₹3,000 in Haryana's Palwal. 62 of these are already on Arkiv, each with its published sources ([press-records.md](press-records.md)).
+- **And the everyday.** Water cut for weeks in Kashmir, farmers besieging substations in Telangana, absent doctors in Uttar Pradesh, an anti-corruption trap over ₹3,000 in Haryana's Palwal. 73 of these are already on Arkiv, each with its published sources ([press-records.md](press-records.md)).
 
 **Why a ledger that cannot be deleted.**
 
@@ -128,7 +128,7 @@ All on Tiramisu (chain 7738577). Private keys are in a git-ignored `.env` and ne
 
 | Address | Role | Creates |
 | --- | --- | --- |
-| `0xC26DEbe828cd500c6d31F184BaeCce2782847eA3` | **Press curator** (`PRESS_KEY`). Writes `source = press` reports from published news, closed lists, no names. Trusted by address from `data/curators.json`. | 62 reports |
+| `0xC26DEbe828cd500c6d31F184BaeCce2782847eA3` | **Press curator** (`PRESS_KEY`). Writes `source = press` reports from published news, closed lists, no names. Trusted by address from `data/curators.json`. | 73 reports |
 | `0xabd68359A33fAb9A03Bb706B56272370A011E5b6` | **Location checker** (`ATTEST_KEY`). Writes `attestation` entities only: "this wallet was inside this state when it filed". Trusted from `data/attesters.json`. Runs server-side. | attestations |
 | `0x13398a1803eCa909D909193F1547FfFc1e05eF4F` | Demo creator 1 (`SEED_KEY_1`). Synthetic rows. Also funded the other wallets. | demo reports |
 | `0x8b34C95Cda664550C4eb9C4Ba14BB7172D6Ada25` | Demo creator 2 (`SEED_KEY_2`). Synthetic rows. | demo reports |
@@ -154,7 +154,7 @@ Two entity types, `report` and `attestation`, with every attribute, type, query 
 
 You need Node 20 or later. No key is required for the read-only steps; they work on the public RPC (about 100 reads an hour), and faster with a Hub access key as `ARKIV_ACCESS_KEY`.
 
-**1. Open the live app** at https://underthetable.vercel.app. The Pulse tab shows 62 press-sourced records (toggle the demo rows to see the 51 synthetic ones). Open the **Map** tab, switch on the demo pin, and press **Search this view on Arkiv**: the page prints the exact range query it sent and what Tiramisu returned.
+**1. Open the live app** at https://underthetable.vercel.app. The Pulse tab shows 73 press-sourced records (toggle the demo rows to see the 51 synthetic ones). Open the **Map** tab (11 pins, each named in a news report) and press **Search this view on Arkiv**: the page prints the exact range query it sent and what Tiramisu returned.
 
 **2. Read the chain without our site.**
 
@@ -205,7 +205,7 @@ Concretely: (1) return a JSON-RPC error that names the limit, the remaining budg
 | | |
 | --- | --- |
 | ![The Pulse](screenshots/01-pulse.png) | ![Map with Arkiv range query](screenshots/07-map-arkiv-range-query.png) |
-| The Pulse: what can be documented, and 62 sourced records | The Map tab: an Arkiv range query for "pins inside this rectangle" |
+| The Pulse: what can be documented, and 73 sourced records | The Map tab: an Arkiv range query for "pins inside this rectangle" |
 | ![Report form with pin](screenshots/08-report-form-pin.png) | ![Shutdown report](screenshots/09-report-form-shutdown.png) |
 | A pothole with an exact pin; public summary shown before filing | A rights violation read from a sentence, on the device |
 | ![Mirror](screenshots/16-mirror.png) | ![Phone](screenshots/14-pulse-mobile.png) |

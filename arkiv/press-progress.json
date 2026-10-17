@@ -246,5 +246,49 @@
   "dha-w42-meal": {
     "txHash": "0x857d7127549a46d28beaa84d6e8e1862d870e3e23508c291a9f16922d5dbe996",
     "entityKey": "0xbfa4ac0d6e888e6cd4524cdefbbfe4f1c67baf63c7b2a0551e0a6ae3c7b5a2a1"
+  },
+  "blr-w42-pin-mcechs": {
+    "txHash": "0xf994d04fd60f8b8e0a32c720ac1aa441d54487d872303c9266173a81da64a071",
+    "entityKey": "0xf31a5e26784dfd0724f72b48da84388428ff1edf8b87ce2a921145662ce3560d"
+  },
+  "gwh-w41-pin-zoo-road": {
+    "txHash": "0xe640009ba51025f346235b211eeab66edc98993e95c287d78c678b37b32aaa57",
+    "entityKey": "0x127727ce2678380cc49076c2bd49236bca356746d176d58d8616697432a8eb20"
+  },
+  "ldh-w42-pin-lakkar-bridge": {
+    "txHash": "0xe436ff35600de00ef0f1ada48b32d7dc2f9cf2a8531024092bd821aa5a547c84",
+    "entityKey": "0x8ce7ed1d446e2b84f70620641204c5501e4209a1eb178bf17ef240def9345d40"
+  },
+  "zrk-w42-pin-vip-road": {
+    "txHash": "0xf39cbbab97c2247602b90b6b2fd34195b662753174f61acf3dc6a574f2e93091",
+    "entityKey": "0x1a2920b733100fe8f8d68c7eca2c2c585898fbac9abc514dcd20f1802cec3896"
+  },
+  "fbd-w42-pin-bhagat-singh-colony": {
+    "txHash": "0xfbb95ca430b7e60691c79b98b87a4082c543cad0a8a3fafa0fb5db422834cb9c",
+    "entityKey": "0x9cb755d6ddcab760cd0ef9ee1dae2a4a35adb2e20a6c588db5e4545156a7423b"
+  },
+  "mhg-w42-pin-masani-chowk": {
+    "txHash": "0x3087995ec6f0170126dc88627421aebc863044c8a9be833f066839a74974616a",
+    "entityKey": "0x6a0a8baab61182977dd543b0b4cee8655465308e3e984368dd976d78af59db50"
+  },
+  "lko-w42-pin-daliganj": {
+    "txHash": "0x0b090f197c8c7a7eae9b145d0bdc314b19bc210a71773bbe88d797650827f0f3",
+    "entityKey": "0xb538fa600954f192ea9bf2577f742b5feba6e228eb287e26fc104c6ab99d9d78"
+  },
+  "knp-w41-pin-badlipurwa": {
+    "txHash": "0x88c569d815b3461a1acc63b4e480af1fd43aa7e3bbb02103ac78938f0e15ba4c",
+    "entityKey": "0x0af9075caa8fe44a0a6f21dd47af5a29f41f7c65b60de647034b39b7c55a8807"
+  },
+  "prg-w40-pin-soraon": {
+    "txHash": "0x7802f241944544244323f4fd2ac26494bd355c8563d8f9ac232b5c926671a6a5",
+    "entityKey": "0xa64e2139b6a0cf4cbe8738e40ea0cd7b0e9c3c95b5aa139a7bc1d0b1722c43c6"
+  },
+  "hrd-w42-pin-birla-farm": {
+    "txHash": "0xba2b4c869d51c7e3b35ccf2831bb4221a03c8819a1b5f033b7a4ed46fec5e178",
+    "entityKey": "0x345ca56b670cdb987701ba65cb7311feebd1c87db46230ee052c13116c0ae9bd"
+  },
+  "pun-w41-pin-kondhwa": {
+    "txHash": "0x92c836517247305c5978f3f19e5273d0f31484313a5427adac268aa2e30c8371",
+    "entityKey": "0xc4bd29200b08667779422fa2e6fd3ff2b5236c78325eb80d54bbc87582b53b54"
   }
 }

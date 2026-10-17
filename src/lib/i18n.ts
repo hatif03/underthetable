@@ -9,7 +9,6 @@ export type Lang = "en" | "hi"
 
 const en = {
   "nav.pulse": "Pulse",
-  "nav.office": "Office",
   "nav.record": "Record",
   "nav.sealed": "How it is sealed",
   "nav.report": "Report",
@@ -115,7 +114,6 @@ const en = {
 
 const hi: typeof en = {
   "nav.pulse": "लाइव",
-  "nav.office": "दफ़्तर",
   "nav.record": "रिकॉर्ड",
   "nav.sealed": "सील कैसे होता है",
   "nav.report": "रिपोर्ट करें",

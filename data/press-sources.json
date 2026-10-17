@@ -800,5 +800,126 @@
       }
     ],
     "note": "The mid-day meal stopped from 12 October at a school of 58 children while online records showed a meal for 45 children on 13 October; the department promised an inquiry. Single outlet. Severity 3."
+  },
+  "0xf31a5e26784dfd0724f72b48da84388428ff1edf8b87ce2a921145662ce3560d": {
+    "sources": [
+      {
+        "outlet": "Citizen Matters",
+        "url": "https://citizenmatters.in/broken-roads-digging-bengaluru-mcechs-layout-thanisandra-civic/",
+        "title": "Broken roads, zero accountability: Bengaluru's MCECHS Layout faces year-long civic chaos",
+        "published": "2026-10-17"
+      }
+    ],
+    "note": "Gas, water, sewerage and power agencies have repeatedly dug up the layout's roads over about a year without proper restoration; the article describes exposed iron rods, a car stuck in loosened soil after rain, and an injury to a resident. Pin at the layout named in the article. Date is the publication date. Single outlet. Severity 4."
+  },
+  "0x127727ce2678380cc49076c2bd49236bca356746d176d58d8616697432a8eb20": {
+    "sources": [
+      {
+        "outlet": "The Sentinel (Assam)",
+        "url": "https://www.sentinelassam.com/cities/guwahati-city/guwahati-potholed-ganeshguri-nayanpur-to-zoo-road-exposes-apathy",
+        "title": "Guwahati: Potholed Ganeshguri-Nayanpur to Zoo Road exposes apathy",
+        "published": "2026-10-05"
+      }
+    ],
+    "note": "The stretch from Ganeshguri-Nayanpur to Zoo Road is reported riddled with potholes and uneven patches; residents call for resurfacing rather than patchwork, and the report also notes missing street lighting after dark and waterlogging. Pin at Zoo Road. Single outlet. Severity 3."
+  },
+  "0x8ce7ed1d446e2b84f70620641204c5501e4209a1eb178bf17ef240def9345d40": {
+    "sources": [
+      {
+        "outlet": "The Tribune",
+        "url": "https://www.tribuneindia.com/news/ludhiana/garbage-continues-to-plague-lakkar-bridge-footpath-in-ludhiana/",
+        "title": "Garbage continues to plague Lakkar Bridge footpath in Ludhiana",
+        "published": "2026-10-14"
+      }
+    ],
+    "note": "The walkway along Lakkar Bridge is reported covered with plastic, food wrappers and bottles, with several railings loose or damaged; residents and traders say complaints over about two years brought no cleaning or repair. Pin at the bridge. Date is the publication date. Single outlet. Severity 3."
+  },
+  "0x1a2920b733100fe8f8d68c7eca2c2c585898fbac9abc514dcd20f1802cec3896": {
+    "sources": [
+      {
+        "outlet": "Amar Ujala",
+        "url": "https://www.amarujala.com/punjab/mohali/vip-road-riddled-with-potholes-people-face-trouble-during-the-festive-season-mohali-news-c-71-1-mli1017-148005-2026-10-17",
+        "title": "VIP Road riddled with potholes, people face trouble during the festive season",
+        "published": "2026-10-17"
+      }
+    ],
+    "note": "Potholes across VIP Road in Zirakpur are reported to slow traffic, force sudden swerves and be hard to see at night; the municipal council head says tenders have been floated to improve the town's roads. Pin on VIP Road. Single outlet. Severity 3."
+  },
+  "0x9cb755d6ddcab760cd0ef9ee1dae2a4a35adb2e20a6c588db5e4545156a7423b": {
+    "sources": [
+      {
+        "outlet": "Amar Ujala",
+        "url": "https://www.amarujala.com/delhi-ncr/faridabad/sewers-overflowing-for-two-months-residents-protest-at-the-municipal-office-faridabad-news-c-26-1-fbd1023-82735-2026-10-15",
+        "title": "Sewers overflowing for two months, residents protest at the municipal office",
+        "published": "2026-10-15"
+      }
+    ],
+    "note": "Sewage has overflowed for about two months in one lane of the colony, sending dirty water across the street and affecting about 150 houses. Residents protested at the Municipal Corporation office; a junior engineer said the agency whose sewer-line work caused the overflow had assured a fix within two days. Pin at the colony. Date is the publication date. Single outlet. Severity 4."
+  },
+  "0x6a0a8baab61182977dd543b0b4cee8655465308e3e984368dd976d78af59db50": {
+    "sources": [
+      {
+        "outlet": "Amar Ujala",
+        "url": "https://www.amarujala.com/haryana/mahendragarh-narnaul/the-poor-condition-of-the-road-from-masani-chowk-to-balaji-chowk-in-the-city-has-troubled-motorists-narnol-news-c-203-1-sroh1011-130920-2026-10-13",
+        "title": "A 300-metre road broken in many places",
+        "published": "2026-10-13"
+      }
+    ],
+    "note": "The roughly 300-metre stretch between two junctions is reported broken in places and potholed, slowing two-wheelers, cars, buses and pedestrians; the municipal council is said to have taken no concrete step to repair it. Pin at Masani Chowk. Single outlet. Severity 3."
+  },
+  "0xb538fa600954f192ea9bf2577f742b5feba6e228eb287e26fc104c6ab99d9d78": {
+    "sources": [
+      {
+        "outlet": "Amar Ujala",
+        "url": "https://www.amarujala.com/lucknow/road-turns-into-a-pond-due-to-pipeline-excavation-population-of-one-lakh-stranded-in-waterlogging-lucknow-news-c-13-lko1070-1962779-2026-10-13",
+        "title": "Road turns into a pond due to pipeline excavation",
+        "published": "2026-10-13"
+      }
+    ],
+    "note": "Pipeline digging damaged an old water line and leaking water fills potholes to about a foot deep along a 30-metre stretch; the report says the problem has lasted about 20 days and that more than a dozen two-wheeler riders are injured daily. Pin at Daliganj. Date is the publication date. Single outlet. Severity 4."
+  },
+  "0x0af9075caa8fe44a0a6f21dd47af5a29f41f7c65b60de647034b39b7c55a8807": {
+    "sources": [
+      {
+        "outlet": "Amar Ujala",
+        "url": "https://www.amarujala.com/video/uttar-pradesh/kanpur/video-darkness-descends-on-badlipurwa-kanpur-cantt-streetlights-obscured-by-tree-branches-2026-10-06",
+        "title": "Darkness descends on Badlipurwa, Kanpur Cantt: streetlights obscured by tree branches",
+        "published": "2026-10-06"
+      }
+    ],
+    "note": "Tree branches and bushes cover the streetlights on the main road, leaving it dark at night; residents ask the Cantonment Board to trim the trees and restore lighting. Pin at Badlipurwa. Single outlet. Severity 2."
+  },
+  "0xa64e2139b6a0cf4cbe8738e40ea0cd7b0e9c3c95b5aa139a7bc1d0b1722c43c6": {
+    "sources": [
+      {
+        "outlet": "Amar Ujala",
+        "url": "https://www.amarujala.com/uttar-pradesh/allahabad/drains-overflowing-with-filth-piles-of-garbage-lining-the-roadside-allahabad-news-c-417-1-sor1001-9939-2026-10-02",
+        "title": "Drains overflowing with filth, piles of garbage lining the roadside",
+        "published": "2026-10-02"
+      }
+    ],
+    "note": "Drains are reported clogged in several mohallas, sending dirty water onto the streets with garbage piled beside the roads; the report adds that the town has only two sanitation workers. Pin at Soraon. Single outlet. Severity 3."
+  },
+  "0x345ca56b670cdb987701ba65cb7311feebd1c87db46230ee052c13116c0ae9bd": {
+    "sources": [
+      {
+        "outlet": "Amar Ujala",
+        "url": "https://www.amarujala.com/uttarakhand/haridwar/contaminated-sewer-water-flows-on-the-main-road-causing-great-anger-among-the-people-haridwar-news-c-35-1-hrd1020-155310-2026-10-12",
+        "title": "Contaminated sewer water flows on the main road",
+        "published": "2026-10-12"
+      }
+    ],
+    "note": "Sewage overflowed onto the main road of the market, with foul smell and dirty water troubling residents and passersby; the water department sent a team and an official promised a fix by evening. Pin at Saptarishi. Single outlet. Severity 2."
+  },
+  "0xc4bd29200b08667779422fa2e6fd3ff2b5236c78325eb80d54bbc87582b53b54": {
+    "sources": [
+      {
+        "outlet": "Punekar News",
+        "url": "https://www.punekarnews.in/crater-sized-potholes-make-approach-road-to-180-flat-society-and-nearby-areas-in-kondhwa-budruk-a-safety-hazard/",
+        "title": "Crater-Sized Potholes Make Approach Road to 180-Flat Society and Nearby Areas in Kondhwa Budruk a Safety Hazard",
+        "published": "2026-10-09"
+      }
+    ],
+    "note": "A roughly 100-metre stretch connecting a large housing society to the main road is reported to have crater-sized potholes unrepaired since the monsoon; residents also say encroachments worsen peak-hour congestion. Single outlet. Severity 3."
   }
 }

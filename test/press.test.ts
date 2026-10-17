@@ -8,6 +8,10 @@ import { derive } from "../src/lib/derive.ts"
 import { sealReport } from "../src/lib/guard.ts"
 import { toReportRow } from "../src/lib/query.ts"
 
+const pin = (record: object) => {
+  const { lat, lon } = record as { lat?: number; lon?: number }
+  return lat !== undefined && lon !== undefined ? { lat, lon } : undefined
+}
 const curator = curators.addresses[0]
 const demo = [...DEMO_WALLETS][0]
 
@@ -66,7 +70,7 @@ test("every press record passes the guard, is dated in the window, and cites a s
     assert.ok(record.eventDate >= "2026-10-02" && record.eventDate <= "2026-10-17", `${record.id} is outside 2 to 17 October`)
     const sealed = sealReport({
       state: record.state, district: record.district, department: record.department, role: record.role, service: record.service,
-      outcome: record.outcome, amountInr: record.amountInr, day: record.eventDate, today: "2026-10-17", kind: record.kind as never, source: "press",
+      outcome: record.outcome, amountInr: record.amountInr, day: record.eventDate, today: "2026-10-17", kind: record.kind as never, source: "press", geo: pin(record),
     })
     assert.equal(sealed.source, "press")
     // No name or number that identifies a person in what is published about the record.

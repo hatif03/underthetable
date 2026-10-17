@@ -71,7 +71,7 @@ vercel deploy --prod
 
 Each `env add` asks for the value; paste it from `.env`. Add them as **sensitive**/encrypted if Vercel offers it. After the first deploy, any change to an environment variable needs a new deploy.
 
-The office art is committed, so it ships with the deploy. If you decide it must not be in a public repository, gitignore `public/tilesets`, `public/characters` and `public/sprites` and run `vercel deploy --prod` from this folder: the deploy uploads your local files, not the repository.
+The Office tab and its art were removed on 17 October 2026, so nothing in the deploy needs a special licence.
 
 ## Check it, from a private window and a phone
 

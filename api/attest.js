@@ -21898,6 +21898,7 @@ var districts_default = {
         "hisar",
         "karnal",
         "kurukshetra",
+        "mahendragarh",
         "nuh",
         "palwal",
         "panipat",
@@ -22247,6 +22248,7 @@ var districts_default = {
         "lucknow",
         "meerut",
         "moradabad",
+        "prayagraj",
         "rampur",
         "sitapur",
         "varanasi"

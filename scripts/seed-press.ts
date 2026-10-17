@@ -30,6 +30,9 @@ type PressRecord = {
   outcome: string
   amountInr: number
   eventDate: string
+  /** Optional pin, for broken public infrastructure only: the named road or locality in the article, placed by the curator. */
+  lat?: number
+  lon?: number
   sources: Source[]
   note: string
 }
@@ -59,6 +62,7 @@ const sealed = records.map((record) => {
     today,
     kind: record.kind,
     source: "press",
+    geo: record.lat !== undefined && record.lon !== undefined ? { lat: record.lat, lon: record.lon } : undefined,
   })
 })
 console.log(`${records.length} records pass the guard`)
@@ -109,7 +113,7 @@ const lines = [
   "| --- | --- | --- | --- | --- | --- | --- | --- |",
   ...records.map((record, index) => {
     const done = progress[record.id]
-    const figure = record.kind === "demand" ? `₹${record.amountInr.toLocaleString("en-IN")}` : `severity ${record.amountInr}`
+    const figure = (record.kind === "demand" ? `₹${record.amountInr.toLocaleString("en-IN")}` : `severity ${record.amountInr}`) + (record.lat !== undefined ? ` · pinned` : "")
     const links = record.sources.map((source) => `[${source.outlet}](${source.url})`).join(", ")
     return `| ${record.id} | ${record.kind} | ${record.district}, ${record.state} | ${record.service} | ${sealed[index].week} | ${figure} | ${done ? `\`${done.entityKey}\`` : "not written"} | ${links} |`
   }),

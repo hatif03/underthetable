@@ -122,11 +122,11 @@ Every Arkiv feature we use, where it lives and how to check it: [docs/arkiv-usag
 
 ## Three tracks, one idea
 
-**Best Indian Use Case.** The problem is Indian and current: the 65 shutdowns, the Corruption Perceptions rank, a fortnight of detentions, evictions and custody deaths, all with sources. It is built for how India reports: the **district** is the unit (338 of them), Hindi and English, the desks people actually queue at (RTO, revenue, ration, health, school), a sentence parsed on the phone, no account, 390 px mobile. It is seeded with 62 sourced records from the last fortnight and says plainly that zero citizen reports exist yet.
+**Best Indian Use Case.** The problem is Indian and current: the 65 shutdowns, the Corruption Perceptions rank, a fortnight of detentions, evictions and custody deaths, all with sources. It is built for how India reports: the **district** is the unit (338 of them), Hindi and English, the desks people actually queue at (RTO, revenue, ration, health, school), a sentence parsed on the phone, no account, 390 px mobile. It is seeded with 73 sourced records from the last fortnight and says plainly that zero citizen reports exist yet.
 
 **Censorship Resistance.** The adversary is the custodian. The record is handed to an address nobody holds, so there is no admin who can be told to empty a queue; it survives the loss of our own site (`mirror.html`, `curl`); a rival cannot pin an accusation past its life; the expiry is automatic, not editorial.
 
-**Open Source.** MIT, public, and meant to be forked. Everything is in the repository: the closed vocabularies (`data/vocab.json`, `data/districts.json`), the press records with their sources, the lists of trusted wallets, the server routes (`server/`, bundled to `api/`), 32 tests, and the scripts that let anyone re-check every claim (`npm run audit`, `query`, `repro`). [CONTRIBUTING.md](CONTRIBUTING.md) says how to add a district, a service or a sourced record, and how to fork it for another country. The ledger itself is public and readable with `curl`. Honest limit: the office pixel art and the animation above are not MIT; they are listed in [docs/assets.md](docs/assets.md) and [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
+**Open Source.** MIT, public, and meant to be forked. Everything is in the repository: the closed vocabularies (`data/vocab.json`, `data/districts.json`), the press records with their sources, the lists of trusted wallets, the server routes (`server/`, bundled to `api/`), 32 tests, and the scripts that let anyone re-check every claim (`npm run audit`, `query`, `repro`). [CONTRIBUTING.md](CONTRIBUTING.md) says how to add a district, a service or a sourced record, and how to fork it for another country. The ledger itself is public and readable with `curl`. Honest limit: the animation above is a stock download and is not MIT; it is listed in [docs/assets.md](docs/assets.md) and [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md), and the project works without it.
 
 ---
 
@@ -134,7 +134,7 @@ Every Arkiv feature we use, where it lives and how to check it: [docs/arkiv-usag
 
 **In the browser, in a minute: https://underthetable.vercel.app**
 
-1. Open the **Map** tab, switch on the demo pin, press **Search this view on Arkiv**.
+1. Open the **Map** tab: 11 pins, each a broken road, light, drain or garbage pile named in a news report from this fortnight (click one for its explorer link). Press **Search this view on Arkiv**.
 2. Press **Report**. Type "Last week in Nashik there is a deep pothole near the bus stand", drop a pin, file. The receipt shows `$creator`, `$owner` (`0x…dEaD`), the human check and the location check. Press **Try to delete it**.
 3. Open [`/mirror.html`](https://underthetable.vercel.app/mirror.html): one file, no server of ours, reads Arkiv directly. It still works if our site does not.
 
@@ -163,7 +163,7 @@ npm test                              # 32 tests: the rules, parser, PII tripwir
 | [arkiv/schema.md](arkiv/schema.md), [arkiv/friction.md](arkiv/friction.md), [arkiv/wallets.md](arkiv/wallets.md) | The data contract, 18 friction entries from real calls, every wallet and its role |
 | [arkiv-usage.md](docs/arkiv-usage.md) | Arkiv feature by feature |
 | [verification.md](docs/verification.md), [abuse-model.md](docs/abuse-model.md) | How a claim is checked, and what stops fakes and personal data |
-| [press-records.md](docs/press-records.md) | The 62 sourced press records and their articles |
+| [press-records.md](docs/press-records.md) | The 73 sourced press records and their articles |
 | [ai-agent.md](docs/ai-agent.md) | Is there a genuine use for an AI here? One, narrow, advisory |
 | [demo-video-script.md](docs/demo-video-script.md) | What to say and how to record the 3-minute demo video |
 | [CONTRIBUTING.md](CONTRIBUTING.md) | Add a district, a service or a sourced record; fork it |
@@ -217,7 +217,7 @@ npm run ai:check        # optional: a language model re-reads cited articles aga
 ```text
 src/state/store.ts      one snapshot of every report, cached, live over WebSocket
 src/lib/                guard (PII, pins), parse (local), write (batch), query, aggregate (quote rule), validate, identity, human
-src/views/              Pulse (dot map), Map (Leaflet pins), Office (Phaser, lazy), DistrictSheet, FileSheet, Record, Sealed, Palette
+src/views/              Pulse (dot map), Map (Leaflet pins), DistrictSheet, FileSheet, Record, Sealed, Palette
 src/ui/                 Radix-based kit, original animated illustrations
 scripts/                seed, query, audit, verify, repro, catalog, screenshots, ai-check
 server/ api/            faucet, human check, location checker, read relay (all server-side)
@@ -228,4 +228,4 @@ docs/                   submission, why Arkiv, what is recorded, screenshots, me
 
 ## Licence
 
-MIT. See [LICENSE](LICENSE). Fonts: Geist and Press Start 2P (OFL). Icons: Lucide (ISC). UI primitives: Radix. State boundaries: DataMeet India (CC BY 4.0). Map tiles: © OpenStreetMap contributors. Office art: LimeZu, used under the team's licence. Office scene code adapted from an MIT-licensed project, see [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md). The animation at the top is a stock animation downloaded by the team and is **not** covered by the MIT licence; see [docs/assets.md](docs/assets.md).
+MIT. See [LICENSE](LICENSE). Fonts: Geist (OFL). Icons: Lucide (ISC). UI primitives: Radix. State boundaries: DataMeet India (CC BY 4.0). Map tiles: © OpenStreetMap contributors. See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md). The animation at the top is a stock animation downloaded by the team and is **not** covered by the MIT licence; see [docs/assets.md](docs/assets.md).
